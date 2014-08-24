@@ -272,6 +272,7 @@ GameObject:
   - 33: {fileID: 977558364}
   - 23: {fileID: 977558362}
   - 114: {fileID: 977558363}
+  - 114: {fileID: 977558366}
   m_Layer: 0
   m_Name: ZillaHead
   m_TagString: Untagged
@@ -331,6 +332,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!114 &977558366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 977558361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae1a6e334a704fac86be7fd0de8581f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1140132279
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +394,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e85f58e512f4b3d99b77656fbf7784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHand: 0
   followTarget: {fileID: 1373357315}
 --- !u!33 &1140132282
 MeshFilter:
@@ -520,7 +531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e85f58e512f4b3d99b77656fbf7784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHand: 1
   followTarget: {fileID: 165466224}
 --- !u!33 &1160032456
 MeshFilter:
