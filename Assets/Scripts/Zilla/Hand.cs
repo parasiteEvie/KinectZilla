@@ -7,7 +7,7 @@ public class Hand:MonoBehaviour {
 	public bool leftHand;
 	public Transform followTarget;
 
-	const float ATTACK_Y_POS = -3f;
+	const float ATTACK_Y_POS = 0f;
 	const float RECOVER_Y_POS = 5f;
 
 	private Vector3 startScale;
