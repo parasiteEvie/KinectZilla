@@ -5,15 +5,12 @@ public class BulletAI : MonoBehaviour {
 
 	public float speed;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
+	public Vector3 targetDirection;
+
 	// Update is called once per frame
 	void Update () {
 		Vector3 newPosition = transform.position;
-		newPosition.y += speed * Time.deltaTime;
+		newPosition = newPosition + targetDirection * speed;
 		transform.position = newPosition;
 
 	}
