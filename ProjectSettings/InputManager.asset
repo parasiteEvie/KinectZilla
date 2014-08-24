@@ -73,7 +73,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: 
+    positiveButton: joystick 2 button 16
     altNegativeButton: 
     altPositiveButton: mouse 0
     gravity: 1000
@@ -201,7 +201,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: space
+    positiveButton: joystick 1 button 16
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -213,7 +213,7 @@ InputManager:
     axis: 4
     joyNum: 1
   - serializedVersion: 3
-    m_Name: JumpP2
+    m_Name: JumpP2alt
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -233,7 +233,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: space
+    positiveButton: joystick 3 button 16
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -245,11 +245,11 @@ InputManager:
     axis: 4
     joyNum: 3
   - serializedVersion: 3
-    m_Name: JumpP3
+    m_Name: JumpP3alt
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: space
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -265,7 +265,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: space
+    positiveButton: joystick 2 button 16
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -277,11 +277,11 @@ InputManager:
     axis: 4
     joyNum: 4
   - serializedVersion: 3
-    m_Name: JumpP4
+    m_Name: JumpP4alt
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: space
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

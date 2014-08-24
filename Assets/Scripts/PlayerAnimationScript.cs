@@ -60,9 +60,9 @@ public class PlayerAnimationScript : MonoBehaviour {
 		float y = Input.GetAxis ("Vertical2P"+myPlayer);
 
 		if(transform.localScale.x < 0f) {
-			gunTransform.eulerAngles = new Vector3(0f, 0f, -Mathf.Atan2(y, x) * 60f + 155f);
+			//gunTransform.eulerAngles = new Vector3(0f, 0f, -Mathf.Atan2(y, x) * 60f + 155f);
 		} else {
-			gunTransform.eulerAngles = new Vector3(0f, 0f, Mathf.Atan2(y, x) * 60f - 35f);
+			//gunTransform.eulerAngles = new Vector3(0f, 0f, Mathf.Atan2(y, x) * 60f - 35f);
 		}
 	}
 }
