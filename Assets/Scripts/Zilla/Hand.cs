@@ -38,7 +38,7 @@ public class Hand:MonoBehaviour {
 		}
 
 		// Follow
-		deltaPos = Vector3.ClampMagnitude(followTarget.position - transform.position, 5f);
+		deltaPos = Vector3.ClampMagnitude(followTarget.position - transform.position, 10f);
 		if(deltaPos.magnitude > 1f) {
 			transform.position += deltaPos * Time.deltaTime * 5f;
 		}
