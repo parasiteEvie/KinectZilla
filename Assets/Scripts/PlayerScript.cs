@@ -36,7 +36,7 @@ public class PlayerScript : MonoBehaviour {
 			if(deathCountdown <= 0f){
 				Destroy(this.gameObject);
 			}
-
+			return;
 		}
 		CharacterController controller = GetComponent<CharacterController>();
 
