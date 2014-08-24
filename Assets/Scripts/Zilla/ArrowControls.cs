@@ -11,7 +11,7 @@ public class ArrowControls:MonoBehaviour {
 	private Vector3 pos;
 
 	public void Update() {
-		if(isLeftHand) {
+		/*if(isLeftHand) {
 			vel.x = Input.GetAxis("HorizontalLeft");
 			vel.y = Input.GetAxis("VerticalLeft");
 		} else {
@@ -25,7 +25,7 @@ public class ArrowControls:MonoBehaviour {
 			rigidbody.velocity = vel * 20f;
 		} else {
 			rigidbody.velocity = (-transform.position).normalized * 20f;
-		}
+		}*/
 	}
 
 	// Draw Gizmo
