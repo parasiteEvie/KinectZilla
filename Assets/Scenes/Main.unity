@@ -363,11 +363,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1140132283}
-  - 33: {fileID: 1140132282}
-  - 23: {fileID: 1140132280}
   - 114: {fileID: 1140132281}
   - 65: {fileID: 1140132284}
   - 54: {fileID: 1140132285}
+  - 212: {fileID: 1140132282}
+  - 95: {fileID: 1140132280}
   m_Layer: 9
   m_Name: ZillaHandRight
   m_TagString: Untagged
@@ -375,26 +375,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!23 &1140132280
-Renderer:
+--- !u!95 &1140132280
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1140132279}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 05ca1af779e134e25a696a6c95c25947, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1f2d6379dcc054bb39dbff52da94e25c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &1140132281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,13 +403,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followTarget: {fileID: 1373357315}
   bpc: {fileID: 1373357316}
---- !u!33 &1140132282
-MeshFilter:
+--- !u!212 &1140132282
+SpriteRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1140132279}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 8d4c59823e66f4618bce878495fab815, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1140132283
 Transform:
   m_ObjectHideFlags: 0
@@ -423,7 +433,7 @@ Transform:
   m_GameObject: {fileID: 1140132279}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16, y: 0, z: 20}
-  m_LocalScale: {x: 9, y: 10, z: 1}
+  m_LocalScale: {x: -3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -501,11 +511,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1160032457}
-  - 33: {fileID: 1160032456}
-  - 23: {fileID: 1160032454}
   - 114: {fileID: 1160032455}
   - 65: {fileID: 1160032458}
   - 54: {fileID: 1160032459}
+  - 95: {fileID: 1160032456}
+  - 212: {fileID: 1160032454}
   m_Layer: 9
   m_Name: ZillaHandLeft
   m_TagString: Untagged
@@ -513,19 +523,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!23 &1160032454
-Renderer:
+--- !u!212 &1160032454
+SpriteRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1160032453}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: b4ddf734152704e02b7a366765eb95bf, type: 2}
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -533,6 +543,8 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 8d4c59823e66f4618bce878495fab815, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1160032455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,13 +558,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followTarget: {fileID: 165466224}
   bpc: {fileID: 165466225}
---- !u!33 &1160032456
-MeshFilter:
+--- !u!95 &1160032456
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1160032453}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 89393bb7cd16e459d9b3db957b2400c8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &1160032457
 Transform:
   m_ObjectHideFlags: 0
@@ -561,7 +581,7 @@ Transform:
   m_GameObject: {fileID: 1160032453}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.0300007, y: 0, z: 20}
-  m_LocalScale: {x: 9, y: 10, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
