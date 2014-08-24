@@ -22,9 +22,9 @@ public class ArrowControls:MonoBehaviour {
 		pos = transform.position;
 
 		if(pos.x < 25f && pos.x > -25f && pos.y > -13f && pos.y < 21f) {
-			rigidbody.velocity = vel * 10f;
+			rigidbody.velocity = vel * 20f;
 		} else {
-			rigidbody.velocity = (-transform.position).normalized * 10f;
+			rigidbody.velocity = (-transform.position).normalized * 20f;
 		}
 	}
 

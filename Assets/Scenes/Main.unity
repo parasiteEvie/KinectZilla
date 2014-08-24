@@ -384,7 +384,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHand: 0
   followTarget: {fileID: 1373357315}
-  hitTarget: {fileID: 1149526406}
 --- !u!33 &1140132282
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -523,7 +522,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHand: 1
   followTarget: {fileID: 165466224}
-  hitTarget: {fileID: 2108706360}
 --- !u!33 &1160032456
 MeshFilter:
   m_ObjectHideFlags: 0

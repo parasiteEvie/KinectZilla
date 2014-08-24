@@ -4,7 +4,6 @@ using Holoville.HOTween;
 using Holoville.HOTween.Core;
 
 public class Hand:MonoBehaviour {
-	public bool leftHand;
 	public Transform followTarget;
 
 	const float ATTACK_Y_POS = 0f;
