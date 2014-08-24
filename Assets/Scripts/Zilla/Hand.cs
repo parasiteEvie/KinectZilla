@@ -3,6 +3,8 @@ using System.Collections;
 using Holoville.HOTween;
 using Holoville.HOTween.Core;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class Hand:MonoBehaviour {
 	public Transform followTarget;
 
@@ -21,6 +23,8 @@ public class Hand:MonoBehaviour {
 
 	public BodyPartControls bpc;
 	private Animator anim;
+
+	public AudioClip smashSound;
 
 	// Init
 	public void Awake() {
@@ -97,6 +101,8 @@ public class Hand:MonoBehaviour {
 		targetPos.y = -8f;
 		targetPos.z = startPos.z;
 		HOTween.To(transform, 1f, new TweenParms().Prop("position", targetPos).Ease(EaseType.EaseOutBounce).OnComplete(DoneHandAttack));
+		audio.clip = smashSound;
+		audio.Play();
 	}
 
 	private void DoneHandAttack() {

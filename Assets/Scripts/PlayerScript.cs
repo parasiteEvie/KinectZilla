@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour {
 	public int myPlayer;
 
 	public AudioClip jumpSound;
+	public AudioClip shotSound;
 
 	private Vector3 moveDirection = Vector3.zero;
 
@@ -40,7 +41,7 @@ public class PlayerScript : MonoBehaviour {
 			{
 
 				moveDirection.y = jumpSpeed;
-				//audio.clip = jumpSound;
+				audio.clip = jumpSound;
 				audio.Play();
 				
 			}
@@ -65,6 +66,9 @@ public class PlayerScript : MonoBehaviour {
 				Debug.Log(x + " " + y);
 				BulletAI bai = ((GameObject)Instantiate (bullet, transform.position, transform.rotation)).GetComponent<BulletAI>();
 				bai.targetDirection = new Vector3(x, y, 0f).normalized;
+				audio.clip = shotSound;
+				audio.Play();
+
 			}
 		}
 	}

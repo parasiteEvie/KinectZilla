@@ -238,6 +238,7 @@ GameObject:
   - 4: {fileID: 814376120}
   - 135: {fileID: 814376119}
   - 212: {fileID: 814376118}
+  - 95: {fileID: 814376121}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -291,6 +292,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
+--- !u!95 &814376121
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 814376117}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b698b31b745e406087d008e5c0cc378, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &875610743
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +517,7 @@ GameObject:
   - 54: {fileID: 1140132285}
   - 212: {fileID: 1140132282}
   - 95: {fileID: 1140132280}
+  - 82: {fileID: 1140132286}
   m_Layer: 9
   m_Name: ZillaHandRight
   m_TagString: Untagged
@@ -536,6 +553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followTarget: {fileID: 1373357315}
   bpc: {fileID: 1373357316}
+  smashSound: {fileID: 8300000, guid: 530edd4f7a7c04776a91c05b197b0aa5, type: 3}
 --- !u!212 &1140132282
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -597,6 +615,64 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!82 &1140132286
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1140132279}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 530edd4f7a7c04776a91c05b197b0aa5, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1149526404
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,6 +767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followTarget: {fileID: 165466224}
   bpc: {fileID: 165466225}
+  smashSound: {fileID: 0}
 --- !u!95 &1160032456
 Animator:
   serializedVersion: 3
