@@ -28,7 +28,6 @@ public class PlayerScript : MonoBehaviour {
 		timer += Time.deltaTime;
 
 		if (controller.isGrounded) {
-			Debug.Log("I b grounded"+moveDirection.ToString());
 			moveDirection = new Vector3(Input.GetAxis("HorizontalP"+myPlayer),0, Input.GetAxis("VerticalP"+myPlayer));
 			//moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= speed;
