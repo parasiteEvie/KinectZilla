@@ -9,6 +9,8 @@ public class BodyPartControls:MonoBehaviour {
 	public GameObject bodyManager;
 	public Kinect.JointType joinType;
 
+	public bool bodyPartClosed = false;
+
 	private BodySourceManager _BodyManager;
 
 	private Vector3 pos;
@@ -36,6 +38,28 @@ public class BodyPartControls:MonoBehaviour {
 				pos.z = transform.position.z;
 
 				transform.position = pos;
+
+				// Left Hand
+				if(joinType == Kinect.JointType.HandLeft) {
+					if(body.HandLeftState == Kinect.HandState.Open) {
+						bodyPartClosed = false;
+					} else {
+						bodyPartClosed = true;
+					}
+				}
+				// Right Hand
+				if(joinType == Kinect.JointType.HandRight) {
+					if(body.HandRightState == Kinect.HandState.Open) {
+						bodyPartClosed = false;
+					} else {
+						bodyPartClosed = true;
+					}
+				}
+				// Head
+				if(joinType == Kinect.JointType.Head) {
+					Debug.Log(body.Expressions.Keys);
+					Debug.Log(body.Expressions.Values);
+				}
 			}
 		}
 	}
