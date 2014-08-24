@@ -75,14 +75,19 @@ public class PlayerScript : MonoBehaviour {
 
 		//player death
 		if(transform.position.y < -30){
-			Destroy(this.gameObject);
+			KillPlayer();
 		}
 	}
 
-	void OnDestroy() {
+	public void KillPlayer(){
 		//play death sound
 		audio.clip = deathSound;
 		audio.Play();
+		
+		Destroy(this.gameObject);
+	}
+
+	void OnDestroy() {
 		//set variable not active.
 		CreatePlayer pl = Camera.main.GetComponent<CreatePlayer>();
 		switch(myPlayer){

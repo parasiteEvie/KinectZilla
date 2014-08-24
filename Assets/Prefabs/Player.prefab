@@ -16,7 +16,7 @@ GameObject:
   - 82: {fileID: 8200000}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 79ba4c021f3ab42c9b3be6c45ed25b6f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.64999998
   Loop: 0
   Mute: 0
   Priority: 128

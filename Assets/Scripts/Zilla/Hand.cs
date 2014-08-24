@@ -109,4 +109,13 @@ public class Hand:MonoBehaviour {
 		attacking = false;
 		collider.enabled = false;
 	}
+
+	void OnCollisionEnter(Collision collision) {
+		if(collision.gameObject.tag == "Player")
+		{
+			PlayerScript p = collision.gameObject.GetComponent<PlayerScript>();
+			p.KillPlayer();
+			
+		}
+	}
 }
