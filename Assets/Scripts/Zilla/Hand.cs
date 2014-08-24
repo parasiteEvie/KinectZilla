@@ -15,16 +15,19 @@ public class Hand:MonoBehaviour {
 	private Vector3 deltaPos;
 	private Vector3 targetPos;
 	private Vector3 pos;
-	float targetZ;
 
 	private bool attacking = false;
 	private bool recovered = true;
+
+	public BodyPartControls bpc;
 
 	// Init
 	public void Awake() {
 		startPos = transform.position;
 		startScale = transform.localScale;
-		targetZ = startPos.z;
+		if(bpc == null) {
+			bpc = GetComponent<BodyPartControls>();
+		}
 	}
 
 	// Input
@@ -70,6 +73,13 @@ public class Hand:MonoBehaviour {
 			}
 			// Adjust
 			transform.position = pos;
+		}
+
+		// Hand animation
+		if(! bpc.bodyPartClosed) {
+			transform.localEulerAngles = Vector3.left;
+		} else {
+			transform.localEulerAngles = Vector3.zero;
 		}
 	}
 

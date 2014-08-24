@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyManager: {fileID: 1055922039}
   joinType: 7
+  bodyPartClosed: 0
 --- !u!54 &165466226
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ab3b3b0cb7d4227bd885fd0b3be332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLeftHand: 0
+  isLeftHand: 1
 --- !u!1 &875610743
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,6 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyManager: {fileID: 1055922039}
   joinType: 3
+  bodyPartClosed: 0
 --- !u!114 &977558367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 1373357315}
+  bpc: {fileID: 1373357316}
 --- !u!33 &1140132282
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -532,6 +535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 165466224}
+  bpc: {fileID: 165466225}
 --- !u!33 &1160032456
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -685,6 +689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyManager: {fileID: 1055922039}
   joinType: 11
+  bodyPartClosed: 0
 --- !u!54 &1373357317
 Rigidbody:
   m_ObjectHideFlags: 0
