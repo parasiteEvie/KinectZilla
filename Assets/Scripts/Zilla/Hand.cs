@@ -1,54 +1,90 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using Holoville.HOTween;
 using Holoville.HOTween.Core;
 
 public class Hand:MonoBehaviour {
-	public bool leftHand;
 	public Transform followTarget;
-	public Transform hitTarget;
+
+	const float ATTACK_Y_POS = 0f;
+	const float RECOVER_Y_POS = 5f;
+
+	private Vector3 startScale;
 
 	private Vector3 startPos;
-	private Vector3 deltaToTargetPos;
-
 	private Vector3 deltaPos;
+	private Vector3 targetPos;
+	private Vector3 pos;
+	float targetZ;
 
-	private Sequence seq;
+	private bool attacking = false;
+	private bool recovered = true;
 
 	// Init
 	public void Awake() {
 		startPos = transform.position;
-		deltaToTargetPos = hitTarget.position - startPos;
-
-		seq = new Sequence();
-		seq.Append(HOTween.To(transform, 1f, "position", deltaToTargetPos, true, EaseType.EaseOutBounce, 0f));
-		seq.Append(HOTween.To(transform, 1f, "position", -deltaToTargetPos, true, EaseType.EaseInOutCubic, 0f));
+		startScale = transform.localScale;
+		targetZ = startPos.z;
 	}
 
 	// Input
 	public void Update() {
-		if(leftHand) {
-			if(Input.GetKeyUp(KeyCode.Space)) {
-				HandAttack();
-			}
-		} else {
-			if(Input.GetKeyUp(KeyCode.Space)) {
-				HandAttack();
-			}
+		pos = transform.position;
+
+		// Attack
+		if(pos.y < ATTACK_Y_POS && ! attacking && recovered) {
+			HandAttack();
+		} else if(! recovered && pos.y > RECOVER_Y_POS && ! attacking) {
+			recovered = true;
+			collider.enabled = true;
 		}
 
 		// Follow
-		deltaPos = Vector3.ClampMagnitude(followTarget.position - transform.position, 5f);
-		if(deltaPos.magnitude > 1f) {
-			transform.position += deltaPos * Time.deltaTime * 5f;
+		if(! attacking) {
+			// Move towards follow target
+			deltaPos = Vector3.ClampMagnitude(followTarget.position - pos, 10f);
+			// Z adjustment
+			if(! recovered && pos.z < 30f) {
+				deltaPos.z = Time.deltaTime * 300f;
+			} else if(recovered && pos.z > 20f) { 
+				deltaPos.z = -Time.deltaTime * 300f;
+			} else {
+				deltaPos.z = 0f;
+			}
+			// Pre-adjust
+			if(deltaPos.magnitude > 1f) {
+				pos += deltaPos * Time.deltaTime * 5f;
+			}
+			// Check bounds
+			if(pos.x > 23f) {
+				pos.x = 23f;
+			}
+			if(pos.x < -23f) {
+				pos.x = -23f;
+			}
+			if(pos.y < -10f) {
+				pos.y = -10f;
+			}
+			if(pos.y > 18f) {
+				pos.y = 18f;
+			}
+			// Adjust
+			transform.position = pos;
 		}
 	}
 
 	// Attack!
 	private void HandAttack() {
-		if(seq.isPaused) {
-			seq.Restart();
-			seq.Play();
-		}
+		attacking = true;
+		recovered = false;
+		targetPos = transform.position;
+		targetPos.y = -8f;
+		targetPos.z = startPos.z;
+		HOTween.To(transform, 1f, new TweenParms().Prop("position", targetPos).Ease(EaseType.EaseOutBounce).OnComplete(DoneHandAttack));
+	}
+
+	private void DoneHandAttack() {
+		attacking = false;
+		collider.enabled = false;
 	}
 }
