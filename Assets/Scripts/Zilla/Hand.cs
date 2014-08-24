@@ -82,7 +82,7 @@ public class Hand:MonoBehaviour {
 		}
 
 		// Hand animation
-		if(! bpc.bodyPartClosed) {
+		if( bpc.bodyPartClosed) {
 			anim.Play("fistanim");
 		} else {
 			anim.Play("handanim");
