@@ -20,6 +20,7 @@ public class Hand:MonoBehaviour {
 	private bool recovered = true;
 
 	public BodyPartControls bpc;
+	private Animator anim;
 
 	// Init
 	public void Awake() {
@@ -28,6 +29,7 @@ public class Hand:MonoBehaviour {
 		if(bpc == null) {
 			bpc = GetComponent<BodyPartControls>();
 		}
+		anim = GetComponent<Animator>();
 	}
 
 	// Input
@@ -81,9 +83,9 @@ public class Hand:MonoBehaviour {
 
 		// Hand animation
 		if(! bpc.bodyPartClosed) {
-			transform.localEulerAngles = new Vector3(0f, 0f, -45f);
+			anim.Play("fistanim");
 		} else {
-			transform.localEulerAngles = Vector3.zero;
+			anim.Play("handanim");
 		}
 	}
 
