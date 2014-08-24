@@ -21,7 +21,7 @@ public class ArrowControls:MonoBehaviour {
 
 		pos = transform.position;
 
-		if(pos.x < 23f && pos.x > -23f && pos.y > -10f && pos.y < 18f) {
+		if(pos.x < 25f && pos.x > -25f && pos.y > -13f && pos.y < 21f) {
 			rigidbody.velocity = vel * 10f;
 		} else {
 			rigidbody.velocity = (-transform.position).normalized * 10f;

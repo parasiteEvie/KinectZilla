@@ -43,11 +43,7 @@ public class Hand:MonoBehaviour {
 		// Follow
 		if(! attacking) {
 			// Move towards follow target
-			if(pos.x < 23f && pos.x > -23f && pos.y > -10f && pos.y < 18f) {
-				deltaPos = Vector3.ClampMagnitude(followTarget.position - pos, 10f);
-			} else {
-				deltaPos = -pos.normalized * Time.deltaTime * 10f;
-			}
+			deltaPos = Vector3.ClampMagnitude(followTarget.position - pos, 10f);
 			// Z adjustment
 			if(! recovered && pos.z < 30f) {
 				deltaPos.z = Time.deltaTime * 300f;
@@ -56,10 +52,25 @@ public class Hand:MonoBehaviour {
 			} else {
 				deltaPos.z = 0f;
 			}
-			// Adjust!
+			// Pre-adjust
 			if(deltaPos.magnitude > 1f) {
-				transform.position += deltaPos * Time.deltaTime * 5f;
+				pos += deltaPos * Time.deltaTime * 5f;
 			}
+			// Check bounds
+			if(pos.x > 23f) {
+				pos.x = 23f;
+			}
+			if(pos.x < -23f) {
+				pos.x = -23f;
+			}
+			if(pos.y < -10f) {
+				pos.y = -10f;
+			}
+			if(pos.y > 18f) {
+				pos.y = 18f;
+			}
+			// Adjust
+			transform.position = pos;
 		}
 	}
 
@@ -69,6 +80,7 @@ public class Hand:MonoBehaviour {
 		recovered = false;
 		targetPos = transform.position;
 		targetPos.y = -8f;
+		targetPos.z = startPos.z;
 		HOTween.To(transform, 1f, new TweenParms().Prop("position", targetPos).Ease(EaseType.EaseOutBounce).OnComplete(DoneHandAttack));
 	}
 
