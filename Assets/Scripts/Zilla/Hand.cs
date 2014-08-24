@@ -7,6 +7,7 @@ public class Hand:MonoBehaviour {
 	public bool leftHand;
 	public Transform followTarget;
 
+	const float ATTACK_Y_POS = -3f;
 	const float RECOVER_Y_POS = 5f;
 
 	private Vector3 startScale;
@@ -29,7 +30,7 @@ public class Hand:MonoBehaviour {
 	// Input
 	public void Update() {
 		// Attack
-		if(transform.position.y < RECOVER_Y_POS && ! attacking && recovered) {
+		if(transform.position.y < ATTACK_Y_POS && ! attacking && recovered) {
 			HandAttack();
 		} else if(! recovered && transform.position.y > RECOVER_Y_POS && ! attacking) {
 			recovered = true;
