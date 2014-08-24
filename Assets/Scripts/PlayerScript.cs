@@ -21,19 +21,22 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if(myPlayer == 0)return;
 		CharacterController controller = GetComponent<CharacterController>();
 
 		//update timer 
 		timer += Time.deltaTime;
 
 		if (controller.isGrounded) {
-			Debug.Log("I b grounded"+moveDirection.ToString());
 			moveDirection = new Vector3(Input.GetAxis("HorizontalP"+myPlayer),0, Input.GetAxis("VerticalP"+myPlayer));
 			//moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= speed;
-			//if (Input.GetButton("JumpP"+myPlayer))
-			//	moveDirection.y = jumpSpeed;
+			Debug.Log("jumping"+Input.GetAxis("JumpP"+myPlayer));
+			if (Input.GetButton("JumpP"+myPlayer) || Input.GetAxis("JumpP"+myPlayer) > 0 || Input.GetAxis("JumpP"+myPlayer+"alt") > 0)
+			{
+
+				moveDirection.y = jumpSpeed;
+			}
 			
 		}
 		//Vector3 newPosition = transform.position;
