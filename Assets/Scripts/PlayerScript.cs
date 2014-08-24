@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour {
 
 	public AudioClip jumpSound;
 	public AudioClip shotSound;
+	public AudioClip deathSound;
 
 	private Vector3 moveDirection = Vector3.zero;
 
@@ -71,5 +72,40 @@ public class PlayerScript : MonoBehaviour {
 
 			}
 		}
+
+		//player death
+		if(transform.position.y < -30){
+			Destroy(this.gameObject);
+		}
+	}
+
+	void OnDestroy() {
+		//play death sound
+		audio.clip = deathSound;
+		audio.Play();
+		//set variable not active.
+		CreatePlayer pl = Camera.main.GetComponent<CreatePlayer>();
+		switch(myPlayer){
+		
+		case 1:
+			pl.player1IsActive = false;
+			break;
+		
+		case 2:
+			pl.player2IsActive = false;
+			break;
+		
+		case 3:
+			pl.player3IsActive = false;
+			break;
+		
+		case 4:
+			pl.player4IsActive = false;
+			break;
+
+		}
+
 	}
 }
+
+

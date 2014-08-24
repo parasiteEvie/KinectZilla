@@ -3,10 +3,10 @@ using System.Collections;
 
 public class CreatePlayer : MonoBehaviour {
 
-	bool player1IsActive = false;
-	bool player2IsActive = false;
-	bool player3IsActive = false;
-	bool player4IsActive = false;
+	public bool player1IsActive = false;
+	public bool player2IsActive = false;
+	public bool player3IsActive = false;
+	public bool player4IsActive = false;
 
 	public GameObject player;
 
