@@ -6,49 +6,51 @@ using Holoville.HOTween.Core;
 public class Hand:MonoBehaviour {
 	public bool leftHand;
 	public Transform followTarget;
-	public Transform hitTarget;
+
+	private Vector3 startScale;
 
 	private Vector3 startPos;
-	private Vector3 deltaToTargetPos;
-
 	private Vector3 deltaPos;
+	private Vector3 targetPos;
 
-	private Sequence seq;
+	private bool attacking = false;
+	private bool recovered = true;
 
 	// Init
 	public void Awake() {
 		startPos = transform.position;
-		deltaToTargetPos = hitTarget.position - startPos;
-
-		seq = new Sequence();
-		seq.Append(HOTween.To(transform, 1f, "position", deltaToTargetPos, true, EaseType.EaseOutBounce, 0f));
-		seq.Append(HOTween.To(transform, 1f, "position", -deltaToTargetPos, true, EaseType.EaseInOutCubic, 0f));
+		startScale = transform.localScale;
 	}
 
 	// Input
 	public void Update() {
-		if(leftHand) {
-			if(Input.GetKeyUp(KeyCode.Space)) {
-				HandAttack();
-			}
-		} else {
-			if(Input.GetKeyUp(KeyCode.Space)) {
-				HandAttack();
-			}
+		// Attack
+		if(transform.position.y < 0f && ! attacking && recovered) {
+			HandAttack();
+		} else if(! recovered && transform.position.y > 0f && ! attacking) {
+			recovered = true;
 		}
 
 		// Follow
-		deltaPos = Vector3.ClampMagnitude(followTarget.position - transform.position, 5f);
-		if(deltaPos.magnitude > 1f) {
-			transform.position += deltaPos * Time.deltaTime * 5f;
+		if(! attacking) {
+			deltaPos = Vector3.ClampMagnitude(followTarget.position - transform.position, 5f);
+			if(deltaPos.magnitude > 1f) {
+				transform.position += deltaPos * Time.deltaTime * 5f;
+			}
 		}
 	}
 
 	// Attack!
 	private void HandAttack() {
-		if(seq.isPaused) {
-			seq.Restart();
-			seq.Play();
-		}
+		attacking = true;
+		recovered = false;
+		targetPos = transform.position;
+		targetPos.y = -8f;
+		HOTween.To(transform, 1f, new TweenParms().Prop("position", targetPos).Ease(EaseType.EaseOutBounce).OnComplete(DoneHandAttack));
+	}
+
+	private void DoneHandAttack() {
+		attacking = false;
+		HOTween.To(transform, 0.5f, new TweenParms().Prop("localScale", startScale).Ease(EaseType.EaseInOutCubic));
 	}
 }
