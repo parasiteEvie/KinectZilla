@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class PlayerScript : MonoBehaviour {
 
 	public float speed = 1.0f;
@@ -11,6 +13,8 @@ public class PlayerScript : MonoBehaviour {
 	public float ShotDelay = 1.0f;
 	private float timer = 0.0f;
 	public int myPlayer;
+
+	public AudioClip jumpSound;
 
 	private Vector3 moveDirection = Vector3.zero;
 
@@ -36,6 +40,9 @@ public class PlayerScript : MonoBehaviour {
 			{
 
 				moveDirection.y = jumpSpeed;
+				//audio.clip = jumpSound;
+				audio.Play();
+				
 			}
 			
 		}
