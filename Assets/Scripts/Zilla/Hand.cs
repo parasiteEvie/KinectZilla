@@ -15,6 +15,7 @@ public class Hand:MonoBehaviour {
 	private Vector3 startPos;
 	private Vector3 deltaPos;
 	private Vector3 targetPos;
+	private Vector3 pos;
 	float targetZ;
 
 	private bool attacking = false;
@@ -29,10 +30,12 @@ public class Hand:MonoBehaviour {
 
 	// Input
 	public void Update() {
+		pos = transform.position;
+
 		// Attack
-		if(transform.position.y < ATTACK_Y_POS && ! attacking && recovered) {
+		if(pos.y < ATTACK_Y_POS && ! attacking && recovered) {
 			HandAttack();
-		} else if(! recovered && transform.position.y > RECOVER_Y_POS && ! attacking) {
+		} else if(! recovered && pos.y > RECOVER_Y_POS && ! attacking) {
 			recovered = true;
 			collider.enabled = true;
 		}
@@ -40,11 +43,15 @@ public class Hand:MonoBehaviour {
 		// Follow
 		if(! attacking) {
 			// Move towards follow target
-			deltaPos = Vector3.ClampMagnitude(followTarget.position - transform.position, 10f);
+			if(pos.x < 23f && pos.x > -23f && pos.y > -10f && pos.y < 18f) {
+				deltaPos = Vector3.ClampMagnitude(followTarget.position - pos, 10f);
+			} else {
+				deltaPos = -pos.normalized * Time.deltaTime * 10f;
+			}
 			// Z adjustment
-			if(! recovered && transform.position.z < 30f) {
+			if(! recovered && pos.z < 30f) {
 				deltaPos.z = Time.deltaTime * 300f;
-			} else if(recovered && transform.position.z > 20f) { 
+			} else if(recovered && pos.z > 20f) { 
 				deltaPos.z = -Time.deltaTime * 300f;
 			} else {
 				deltaPos.z = 0f;
