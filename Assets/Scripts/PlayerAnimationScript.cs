@@ -14,6 +14,8 @@ public class PlayerAnimationScript : MonoBehaviour {
 
 	private Animator anim;
 
+	public bool playingDeath;
+
 	public void Awake() {
 		anim = GetComponent<Animator>();
 	}
@@ -35,9 +37,16 @@ public class PlayerAnimationScript : MonoBehaviour {
 			animPrefix = "Y";
 			break;
 		}
+	} 
+
+	public void PlayDeath(){
+		anim.Play("Death");
+		playingDeath = true;
 	}
 
 	public void Update() {
+		if(playingDeath)return;
+
 		deltaPos = transform.position - prevPos;
 
 		if(deltaPos.magnitude > 0f) {

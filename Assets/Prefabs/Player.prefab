@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunTransform: {fileID: 0}
+  playingDeath: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,6 +139,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 79ba4c021f3ab42c9b3be6c45ed25b6f, type: 3}
   shotSound: {fileID: 8300000, guid: 0a7806b1886704f7190f12c45be27836, type: 3}
   deathSound: {fileID: 8300000, guid: 495b11f2547dd40079fb097c56abb400, type: 3}
+  deathCountdown: 0
 --- !u!143 &14300000
 CharacterController:
   m_ObjectHideFlags: 1

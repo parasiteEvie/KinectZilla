@@ -18,6 +18,8 @@ public class PlayerScript : MonoBehaviour {
 	public AudioClip shotSound;
 	public AudioClip deathSound;
 
+	public float deathCountdown = 0.0f;
+
 	private Vector3 moveDirection = Vector3.zero;
 
 	// Use this for initialization
@@ -28,6 +30,14 @@ public class PlayerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(myPlayer == 0)return;
+
+		if(deathCountdown > 0f){
+			deathCountdown -= Time.deltaTime;
+			if(deathCountdown <= 0f){
+				Destroy(this.gameObject);
+			}
+
+		}
 		CharacterController controller = GetComponent<CharacterController>();
 
 		//update timer 
@@ -83,32 +93,37 @@ public class PlayerScript : MonoBehaviour {
 		//play death sound
 		audio.clip = deathSound;
 		audio.Play();
-		
-		Destroy(this.gameObject);
+
+		CreatePlayer pl = Camera.main.GetComponent<CreatePlayer>();
+		switch(myPlayer){
+			
+		case 1:
+			pl.player1IsActive = false;
+			break;
+			
+		case 2:
+			pl.player2IsActive = false;
+			break;
+			
+		case 3:
+			pl.player3IsActive = false;
+			break;
+			
+		case 4:
+			pl.player4IsActive = false;
+			break;
+			
+		}
+
+		deathCountdown = 3.0f;
+
+		PlayerAnimationScript p = this.gameObject.GetComponent<PlayerAnimationScript>();
+		p.PlayDeath();
 	}
 
 	void OnDestroy() {
 		//set variable not active.
-		CreatePlayer pl = Camera.main.GetComponent<CreatePlayer>();
-		switch(myPlayer){
-		
-		case 1:
-			pl.player1IsActive = false;
-			break;
-		
-		case 2:
-			pl.player2IsActive = false;
-			break;
-		
-		case 3:
-			pl.player3IsActive = false;
-			break;
-		
-		case 4:
-			pl.player4IsActive = false;
-			break;
 
-		}
 
 	}
 }
