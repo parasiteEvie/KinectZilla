@@ -1,8 +1,9 @@
 fileFormatVersion: 2
-guid: 093e519752d5443ddbb3a7ccc620cf8c
+guid: 15a0371b52d0c4f9984b84927361d738
 TextureImporter:
   fileIDToRecycleName:
-    21300000: HeroBRun0003
+    21300000: HeroBRun0003-1
+    21300002: HeroBRun0003
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

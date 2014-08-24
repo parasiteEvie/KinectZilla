@@ -1,8 +1,9 @@
 fileFormatVersion: 2
-guid: 484c104d4cc0040e1808eb2b8ea87030
+guid: 07bec37f55cf7424aa5d8c46fd01bf16
 TextureImporter:
   fileIDToRecycleName:
-    21300000: HeroBIdle0003
+    21300000: HeroBIdle0003-1
+    21300002: HeroBIdle0003
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

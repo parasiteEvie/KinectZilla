@@ -1,8 +1,9 @@
 fileFormatVersion: 2
-guid: 489208428c4fe4680872b854b7b1741f
+guid: 1dbadac70291b48399f4578c11d3a9b3
 TextureImporter:
   fileIDToRecycleName:
-    21300000: HeroBGun
+    21300000: HeroBGun-1
+    21300002: HeroBGun
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

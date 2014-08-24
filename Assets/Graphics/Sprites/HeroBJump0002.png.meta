@@ -1,8 +1,9 @@
 fileFormatVersion: 2
-guid: a309aefb0226c433b8e2d75cf60f6b8a
+guid: 2bf3eb6a09605467590287c169dff1c3
 TextureImporter:
   fileIDToRecycleName:
-    21300000: HeroBJump0002
+    21300000: HeroBJump0002-1
+    21300002: HeroBJump0002
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
