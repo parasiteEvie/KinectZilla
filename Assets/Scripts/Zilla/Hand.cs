@@ -77,7 +77,7 @@ public class Hand:MonoBehaviour {
 
 		// Hand animation
 		if(! bpc.bodyPartClosed) {
-			transform.localEulerAngles = Vector3.left;
+			transform.localEulerAngles = new Vector3(0f, 0f, -45f);
 		} else {
 			transform.localEulerAngles = Vector3.zero;
 		}
