@@ -4,11 +4,15 @@ using System.Collections;
 public class PlayerScript : MonoBehaviour {
 
 	public float speed = 1.0f;
-
+	public float jumpSpeed = 8.0f;
+	public float gravity = 20.0f;
+	
 	public GameObject bullet;
 	public float ShotDelay = 1.0f;
 	private float timer = 0.0f;
 	public int myPlayer;
+
+	private Vector3 moveDirection = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
@@ -17,21 +21,35 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		CharacterController controller = GetComponent<CharacterController>();
+
 		//update timer 
 		timer += Time.deltaTime;
 
+		if (controller.isGrounded) {
+			Debug.Log("I b grounded"+moveDirection.ToString());
+			moveDirection = new Vector3(Input.GetAxis("HorizontalP"+myPlayer),0, Input.GetAxis("VerticalP"+myPlayer));
+			//moveDirection = transform.TransformDirection(moveDirection);
+			moveDirection *= speed;
+			//if (Input.GetButton("JumpP"+myPlayer))
+			//	moveDirection.y = jumpSpeed;
+			
+		}
+		//Vector3 newPosition = transform.position;
+		//newPosition.x += Input.GetAxis("HorizontalP"+myPlayer) * speed * Time.deltaTime;
+		//Debug.Log ("I am" +"HorizontalP"+myPlayer);
+		//transform.position = newPosition;
 
-		Vector3 newPosition = transform.position;
-		newPosition.x += Input.GetAxis("HorizontalP"+myPlayer) * speed * Time.deltaTime;
-		Debug.Log ("I am" +"HorizontalP"+myPlayer);
-		transform.position = newPosition;
-
+		moveDirection.y -= gravity * Time.deltaTime;
+		controller.Move(moveDirection * Time.deltaTime);
+		
 		//shoot
 		if (timer >= ShotDelay)
 		{
 			// Place your code to shoot
-			float x = Input.GetAxis ("Horizontal2");
-			float y = Input.GetAxis ("Vertical2");
+			float x = Input.GetAxis ("Horizontal2P"+myPlayer);
+			float y = Input.GetAxis ("Vertical2P"+myPlayer);
 			if (x != 0f || y != 0f) {
 				timer = 0;
 				Debug.Log(x + " " + y);
