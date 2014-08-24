@@ -36,7 +36,11 @@ public class Hand:MonoBehaviour {
 
 		// Attack
 		if(pos.y < ATTACK_Y_POS && ! attacking && recovered) {
-			HandAttack();
+			if(bpc.bodyPartClosed) {
+				HandAttack();
+			} else {
+				recovered = false;
+			}
 		} else if(! recovered && pos.y > RECOVER_Y_POS && ! attacking) {
 			recovered = true;
 			collider.enabled = true;

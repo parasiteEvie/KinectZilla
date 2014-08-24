@@ -55,14 +55,6 @@ public class BodyPartControls:MonoBehaviour {
 						bodyPartClosed = true;
 					}
 				}
-				// Head
-				if(joinType == Kinect.JointType.Head) {
-					if(body.Expressions[Kinect.Expression.Happy] == Kinect.DetectionResult.Yes || body.Expressions[Kinect.Expression.Happy] == Kinect.DetectionResult.Maybe) {
-						bodyPartClosed = false;
-					} else {
-						bodyPartClosed = true;
-					}
-				}
 			}
 		}
 	}
