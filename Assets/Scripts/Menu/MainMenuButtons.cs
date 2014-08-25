@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Buttons : MonoBehaviour
+public class MainMenuButtons : MonoBehaviour
 
 {
 	void OnGUI()
