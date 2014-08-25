@@ -48,7 +48,7 @@ public class PlayerScript : MonoBehaviour {
 			//moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= speed;
 			Debug.Log("jumping"+Input.GetAxis("JumpP"+myPlayer));
-			if (Input.GetButton("JumpP"+myPlayer) || Input.GetAxis("JumpP"+myPlayer) > 0 || Input.GetAxis("JumpP"+myPlayer+"alt") > 0)
+			if (Input.GetButton("JumpP"+myPlayer) || Input.GetAxis("JumpP"+myPlayer) > 0 || Input.GetAxis("JumpP"+myPlayer+"alt") > 0 || Input.GetAxis("JumpP"+myPlayer) < 0 || Input.GetAxis("JumpP"+myPlayer+"alt") < 0)
 			{
 
 				moveDirection.y = jumpSpeed;
