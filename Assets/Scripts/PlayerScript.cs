@@ -69,6 +69,8 @@ public class PlayerScript : MonoBehaviour {
 		//shoot
 		if (timer >= ShotDelay)
 		{
+			if(Time.timeScale != 0)  //Fixes pause issue. Without this IF statement the player is able to fire 1 bullet when the game is paused.
+				{
 			// Place your code to shoot
 			float x = Input.GetAxis ("Horizontal2P"+myPlayer);
 			float y = Input.GetAxis ("Vertical2P"+myPlayer);
@@ -79,7 +81,7 @@ public class PlayerScript : MonoBehaviour {
 				bai.targetDirection = new Vector3(x, y, 0f).normalized;
 				audio.clip = shotSound;
 				audio.Play();
-
+				}
 			}
 		}
 
