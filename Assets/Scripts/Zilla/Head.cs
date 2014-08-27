@@ -50,6 +50,26 @@ public class Head:MonoBehaviour {
 		transform.position = pos;
 	}
 
+	//void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.gameObject.tag == "Bullet")
+		{
+			//TODO: Display the shot landed animation.
+			
+			//gun_boss_damage_spark0001
+			
+			//TODO: Add sound effect for boss damage
+			//AudioSource.Play(boss damage);
+			
+			//remove life from the boss\
+			DealDamage();
+			
+			//this gameObject can go away
+			Destroy(other.gameObject);
+		}
+	}
+
 	public void DealDamage()
 	{
 		switch (myState)

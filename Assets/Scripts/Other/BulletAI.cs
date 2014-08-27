@@ -10,31 +10,17 @@ public class BulletAI : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (targetDirection == Vector3.zero){
+			speed = speed/5f;
+			targetDirection = Vector3.up;
+		}
 		Vector3 newPosition = transform.position;
-		newPosition = newPosition + targetDirection * speed;
+		newPosition = newPosition + targetDirection * speed * Time.deltaTime;
 		transform.position = newPosition;
 
 	}
-
-	void OnColliderEnter(Collider other)
-	//void OnCollisionEnter(Collision other)
-	{
-		Debug.Log("collided with a thing" +other.gameObject.ToString());
-		if(other.gameObject.tag == "BossHead")
-		{
-			//TODO: Display the shot landed animation.
-			
-			//gun_boss_damage_spark0001
-			
-			//TODO: Add sound effect for boss damage
-				//AudioSource.Play(boss damage);
-				
-			//remove life from the boss\
-			Head bs = other.gameObject.GetComponent<Head>();
-			bs.DealDamage();
-			
-			//this gameObject can go away
-			Destroy(this.gameObject);
-		}
+	
+	void OnBecameInvisible() {
+		Destroy(gameObject);
 	}
 }
