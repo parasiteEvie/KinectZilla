@@ -44,16 +44,34 @@ public class PlayerScript : MonoBehaviour {
 		timer += Time.deltaTime;
 
 		if (controller.isGrounded) {
-			moveDirection = new Vector3(Input.GetAxis("HorizontalP"+myPlayer),0, Input.GetAxis("VerticalP"+myPlayer));
+			//if ( Application.platform == RuntimePlatform.WindowsEditor ||
+			  //  Application.platform == RuntimePlatform.WindowsPlayer ||
+			   // Application.platform == RuntimePlatform.WindowsWebPlayer) {
+			    //moveDirection = new Vector3(Input.GetAxis("HorizontalP"+myPlayer),0, Input.GetAxis("VerticalP"+myPlayer));
+			//}
+			//else{
+			    moveDirection = new Vector3(Input.GetAxis("HorizontalP"+myPlayer),0, Input.GetAxis("VerticalP"+myPlayer));
+			//}
+			 
 			//moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= speed;
-			Debug.Log("jumping"+Input.GetAxis("JumpP"+myPlayer));
-			if (Input.GetButton("JumpP"+myPlayer) || Input.GetAxis("JumpP"+myPlayer) > 0 || Input.GetAxis("JumpP"+myPlayer+"alt") > 0 || Input.GetAxis("JumpP"+myPlayer) < 0 || Input.GetAxis("JumpP"+myPlayer+"alt") < 0)
-			{
+			if ( Application.platform == RuntimePlatform.WindowsEditor ||
+			    Application.platform == RuntimePlatform.WindowsPlayer ||
+			    Application.platform == RuntimePlatform.WindowsWebPlayer) {
 
-				moveDirection.y = jumpSpeed;
-				audio.clip = jumpSound;
-				audio.Play();
+				if (Input.GetButton("JumpP"+myPlayer) || Input.GetAxis("JumpP"+myPlayer) > 0 || Input.GetAxis("JumpP"+myPlayer+"alt") > 0 || Input.GetAxis("JumpP"+myPlayer) < 0 || Input.GetAxis("JumpP"+myPlayer+"alt") < 0)
+
+					moveDirection.y = jumpSpeed;
+					audio.clip = jumpSound;
+					audio.Play();
+				}
+				
+			else{
+				if (Input.GetButton("JumpP"+myPlayer+"Mac")){
+					moveDirection.y = jumpSpeed;
+					audio.clip = jumpSound;
+					audio.Play();
+				}
 				
 			}
 			
@@ -72,11 +90,30 @@ public class PlayerScript : MonoBehaviour {
 			if(Time.timeScale != 0)  //Fixes pause issue. Without this IF statement the player is able to fire 1 bullet when the game is paused.
 				{
 			// Place your code to shoot
-			float x = Input.GetAxis ("Horizontal2P"+myPlayer);
-			float y = Input.GetAxis ("Vertical2P"+myPlayer);
+				float x;
+
+				if ( Application.platform == RuntimePlatform.WindowsEditor ||
+				    Application.platform == RuntimePlatform.WindowsPlayer ||
+				    Application.platform == RuntimePlatform.WindowsWebPlayer) {
+
+				    x = Input.GetAxis ("Horizontal2P"+myPlayer);
+				}
+				else{
+					x = Input.GetAxis ("JumpP"+myPlayer+"alt");
+				}
+			float y;
+
+				if ( Application.platform == RuntimePlatform.WindowsEditor ||
+				    Application.platform == RuntimePlatform.WindowsPlayer ||
+				    Application.platform == RuntimePlatform.WindowsWebPlayer) {
+					y = Input.GetAxis ("Vertical2P"+myPlayer);
+				}
+				else{
+					y = -Input.GetAxis ("Horizontal2P"+myPlayer);
+				}
 			if (x != 0f || y != 0f) {
 				timer = 0;
-				Debug.Log(x + " " + y);
+				//Debug.Log(x + " " + y);
 				BulletAI bai = ((GameObject)Instantiate (bullet, transform.position, transform.rotation)).GetComponent<BulletAI>();
 				bai.targetDirection = new Vector3(x, y, 0f).normalized;
 				audio.clip = shotSound;

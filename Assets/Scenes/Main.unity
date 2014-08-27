@@ -287,14 +287,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 977558365}
-  - 64: {fileID: 977558363}
   - 114: {fileID: 977558367}
   - 114: {fileID: 977558366}
   - 212: {fileID: 977558362}
   - 95: {fileID: 977558364}
+  - 65: {fileID: 977558363}
   m_Layer: 0
   m_Name: ZillaHead
-  m_TagString: Untagged
+  m_TagString: BossHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -321,8 +321,8 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3e1ff15de8afd455495d43322bd1bbc7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!64 &977558363
-MeshCollider:
+--- !u!65 &977558363
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -331,9 +331,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_Size: {x: 4, y: 2.75, z: 40}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &977558364
 Animator:
   serializedVersion: 3
@@ -346,7 +345,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 3bdcdb481581e47dfa148a917b46fa02, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &977558365
