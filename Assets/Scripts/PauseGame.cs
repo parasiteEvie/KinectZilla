@@ -15,7 +15,7 @@ public class PauseGame : MonoBehaviour {
 
 		while (true)
 		{
-			if (Input.GetButtonDown("Pause1") || Input.GetButtonDown("Pause2") || Input.GetButtonDown("Pause3") || Input.GetButtonDown("Pause4"))
+			if (Input.GetButtonDown("PauseP1") || Input.GetButtonDown("PauseP2") || Input.GetButtonDown("PauseP3") || Input.GetButtonDown("PauseP4"))
 			{
 				if (Time.timeScale == 0)
 				{

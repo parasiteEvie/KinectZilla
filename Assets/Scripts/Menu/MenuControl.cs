@@ -2,13 +2,20 @@
 using System.Collections;
 
 public class MenuControl : MonoBehaviour {
+	private double timer;
+	private double TimeToWait;
+	private bool IsTiming = false;
+	private int selected = 0;
 
 string[] buttons = new string[2] {"Start", "Credits"};
-int selected = 0;
+
 	// Use this for initialization
 	void Start () 
 	{
-	selected = 0;		
+	selected = 0;
+	timer = 0;
+	IsTiming = true;
+	TimeToWait = 0.33;
 	}
 
 	int menuSelection (string[] buttonsArray, int selectedItem, string direction) 
@@ -36,20 +43,35 @@ int selected = 0;
 	}
 
 
-
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetAxis("VerticalP1") > 0)
-		{
-			selected = menuSelection(buttons, selected, "up");
-		}
-		if(Input.GetAxis("VerticalP1") < 0)
-		{
-			selected = menuSelection(buttons, selected, "down");
-		}
+		if (IsTiming == true)
+			{
+				//Add the change in time between frames to the timer
+				timer += Time.deltaTime;
+			}
+		if (Input.GetAxis ("VerticalP1") > 0) 
+			{
+			if (timer > TimeToWait)
+				{
+					selected = menuSelection (buttons, selected, "up");
+					timer = 0;
+				}
+			}
+		if (Input.GetAxis ("VerticalP1") < 0) 
+			{
+			if (timer > TimeToWait)
+				{				
+					selected = menuSelection (buttons, selected, "down");
+					timer = 0;
+				}
+			}
 	}
-	void OnGUI()
+
+
+
+	void OnGUI() 
 	{
 		GUISkin menuSkin = (GUISkin)Resources.Load("MenuGUI");
 		GUI.skin = menuSkin;
@@ -58,27 +80,23 @@ int selected = 0;
 		const int buttonHeight = 60;
 
 		// Determine the button's place on screen
-		// Center in X, 2/3 of the height in Y
 		Rect StartRect = new Rect((Screen.width / 2) - (buttonWidth / 2) + (Screen.width / 3), (Screen.height / 3) - (buttonHeight / 2), buttonWidth, buttonHeight);
 		Rect CreditsRect = new Rect((Screen.width / 2) - (buttonWidth / 2) + (Screen.width / 3), (Screen.height / 3) - (buttonHeight / 2) + 65, buttonWidth, buttonHeight);
 
 		GUI.SetNextControlName(buttons[0]);
-		if(GUI.Button(StartRect, buttons[0]))
-		   {
-			// Load main level scene
-			Application.LoadLevel("Main");
-		}
+		GUI.Button(StartRect, buttons[0]);
+		if ((Input.GetButton ("PauseP1") || Input.GetButton("JumpP1")) && GUI.GetNameOfFocusedControl() == "Start")
+			{
+				// Load main level scene
+				Application.LoadLevel("Main");
+			}
 		GUI.SetNextControlName(buttons[1]);
-		if(GUI.Button(CreditsRect, buttons[1]))
+		GUI.Button (CreditsRect, buttons [1]);
+		if ((Input.GetButton ("PauseP1") || Input.GetButton("JumpP1")) && GUI.GetNameOfFocusedControl() == "Credits")
 		   {
 			// Load Credits Scene
 			Application.LoadLevel("Credits");
-		}
-//		GUI.SetNextControlName(buttons[2]);
-//		If(GUI.Button(new Rect(0,200,100,100), buttons[2])
-//		   {
-//			//when selected Exit button
-//		}
+			}
 		GUI.FocusControl(buttons[selected]);
 	}
 
