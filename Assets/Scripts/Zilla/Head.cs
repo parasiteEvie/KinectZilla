@@ -56,7 +56,7 @@ public class Head:MonoBehaviour {
 		if(other.gameObject.tag == "Bullet")
 		{
 			//TODO: Display the shot landed animation.
-			
+			Debug.Log("current boss life: "+lifePoints);
 			//gun_boss_damage_spark0001
 			
 			//TODO: Add sound effect for boss damage
@@ -86,5 +86,4 @@ public class Head:MonoBehaviour {
 	
 		Debug.Log("current boss life: "+lifePoints);
 	}
-
 }
