@@ -237,7 +237,7 @@ GUIText:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 875610743}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Text: 
   m_Anchor: 0
@@ -291,6 +291,7 @@ GameObject:
   - 95: {fileID: 977558364}
   - 65: {fileID: 977558363}
   - 54: {fileID: 977558368}
+  - 114: {fileID: 977558369}
   m_Layer: 0
   m_Name: ZillaHead
   m_TagString: BossHead
@@ -399,6 +400,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &977558369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 977558361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33975f0855d3b634589fbc2477ca1f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 350
 --- !u!1 &1055922039
 GameObject:
   m_ObjectHideFlags: 0

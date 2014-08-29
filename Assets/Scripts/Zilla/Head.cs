@@ -24,10 +24,14 @@ public class Head:MonoBehaviour {
 		myState = BossState.NORMAL;
 	}
 
-	public void Update(){
-		if(lifePoints <= 0){
+	public void Update()
+	{
+		BroadcastMessage ("AdjustCurrentHealth", (lifePoints));
+		if(lifePoints <= 0)
+		{
 			Debug.Log("GAME OVER! THE BOSS IS DEAD!");
 			myState = BossState.DYING;
+			Application.LoadLevel("PlayersWin");
 		}
 	}
 

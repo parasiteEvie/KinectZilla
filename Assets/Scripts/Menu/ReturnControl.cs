@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CreditsControl : MonoBehaviour {
+public class ReturnControl : MonoBehaviour {
 	private double timer;
 	private double TimeToWait;
 	private bool IsTiming = false;

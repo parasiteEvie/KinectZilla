@@ -51,19 +51,19 @@ public class CreatePlayer : MonoBehaviour {
 		}
 
 		//reset spawn timer when it gets too high
-		if (spawntimer1 > 5) 
+		if (spawntimer1 > 20) 
 			{
 				spawntimer1 = 0;
 			}
-		if (spawntimer2 > 5) 
+		if (spawntimer2 > 20) 
 			{
 				spawntimer2 = 0;
 			}
-		if (spawntimer3 > 5) 
+		if (spawntimer3 > 20) 
 			{
 				spawntimer3 = 0;
 			}
-		if (spawntimer4 > 5) 
+		if (spawntimer4 > 20) 
 			{
 				spawntimer4 = 0;
 			}
