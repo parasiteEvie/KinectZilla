@@ -20,6 +20,7 @@ public class Hand:MonoBehaviour {
 
 	private bool attacking = false;
 	private bool recovered = true;
+	public bool isBoss;
 
 	public BodyPartControls bpc;
 	private Animator anim;
@@ -113,8 +114,9 @@ public class Hand:MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
 		if(collision.gameObject.tag == "Player")
 		{
+			isBoss = true;
 			PlayerScript p = collision.gameObject.GetComponent<PlayerScript>();
-			p.KillPlayer();
+			p.KillPlayer(isBoss);
 			
 		}
 	}

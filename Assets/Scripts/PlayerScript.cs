@@ -13,6 +13,11 @@ public class PlayerScript : MonoBehaviour {
 	public float ShotDelay = 1.0f;
 	private float timer = 0.0f;
 	public int myPlayer;
+	public float invincibleTimer = 0f;
+//	public float invincibleTimer1 = 0f;
+//	public float invincibleTimer2 = 0f;
+//	public float invincibleTimer3 = 0f;
+//	public float invincibleTimer4 = 0f;
 
 	public AudioClip jumpSound;
 	public AudioClip shotSound;
@@ -28,7 +33,16 @@ public class PlayerScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
+		//update timers 
+		timer += Time.deltaTime;
+		invincibleTimer -= Time.deltaTime;
+//		invincibleTimer1 -= Time.deltaTime;
+//		invincibleTimer2 -= Time.deltaTime;
+//		invincibleTimer3 -= Time.deltaTime;
+//		invincibleTimer4 -= Time.deltaTime;
+
 		if(myPlayer == 0)return;
 
 		if(deathCountdown > 0f){
@@ -123,47 +137,64 @@ public class PlayerScript : MonoBehaviour {
 		}
 
 		//player death
-		if(transform.position.y < -30){
-			KillPlayer();
+		if(transform.position.y < -30)
+		{
+			//FALSE is sent because the player is NOT being killed by the boss
+			KillPlayer(false);
 		}
 	}
 
-	public void KillPlayer(){
-		//play death sound
-		audio.clip = deathSound;
-		audio.Play();
+	public void KillPlayer(bool isBoss)
+	{
+//		var invincibleString = "invincibleTimer"+myPlayer;
+		Debug.Log ("Invincibility Timer = " + invincibleTimer + ". Did BOSS kill the player? " + isBoss);
+		if(isBoss == false || (invincibleTimer < 0f && isBoss == true))
+		{
+			//play death sound
+			audio.clip = deathSound;
+			audio.Play();
 
-		CreatePlayer pl = Camera.main.GetComponent<CreatePlayer>();
-		switch(myPlayer){
-			
-		case 1:
-			pl.player1IsActive = false;
-			break;
-			
-		case 2:
-			pl.player2IsActive = false;
-			break;
-			
-		case 3:
-			pl.player3IsActive = false;
-			break;
-			
-		case 4:
-			pl.player4IsActive = false;
-			break;
-			
+			CreatePlayer pl = Camera.main.GetComponent<CreatePlayer>();
+			switch(myPlayer){
+				
+			case 1:
+				pl.player1IsActive = false;
+				break;
+				
+			case 2:
+				pl.player2IsActive = false;
+				break;
+				
+			case 3:
+				pl.player3IsActive = false;
+				break;
+				
+			case 4:
+				pl.player4IsActive = false;
+				break;
+				
+			}
+
+			deathCountdown = 3.0f;
+
+			PlayerAnimationScript p = this.gameObject.GetComponent<PlayerAnimationScript>();
+			p.PlayDeath();
 		}
-
-		deathCountdown = 3.0f;
-
-		PlayerAnimationScript p = this.gameObject.GetComponent<PlayerAnimationScript>();
-		p.PlayDeath();
 	}
 
 	void OnDestroy() {
 		//set variable not active.
 
 
+	}
+
+	public void MakeInvincible() 
+	{
+		//TODO: Add logic that makes the player Invincible for 10 seconds. THIS FUNCTION DOES NOT YET EXIST
+		Debug.Log ("Invincible!");
+//		var invincibleString = invincibleTimer + myPlayer;
+//		invincibleString = 10f;
+		invincibleTimer = 10f;
 	}
 }
 
