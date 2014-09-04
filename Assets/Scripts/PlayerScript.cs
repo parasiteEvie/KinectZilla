@@ -57,7 +57,8 @@ public class PlayerScript : MonoBehaviour {
 		//update timer 
 		timer += Time.deltaTime;
 
-		if (controller.isGrounded) {
+		if (controller.isGrounded) 
+		{
 			//if ( Application.platform == RuntimePlatform.WindowsEditor ||
 			  //  Application.platform == RuntimePlatform.WindowsPlayer ||
 			   // Application.platform == RuntimePlatform.WindowsWebPlayer) {
@@ -71,17 +72,20 @@ public class PlayerScript : MonoBehaviour {
 			moveDirection *= speed;
 			if ( Application.platform == RuntimePlatform.WindowsEditor ||
 			    Application.platform == RuntimePlatform.WindowsPlayer ||
-			    Application.platform == RuntimePlatform.WindowsWebPlayer) {
+			    Application.platform == RuntimePlatform.WindowsWebPlayer) 
+			{
 
 				if (Input.GetButton("JumpP"+myPlayer) || Input.GetAxis("JumpP"+myPlayer) > 0 || Input.GetAxis("JumpP"+myPlayer+"alt") > 0 || Input.GetAxis("JumpP"+myPlayer) < 0 || Input.GetAxis("JumpP"+myPlayer+"alt") < 0)
-
+				{
 					moveDirection.y = jumpSpeed;
 					audio.clip = jumpSound;
 					audio.Play();
 				}
 				
-			else{
-				if (Input.GetButton("JumpP"+myPlayer+"Mac")){
+			else
+			{
+				if (Input.GetButton("JumpP"+myPlayer+"Mac"))
+				{
 					moveDirection.y = jumpSpeed;
 					audio.clip = jumpSound;
 					audio.Play();
@@ -89,6 +93,7 @@ public class PlayerScript : MonoBehaviour {
 				
 			}
 			
+			}
 		}
 		//Vector3 newPosition = transform.position;
 		//newPosition.x += Input.GetAxis("HorizontalP"+myPlayer) * speed * Time.deltaTime;
