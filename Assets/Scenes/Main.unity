@@ -289,7 +289,7 @@ GameObject:
   - 114: {fileID: 977558366}
   - 212: {fileID: 977558362}
   - 95: {fileID: 977558364}
-  - 65: {fileID: 977558363}
+  - 136: {fileID: 977558363}
   - 54: {fileID: 977558368}
   - 114: {fileID: 977558369}
   m_Layer: 0
@@ -321,8 +321,8 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3e1ff15de8afd455495d43322bd1bbc7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!65 &977558363
-BoxCollider:
+--- !u!136 &977558363
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -330,9 +330,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.29999995, y: 1.79999995, z: 40}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.09442616
+  m_Height: 3.81514502
+  m_Direction: 0
+  m_Center: {x: 0, y: -.150000006, z: -10}
 --- !u!95 &977558364
 Animator:
   serializedVersion: 3
