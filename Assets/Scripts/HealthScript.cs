@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class HealthScript : MonoBehaviour {
 
 	float moveAnimation = 1.75f;
 	bool upDirection = true;
 	float speed = .60f;
+	public AudioClip itemPickup;
 
 	// Use this for initialization
 	void Start () {
@@ -32,20 +35,28 @@ public class HealthScript : MonoBehaviour {
 
 
 	}
+	void killYourself()
+		{
+		Destroy (this.gameObject);
+		}
 
 
 	void OnCollisionEnter (Collision col) 
 	{
 		if(col.gameObject.tag == "Player")
 		{
+			//sound effect for item collect
+			audio.clip = itemPickup;
+			audio.Play();
+
+			this.gameObject.renderer.enabled = false;
+
 			//Run player invincibility function under PlayerScript
 			PlayerScript ps = col.gameObject.GetComponent<PlayerScript>();
 			ps.MakeInvincible();
-			//TODO: Add sound effect for item collect
-//			AudioSource.Play(healthPackCollectedSE);
-			
+						
 			//this gameObject can go away
-			Destroy(this.gameObject);
+			Invoke("killYourself", 1f);
 		}
 	}
 
