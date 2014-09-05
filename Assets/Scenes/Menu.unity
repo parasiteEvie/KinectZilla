@@ -348,7 +348,7 @@ Prefab:
     - target: {fileID: 11400000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
       propertyPath: bpc
       value: 
-      objectReference: {fileID: 2108019994}
+      objectReference: {fileID: 1401585100}
     - target: {fileID: 11400000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
       propertyPath: followTarget
       value: 
@@ -367,6 +367,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1401585098}
   - 114: {fileID: 1401585099}
+  - 114: {fileID: 1401585100}
   m_Layer: 0
   m_Name: TargetRight
   m_TagString: Untagged
@@ -398,6 +399,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 743b6846b9d7446cc85e42be18f97979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1401585100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1401585097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f5aa0d75eb8ee047840f53fae6b2a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyManager: {fileID: 2108019993}
+  joinType: 11
+  bodyPartClosed: 0
 --- !u!1 &1433676485
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followTarget: {fileID: 1401585098}
   isBoss: 0
-  bpc: {fileID: 2108019994}
+  bpc: {fileID: 1401585100}
   smashSound: {fileID: 8300000, guid: 530edd4f7a7c04776a91c05b197b0aa5, type: 3}
 --- !u!4 &1433676492
 Transform:
@@ -677,7 +692,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 2108019996}
   - 114: {fileID: 2108019995}
-  - 114: {fileID: 2108019994}
   m_Layer: 0
   m_Name: BodyManager
   m_TagString: Untagged
@@ -685,20 +699,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2108019994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2108019993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f5aa0d75eb8ee047840f53fae6b2a45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyManager: {fileID: 2108019993}
-  joinType: 3
-  bodyPartClosed: 0
 --- !u!114 &2108019995
 MonoBehaviour:
   m_ObjectHideFlags: 0
