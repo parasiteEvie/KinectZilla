@@ -604,13 +604,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followTarget: {fileID: 1401585098}
   isBoss: 0
-<<<<<<< HEAD
   bpc: {fileID: 2108019994}
   isMenu: 1
   menuButtons: {fileID: 0}
-=======
-  bpc: {fileID: 1401585100}
->>>>>>> 1231af9caebbd0911910a36d1ac0724de9d9192b
   smashSound: {fileID: 8300000, guid: 530edd4f7a7c04776a91c05b197b0aa5, type: 3}
 --- !u!4 &1433676492
 Transform:
