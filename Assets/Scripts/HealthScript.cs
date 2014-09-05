@@ -45,6 +45,7 @@ public class HealthScript : MonoBehaviour {
 //			AudioSource.Play(healthPackCollectedSE);
 			
 			//this gameObject can go away
+			Debug.Log("I am a player");
 			Destroy(this.gameObject);
 		}
 	}
