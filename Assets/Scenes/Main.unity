@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPack: {fileID: 100000, guid: 8d2ecf2e9ecd544f09e4a627b28c0887, type: 2}
-  bomb: {fileID: 0}
+  bomb: {fileID: 100000, guid: 4ff50db5887d4d741b68109245e21d69, type: 2}
 --- !u!4 &1643800671
 Transform:
   m_ObjectHideFlags: 0
