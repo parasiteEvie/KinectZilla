@@ -180,7 +180,7 @@ MonoBehaviour:
   jumpSpeed: 8
   gravity: 20
   bullet: {fileID: 100000, guid: 5b5bd85e9226f4adcbc44196335fccfe, type: 2}
-  bomb: {fileID: 100000, guid: 4ff50db5887d4d741b68109245e21d69, type: 2}
+  bomb: {fileID: 100000, guid: 532eff53dbb7e1142b627d56714e4ac9, type: 2}
   ShotDelay: .25
   myPlayer: 0
   invincibleTimer: 0

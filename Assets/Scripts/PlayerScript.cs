@@ -150,7 +150,7 @@ public class PlayerScript : MonoBehaviour
 						audio.Play();
 						break;
 					case EquipItem.BOMB:
-						BulletAI bai2 = ((GameObject)Instantiate (bomb, transform.position, transform.rotation)).GetComponent<BulletAI>();
+						BombAI bai2 = ((GameObject)Instantiate (bomb, transform.position, transform.rotation)).GetComponent<BombAI>();
 						bai2.targetDirection = new Vector3(x, y, 0f).normalized;
 						audio.clip = shotSound;
 						audio.Play();

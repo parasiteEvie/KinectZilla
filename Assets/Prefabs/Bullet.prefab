@@ -8,10 +8,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
   - 33: {fileID: 3300000}
   - 135: {fileID: 13500000}
   - 23: {fileID: 2300000}
-  - 114: {fileID: 11400000}
   - 54: {fileID: 5400000}
   m_Layer: 11
   m_Name: Bullet
@@ -86,7 +86,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  damage: 10
   targetDirection: {x: 0, y: 0, z: 0}
 --- !u!135 &13500000
 SphereCollider:
