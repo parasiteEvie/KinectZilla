@@ -7,6 +7,8 @@ public class MenuControl : MonoBehaviour {
 	private bool IsTiming = false;
 	private int selected = 0;
 
+	public GameObject hand;
+
 string[] buttons = new string[2] {"Start", "Credits"};
 
 	// Use this for initialization
@@ -98,6 +100,32 @@ string[] buttons = new string[2] {"Start", "Credits"};
 			Application.LoadLevel("Credits");
 			}
 		GUI.FocusControl(buttons[selected]);
+
+		if(!Application.isLoadingLevel){
+
+			Vector3 handScreenPoint = Camera.main.WorldToViewportPoint(hand.transform.position);
+			handScreenPoint = new Vector3(handScreenPoint.x * Screen.width, Screen.height - (handScreenPoint.y * Screen.height), handScreenPoint.z);
+			//hand controls override
+			Debug.Log("hand screen points" +handScreenPoint.ToString());
+			Debug.Log ("start rectangle" +StartRect.ToString());
+			Hand hs = hand.GetComponent<Hand>();
+			if (StartRect.Contains(new Vector2(handScreenPoint.x, handScreenPoint.y)))
+			{
+				print("Inside Start");
+				if(hs.MenuSelect()){
+					Application.LoadLevel("Main");
+				}
+			}
+			else if (CreditsRect.Contains(new Vector2(handScreenPoint.x, handScreenPoint.y)))
+			{
+				print("Inside Credits");
+				if(hs.MenuSelect()){
+					Application.LoadLevel("Credits");
+				}
+			}
+		}
+
+
 	}
 
 }

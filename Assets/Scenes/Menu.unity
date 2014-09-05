@@ -306,6 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cc083cb2f14244da1f34368d20398f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hand: {fileID: 1433676485}
 --- !u!1001 &1307637697
 Prefab:
   m_ObjectHideFlags: 0
@@ -315,15 +316,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 16
+      value: 4.22150898
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: .69285202
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 20
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
       propertyPath: m_LocalRotation.x
@@ -353,6 +354,34 @@ Prefab:
       propertyPath: followTarget
       value: 
       objectReference: {fileID: 1401585098}
+    - target: {fileID: 21200000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
+      propertyPath: m_Color.r
+      value: .110294104
+      objectReference: {fileID: 0}
+    - target: {fileID: 21200000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
+      propertyPath: m_Color.g
+      value: .0105428156
+      objectReference: {fileID: 0}
+    - target: {fileID: 21200000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
+      propertyPath: m_Color.b
+      value: .0105428156
+      objectReference: {fileID: 0}
+    - target: {fileID: 21200000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
+      propertyPath: m_Color.a
+      value: .650980413
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
+      propertyPath: m_LocalScale.x
+      value: -.400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
+      propertyPath: isMenu
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f78bdc3bc9964eac95bf3840593bab1, type: 2}
   m_RootGameObject: {fileID: 1433676485}
@@ -381,7 +410,7 @@ Transform:
   m_PrefabInternal: {fileID: 1996932621}
   m_GameObject: {fileID: 1401585097}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.2460003, y: -8, z: 20}
+  m_LocalPosition: {x: 4.45059586, y: .140262604, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -516,7 +545,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8d4c59823e66f4618bce878495fab815, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .110294104, g: .0105428156, b: .0105428156, a: .650980413}
 --- !u!54 &1433676489
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -561,6 +590,8 @@ MonoBehaviour:
   followTarget: {fileID: 1401585098}
   isBoss: 0
   bpc: {fileID: 2108019994}
+  isMenu: 1
+  menuButtons: {fileID: 0}
   smashSound: {fileID: 8300000, guid: 530edd4f7a7c04776a91c05b197b0aa5, type: 3}
 --- !u!4 &1433676492
 Transform:
@@ -569,8 +600,8 @@ Transform:
   m_PrefabInternal: {fileID: 1307637697}
   m_GameObject: {fileID: 1433676485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16, y: 0, z: 20}
-  m_LocalScale: {x: -3, y: 3, z: 1}
+  m_LocalPosition: {x: 4.22150898, y: .69285202, z: -5}
+  m_LocalScale: {x: -.400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -633,15 +664,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: afc7b2d42e48b446eb21a3ce2358bb8d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 12.2460003
+      value: 4.45059586
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: afc7b2d42e48b446eb21a3ce2358bb8d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -8
+      value: .140262604
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: afc7b2d42e48b446eb21a3ce2358bb8d, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: afc7b2d42e48b446eb21a3ce2358bb8d, type: 2}
       propertyPath: m_LocalRotation.x
