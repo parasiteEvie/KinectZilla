@@ -499,6 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 1373357315}
+  isBoss: 0
   bpc: {fileID: 1373357316}
   smashSound: {fileID: 8300000, guid: 530edd4f7a7c04776a91c05b197b0aa5, type: 3}
 --- !u!212 &1140132282
@@ -714,6 +715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 165466224}
+  isBoss: 0
   bpc: {fileID: 165466225}
   smashSound: {fileID: 8300000, guid: 530edd4f7a7c04776a91c05b197b0aa5, type: 3}
 --- !u!95 &1160032456
@@ -1250,7 +1252,7 @@ MonoBehaviour:
   player2IsActive: 0
   player3IsActive: 0
   player4IsActive: 0
-  player: {fileID: 100000, guid: 2df7fb6706daf43018d60405acc84e84, type: 2}
+  player: {fileID: 100002, guid: 2df7fb6706daf43018d60405acc84e84, type: 2}
 --- !u!82 &1901726034
 AudioSource:
   m_ObjectHideFlags: 0
