@@ -201,6 +201,13 @@ public class PlayerScript : MonoBehaviour {
 //		invincibleString = 10f;
 		invincibleTimer = 10f;
 	}
+
+void onTriggerEnter(Collider col)
+	{
+		Debug.Log ("hi");
+		if (col.gameObject.tag == "HealthPack")
+						Debug.Log ("Hello");
+	}
 }
 
 
