@@ -27,7 +27,6 @@ public class Hand:MonoBehaviour {
 	public bool isMenu;
 	private Animator anim;
 
-	public GameObject menuButtons;
 	public AudioClip smashSound;
 
 	// Init

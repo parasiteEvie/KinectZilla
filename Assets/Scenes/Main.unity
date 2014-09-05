@@ -503,7 +503,6 @@ MonoBehaviour:
   isBoss: 0
   bpc: {fileID: 1373357316}
   isMenu: 0
-  menuButtons: {fileID: 0}
   smashSound: {fileID: 8300000, guid: 530edd4f7a7c04776a91c05b197b0aa5, type: 3}
 --- !u!212 &1140132282
 SpriteRenderer:
@@ -721,7 +720,6 @@ MonoBehaviour:
   isBoss: 0
   bpc: {fileID: 165466225}
   isMenu: 0
-  menuButtons: {fileID: 0}
   smashSound: {fileID: 8300000, guid: 530edd4f7a7c04776a91c05b197b0aa5, type: 3}
 --- !u!95 &1160032456
 Animator:
