@@ -81,9 +81,19 @@ public class CollectibleScript : MonoBehaviour {
 			//this gameObject can go away
 			Invoke("killYourself", 1f);
 		}
+
 		if (col.gameObject.tag == "Player" && myType == CollectibleType.BOMB) 
 		{
-			Debug.Log ("Bomb");
+
+			//sound effect for item collect
+			audio.clip = itemPickup;
+			audio.Play();
+
+			this.gameObject.renderer.enabled = false;
+
+			//Run bomb increment function under PlayerScript
+			PlayerScript ps = col.gameObject.GetComponent<PlayerScript>();
+			ps.IncrementBombCounter();
 
 			//this gameObject can go away
 			Invoke("killYourself", 1f);

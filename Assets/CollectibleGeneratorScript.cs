@@ -29,8 +29,8 @@ public class CollectibleGeneratorScript : MonoBehaviour {
 		}
 		else
 		{
-				GetRandomGenTime();
-				//generate a collectible
+			GetRandomGenTime();
+			//generate a collectible
 			if (Random.Range(0,2) == 0)
 			{
 			GameObject.Instantiate(healthPack, new Vector3((float)Random.Range (-30f, 30f), 

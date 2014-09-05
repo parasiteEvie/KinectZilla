@@ -1,23 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum EquipItem 
+{
+	ARMCANNON,
+	BOMB
+}
+
 [RequireComponent(typeof(AudioSource))]
 
-public class PlayerScript : MonoBehaviour {
+public class PlayerScript : MonoBehaviour 
+{
 
 	public float speed = 1.0f;
 	public float jumpSpeed = 8.0f;
 	public float gravity = 20.0f;
 	
 	public GameObject bullet;
+	public GameObject bomb;
 	public float ShotDelay = 1.0f;
 	private float timer = 0.0f;
 	public int myPlayer;
 	public float invincibleTimer = 0f;
-//	public float invincibleTimer1 = 0f;
-//	public float invincibleTimer2 = 0f;
-//	public float invincibleTimer3 = 0f;
-//	public float invincibleTimer4 = 0f;
+	public int bombCount;
+	public EquipItem currentWeapon;
+
 
 	public AudioClip jumpSound;
 	public AudioClip shotSound;
@@ -35,6 +42,7 @@ public class PlayerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		weaponSelection ();
 		//update timers 
 		timer += Time.deltaTime;
 		invincibleTimer -= Time.deltaTime;
@@ -133,10 +141,23 @@ public class PlayerScript : MonoBehaviour {
 			if (x != 0f || y != 0f) {
 				timer = 0;
 				//Debug.Log(x + " " + y);
-				BulletAI bai = ((GameObject)Instantiate (bullet, transform.position, transform.rotation)).GetComponent<BulletAI>();
-				bai.targetDirection = new Vector3(x, y, 0f).normalized;
-				audio.clip = shotSound;
-				audio.Play();
+				switch (currentWeapon)
+					{
+					case EquipItem.ARMCANNON:
+						BulletAI bai1 = ((GameObject)Instantiate (bullet, transform.position, transform.rotation)).GetComponent<BulletAI>();
+						bai1.targetDirection = new Vector3(x, y, 0f).normalized;
+						audio.clip = shotSound;
+						audio.Play();
+						break;
+					case EquipItem.BOMB:
+						BulletAI bai2 = ((GameObject)Instantiate (bomb, transform.position, transform.rotation)).GetComponent<BulletAI>();
+						bai2.targetDirection = new Vector3(x, y, 0f).normalized;
+						audio.clip = shotSound;
+						audio.Play();
+						break;
+					default: 
+						break;
+					}
 				}
 			}
 		}
@@ -187,11 +208,25 @@ public class PlayerScript : MonoBehaviour {
 		}
 	}
 
-	void OnDestroy() {
+	void OnDestroy() 
+	{
 		//set variable not active.
 
 
 	}
+
+	public void weaponSelection()
+	{
+		if (Input.GetButtonDown("BumperP"+myPlayer))
+		{
+			int cw = (int)currentWeapon;
+			currentWeapon = (EquipItem)(int)((cw + 1)%2);
+			Debug.Log ("Equiped Weapon = "+currentWeapon);
+		}
+
+
+	}
+
 
 	public void MakeInvincible() 
 	{
@@ -202,11 +237,10 @@ public class PlayerScript : MonoBehaviour {
 		invincibleTimer = 10f;
 	}
 
-void onTriggerEnter(Collider col)
+	public void IncrementBombCounter()
 	{
-		Debug.Log ("hi");
-		if (col.gameObject.tag == "HealthPack")
-						Debug.Log ("Hello");
+		bombCount += 1;
+		Debug.Log ("Number of Bombs = "+bombCount);
 	}
 }
 
