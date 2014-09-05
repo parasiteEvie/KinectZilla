@@ -56,12 +56,8 @@ public class HealthScript : MonoBehaviour {
 			ps.MakeInvincible();
 						
 			//this gameObject can go away
-<<<<<<< HEAD
 			Invoke("killYourself", 1f);
-=======
-			Debug.Log("I am a player");
-			Destroy(this.gameObject);
->>>>>>> origin/master
+
 		}
 	}
 
