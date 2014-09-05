@@ -26,36 +26,50 @@ public class BodyPartControls:MonoBehaviour {
 			return;
 		}
 
-		foreach(Kinect.Body body in data) {
-			if(body == null) {
+		foreach (Kinect.Body body in data) 
+		{
+			if (body == null) 
+			{
 				return;
 			}
 
-			if(body.IsTracked) {
-				Kinect.Joint joint = body.Joints[joinType];
-				pos.x = joint.Position.X * 50f;
-				pos.y = joint.Position.Y * 50f;
-				pos.z = transform.position.z;
+						if (Time.timeScale != 0) 
+						{
+							if (body.IsTracked) 
+							{
+									Kinect.Joint joint = body.Joints [joinType];
+									pos.x = joint.Position.X * 50f;
+									pos.y = joint.Position.Y * 50f;
+									pos.z = transform.position.z;
 
-				transform.position = pos;
+									transform.position = pos;
 
-				// Left Hand
-				if(joinType == Kinect.JointType.HandLeft) {
-					if(body.HandLeftState == Kinect.HandState.Open) {
-						bodyPartClosed = false;
-					} else {
-						bodyPartClosed = true;
-					}
-				}
-				// Right Hand
-				if(joinType == Kinect.JointType.HandRight) {
-					if(body.HandRightState == Kinect.HandState.Open) {
-						bodyPartClosed = false;
-					} else {
-						bodyPartClosed = true;
-					}
-				}
-			}
+									// Left Hand
+									if (joinType == Kinect.JointType.HandLeft)
+									{
+											if (body.HandLeftState == Kinect.HandState.Open) 
+											{
+													bodyPartClosed = false;
+											} 
+												else 
+												{
+													bodyPartClosed = true;
+												}
+									}
+									// Right Hand
+									if (joinType == Kinect.JointType.HandRight) 
+									{
+										if (body.HandRightState == Kinect.HandState.Open) 
+										{
+											bodyPartClosed = false;
+										} 
+											else 
+											{
+													bodyPartClosed = true;
+											}
+									}
+							}
+						}
 		}
 	}
 }

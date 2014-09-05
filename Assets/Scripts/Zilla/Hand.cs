@@ -40,9 +40,9 @@ public class Hand:MonoBehaviour {
 	// Input
 	public void Update() {
 		pos = transform.position;
-
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
+			anim.Play("fistanim");
 			HandAttack();
 		}
 		// Attack
@@ -54,7 +54,6 @@ public class Hand:MonoBehaviour {
 			}
 		} else if(! recovered && pos.y > RECOVER_Y_POS && ! attacking) {
 			recovered = true;
-
 		}
 
 		// Follow
@@ -90,8 +89,7 @@ public class Hand:MonoBehaviour {
 			transform.position = pos;
 		}
 
-		if(!attacking)
-		{
+		if(!attacking){
 			// Hand animation
 			if( bpc.bodyPartClosed) {
 				anim.Play("fistanim");
@@ -99,13 +97,11 @@ public class Hand:MonoBehaviour {
 				anim.Play("handanim");
 			}
 		}
-
 	}
 
 	// Attack!
 	private void HandAttack() {
 		collider.enabled = true;
-		anim.Play ("fistanim");
 		attacking = true;
 		recovered = false;
 		targetPos = transform.position;

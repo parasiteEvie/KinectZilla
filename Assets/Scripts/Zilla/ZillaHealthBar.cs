@@ -12,11 +12,13 @@ public class ZillaHealthBar : MonoBehaviour {
 	private GUIStyle foregroundStyle = null;
 	
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		// Update is called once per frame
 		lastHealth = maxHealth;
 	}
-	void Update () {
+	void Update () 
+	{
 
 	}
 
@@ -50,8 +52,7 @@ public class ZillaHealthBar : MonoBehaviour {
 		// Draw the background image
 		GUI.Box (new Rect (Screen.width/2-(Screen.width/3)/2,10, Screen.width/3,32), "", backgroundStyle);
 
-		
-		if (percentHealth > 2)
+
 		// Draw the foreground image
 		GUI.Box (new Rect (Screen.width/2-(Screen.width/3)/2,10, percentHealth,32), "", foregroundStyle);
 
@@ -69,6 +70,7 @@ public class ZillaHealthBar : MonoBehaviour {
 		{
 			foregroundStyle = new GUIStyle( GUI.skin.box );
 			foregroundStyle.normal.background = MakeTex( 2, 2, new Color( 1f, 0f, 0f, 1f ) );
+			foregroundStyle.border = new RectOffset(0,0,0,0);
 		}
 	}
 	

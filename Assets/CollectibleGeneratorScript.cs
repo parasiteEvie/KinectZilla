@@ -36,6 +36,6 @@ public class CollectibleGeneratorScript : MonoBehaviour {
 	}
 
 	void GetRandomGenTime () {
-		timer = (float)Random.Range (15, 45);
+		timer = (float)Random.Range (1, 5);
 	}
 }
