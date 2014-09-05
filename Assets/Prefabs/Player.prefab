@@ -30,6 +30,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
   - 82: {fileID: 8200000}
+  - 65: {fileID: 6500000}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -62,6 +63,18 @@ Transform:
   - {fileID: 400000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!65 &6500000
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .400000006, y: .400000006, z: .400000006}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -83,7 +96,7 @@ AudioSource:
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 1
-  BypassListenerEffects: 0
+  BypassListenerEffects: 1
   BypassReverbZones: 0
   rolloffCustomCurve:
     serializedVersion: 2
@@ -167,9 +180,12 @@ MonoBehaviour:
   jumpSpeed: 8
   gravity: 20
   bullet: {fileID: 100000, guid: 5b5bd85e9226f4adcbc44196335fccfe, type: 2}
+  bomb: {fileID: 100000, guid: 4ff50db5887d4d741b68109245e21d69, type: 2}
   ShotDelay: .25
   myPlayer: 0
   invincibleTimer: 0
+  bombCount: 0
+  currentWeapon: 0
   jumpSound: {fileID: 8300000, guid: 79ba4c021f3ab42c9b3be6c45ed25b6f, type: 3}
   shotSound: {fileID: 8300000, guid: 0a7806b1886704f7190f12c45be27836, type: 3}
   deathSound: {fileID: 8300000, guid: 495b11f2547dd40079fb097c56abb400, type: 3}

@@ -3,20 +3,43 @@ using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class HealthScript : MonoBehaviour {
+public class CollectibleScript : MonoBehaviour {
 
 	float moveAnimation = 1.75f;
 	bool upDirection = true;
 	float speed = .60f;
 	public AudioClip itemPickup;
+	public CollectibleType myType;
+	private Animator anim;
+
+	public void Awake() 
+	{
+		anim = GetComponent<Animator>();
+	}
+
+	public void CollectibleAnimation()
+	{
+		if (myType == CollectibleType.HEALTH_PACK) 
+		{
+			anim.Play ("healthanim");
+		}
+		if (myType == CollectibleType.BOMB) 
+		{
+			anim.Play ("bombanim");
+		}
+
+	}
+
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+		CollectibleAnimation ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		if(upDirection)
 		{
 			this.gameObject.transform.position += new Vector3(0f, Time.deltaTime * speed, 0f);
@@ -36,14 +59,14 @@ public class HealthScript : MonoBehaviour {
 
 	}
 	void killYourself()
-		{
-		Destroy (this.gameObject);
-		}
-
-
-	void OnCollisionEnter (Collision col) 
 	{
-		if(col.gameObject.tag == "Player")
+		Destroy (this.gameObject);
+	}
+
+
+	void OnTriggerEnter (Collider col) 
+	{
+		if(col.gameObject.tag == "Player" && myType == CollectibleType.HEALTH_PACK)
 		{
 			//sound effect for item collect
 			audio.clip = itemPickup;
@@ -57,8 +80,25 @@ public class HealthScript : MonoBehaviour {
 						
 			//this gameObject can go away
 			Invoke("killYourself", 1f);
-
 		}
+
+		if (col.gameObject.tag == "Player" && myType == CollectibleType.BOMB) 
+		{
+
+			//sound effect for item collect
+			audio.clip = itemPickup;
+			audio.Play();
+
+			this.gameObject.renderer.enabled = false;
+
+			//Run bomb increment function under PlayerScript
+			PlayerScript ps = col.gameObject.GetComponent<PlayerScript>();
+			ps.IncrementBombCounter();
+
+			//this gameObject can go away
+			Invoke("killYourself", 1f);
+		}
+
 	}
 
 }
