@@ -57,29 +57,45 @@ public class Head:MonoBehaviour {
 	//void OnTriggerEnter(Collider other)
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.gameObject.tag == "Bullet")
+		switch (other.gameObject.tag) 
 		{
-			//TODO: Display the shot landed animation.
-			Debug.Log("current boss life: "+lifePoints);
-			//gun_boss_damage_spark0001
+			case "Bullet":
+					//TODO: Display the shot landed animation.
+					//gun_boss_damage_spark0001
 			
-			//TODO: Add sound effect for boss damage
-			//AudioSource.Play(boss damage);
-			
-			//remove life from the boss\
-			DealDamage();
-			
-			//this gameObject can go away
-			Destroy(other.gameObject);
-		}
-	}
+					//TODO: Add sound effect for boss damage
+					//AudioSource.Play(boss damage);
+					
+					//remove life from the boss\
+					DealDamage ((int)EquipItem.BULLET);
+					Destroy (other.gameObject);
+					break;
 
-	public void DealDamage()
+			case "Bomb":
+					//TODO: Display the shot landed animation.
+					//gun_boss_damage_spark0001
+			
+					//TODO: Add sound effect for boss damage
+					//AudioSource.Play(boss damage);
+			
+					//remove life from the boss\
+					DealDamage ((int)EquipItem.BOMB);
+					Destroy (other.gameObject);
+					break;
+	
+			default:
+					Debug.Log ("Bad String");
+					break;
+		}
+}
+
+	public void DealDamage(int e)
 	{
 		switch (myState)
 		{
 		case BossState.NORMAL:
-			lifePoints -= 1;
+			if(e == (int)EquipItem.BULLET){lifePoints -= 1;}
+			if(e ==(int)EquipItem.BOMB){lifePoints -= 20;}
 			break;
 		case BossState.RAGE:
 			lifePoints -= 2;

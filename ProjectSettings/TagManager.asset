@@ -7,6 +7,8 @@ TagManager:
   - Bullet
   - HealthPack
   - Bomb
+  - BombPack
+  - arm
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

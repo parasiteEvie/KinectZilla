@@ -16,7 +16,7 @@ GameObject:
   - 82: {fileID: 8200000}
   m_Layer: 0
   m_Name: BombPack
-  m_TagString: Bomb
+  m_TagString: BombPack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

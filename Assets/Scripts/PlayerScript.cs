@@ -3,7 +3,7 @@ using System.Collections;
 
 public enum EquipItem 
 {
-	ARMCANNON,
+	BULLET,
 	BOMB
 }
 
@@ -15,19 +15,25 @@ public class PlayerScript : MonoBehaviour
 	public float speed = 1.0f;
 	public float jumpSpeed = 8.0f;
 	public float gravity = 20.0f;
-	
+
+	//gameobjects
 	public GameObject bullet;
 	public GameObject bomb;
-	public float ShotDelay = 1.0f;
+
+	//delay timers
+	public float BulletDelay = 0.25f;
+	public float BombDelay = 2.0f;
 	private float timer = 0.0f;
-	public int myPlayer;
 	public float invincibleTimer = 0f;
+
+	public int myPlayer;
+
 	public int bombCount;
 	public EquipItem currentWeapon;
 
-
 	public AudioClip jumpSound;
-	public AudioClip shotSound;
+	public AudioClip bulletSound;
+	public AudioClip bombSound;
 	public AudioClip deathSound;
 
 	public float deathCountdown = 0.0f;
@@ -112,52 +118,63 @@ public class PlayerScript : MonoBehaviour
 		controller.Move(moveDirection * Time.deltaTime);
 		
 		//shoot
-		if (timer >= ShotDelay)
-		{
-			if(Time.timeScale != 0)  //Fixes pause issue. Without this IF statement the player is able to fire 1 bullet when the game is paused.
+		if(Time.timeScale != 0)  //Fixes pause issue. Without this IF statement the player is able to fire 1 bullet when the game is paused.
+			{
+		// Place your code to shoot
+			float x;
+
+			if ( Application.platform == RuntimePlatform.WindowsEditor ||
+			    Application.platform == RuntimePlatform.WindowsPlayer ||
+			    Application.platform == RuntimePlatform.WindowsWebPlayer) 
+			{
+				x = Input.GetAxis ("Horizontal2P"+myPlayer);
+			}
+			else
+			{
+				x = Input.GetAxis ("JumpP"+myPlayer+"alt");
+			}
+		float y;
+
+			if ( Application.platform == RuntimePlatform.WindowsEditor ||
+			    Application.platform == RuntimePlatform.WindowsPlayer ||
+			    Application.platform == RuntimePlatform.WindowsWebPlayer) 
+			{
+				y = Input.GetAxis ("Vertical2P"+myPlayer);
+			}
+			else
+			{
+				y = -Input.GetAxis ("Horizontal2P"+myPlayer);
+			}
+		if (x != 0f || y != 0f) 
+			{
+			//Debug.Log(x + " " + y);
+			switch (currentWeapon)
 				{
-			// Place your code to shoot
-				float x;
-
-				if ( Application.platform == RuntimePlatform.WindowsEditor ||
-				    Application.platform == RuntimePlatform.WindowsPlayer ||
-				    Application.platform == RuntimePlatform.WindowsWebPlayer) {
-
-				    x = Input.GetAxis ("Horizontal2P"+myPlayer);
-				}
-				else{
-					x = Input.GetAxis ("JumpP"+myPlayer+"alt");
-				}
-			float y;
-
-				if ( Application.platform == RuntimePlatform.WindowsEditor ||
-				    Application.platform == RuntimePlatform.WindowsPlayer ||
-				    Application.platform == RuntimePlatform.WindowsWebPlayer) {
-					y = Input.GetAxis ("Vertical2P"+myPlayer);
-				}
-				else{
-					y = -Input.GetAxis ("Horizontal2P"+myPlayer);
-				}
-			if (x != 0f || y != 0f) {
-				timer = 0;
-				//Debug.Log(x + " " + y);
-				switch (currentWeapon)
+				case EquipItem.BULLET:
+					if (timer >= BulletDelay)
 					{
-					case EquipItem.ARMCANNON:
 						BulletAI bai1 = ((GameObject)Instantiate (bullet, transform.position, transform.rotation)).GetComponent<BulletAI>();
 						bai1.targetDirection = new Vector3(x, y, 0f).normalized;
-						audio.clip = shotSound;
+						audio.clip = bulletSound;
 						audio.Play();
-						break;
-					case EquipItem.BOMB:
+						timer = 0;
+					}
+					break;
+				case EquipItem.BOMB:
+					if(bombCount <= 0){break;}
+					if (timer >= BombDelay)
+					{
 						BombAI bai2 = ((GameObject)Instantiate (bomb, transform.position, transform.rotation)).GetComponent<BombAI>();
 						bai2.targetDirection = new Vector3(x, y, 0f).normalized;
-						audio.clip = shotSound;
+						audio.clip = bombSound;
 						audio.Play();
-						break;
-					default: 
-						break;
+						bombCount -= 1;
+						Debug.Log ("Number of bombs = "+bombCount);
+						timer = 0;
 					}
+					break;
+				default: 
+					break;
 				}
 			}
 		}
@@ -232,8 +249,6 @@ public class PlayerScript : MonoBehaviour
 	{
 		//TODO: Add logic that makes the player Invincible for 10 seconds. THIS FUNCTION DOES NOT YET EXIST
 		Debug.Log ("Invincible!");
-//		var invincibleString = invincibleTimer + myPlayer;
-//		invincibleString = 10f;
 		invincibleTimer = 10f;
 	}
 

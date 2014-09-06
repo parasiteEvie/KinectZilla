@@ -101,14 +101,14 @@ public class PlayerAnimationScript : MonoBehaviour {
 			//gunArm.transform.rotation = Quaternion.LookRotation(lookPos);
 			if(x == 0 && y == 0)
 			{
-				gunArm.transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
+				gunArm.transform.rotation = Quaternion.AngleAxis(15, Vector3.forward);
 			}
 			else
 			{
-				gunArm.transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(y, -x) *Mathf.Rad2Deg - 45f), Vector3.forward);
+				gunArm.transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(y, -x) *Mathf.Rad2Deg - 30f), Vector3.forward);
 			}
 		} else {
-			gunArm.transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(y, x) *Mathf.Rad2Deg - 45f), Vector3.forward);
+			gunArm.transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(y, x) *Mathf.Rad2Deg - 30f), Vector3.forward);
 		}
 	}
 }

@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21200000}
   m_Layer: 0
   m_Name: Arm
-  m_TagString: Untagged
+  m_TagString: arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,13 +181,15 @@ MonoBehaviour:
   gravity: 20
   bullet: {fileID: 100000, guid: 5b5bd85e9226f4adcbc44196335fccfe, type: 2}
   bomb: {fileID: 100000, guid: 532eff53dbb7e1142b627d56714e4ac9, type: 2}
-  ShotDelay: .25
-  myPlayer: 0
+  BulletDelay: .25
+  BombDelay: 2
   invincibleTimer: 0
+  myPlayer: 0
   bombCount: 0
   currentWeapon: 0
   jumpSound: {fileID: 8300000, guid: 79ba4c021f3ab42c9b3be6c45ed25b6f, type: 3}
-  shotSound: {fileID: 8300000, guid: 0a7806b1886704f7190f12c45be27836, type: 3}
+  bulletSound: {fileID: 8300000, guid: 0a7806b1886704f7190f12c45be27836, type: 3}
+  bombSound: {fileID: 8300000, guid: be14c7ff5c7764d4e8e3e1d2835f0f7d, type: 3}
   deathSound: {fileID: 8300000, guid: 495b11f2547dd40079fb097c56abb400, type: 3}
   deathCountdown: 0
 --- !u!143 &14300000
