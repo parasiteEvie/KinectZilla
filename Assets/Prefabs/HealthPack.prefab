@@ -56,7 +56,7 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 28b996576c1ba1b47b06b0e9ad930f4a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e057b78e7f4093048ba46f0e789bd8e2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d0de0579c314df3af2751049f56a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPickup: {fileID: 8300000, guid: 28b996576c1ba1b47b06b0e9ad930f4a, type: 3}
+  itemPickup: {fileID: 8300000, guid: e057b78e7f4093048ba46f0e789bd8e2, type: 3}
   myType: 1
 --- !u!135 &13500000
 SphereCollider:
