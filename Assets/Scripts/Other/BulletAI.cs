@@ -4,23 +4,36 @@ using System.Collections;
 public class BulletAI : MonoBehaviour {
 
 	public float speed;
+	public bool hascollided;
+	private Animator anim;
 
 
 	public Vector3 targetDirection;
 
+	public void Awake() 
+	{
+		anim = GetComponent<Animator>();
+		anim.Play ("bulletAnim");
+	}
+
+
 	// Update is called once per frame
-	void Update () {
-		if (targetDirection == Vector3.zero){
-			speed = speed/5f;
-			targetDirection = Vector3.up;
-		}
-		Vector3 newPosition = transform.position;
-		newPosition = newPosition + targetDirection * speed * Time.deltaTime;
-		transform.position = newPosition;
+	void Update () 
+	{
+		if (hascollided) {return;}
+			if (targetDirection == Vector3.zero)
+			{
+				speed = speed/5f;
+				targetDirection = Vector3.up;
+			}
+			Vector3 newPosition = transform.position;
+			newPosition = newPosition + targetDirection * speed * Time.deltaTime;
+			transform.position = newPosition;
 
 	}
 	
-	void OnBecameInvisible() {
+	void OnBecameInvisible() 
+	{
 		Destroy(gameObject);
 	}
 }

@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: ebcf6acb7243e4e05b4f583cffed5685
+guid: 8a083f1de3c52d84ab62d2fb526a92ec
 TextureImporter:
   fileIDToRecycleName:
-    21300000: gun_boss_damage_spark0001
+    21300000: bullet
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

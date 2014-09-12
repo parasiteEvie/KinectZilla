@@ -14,6 +14,7 @@ public class Head:MonoBehaviour {
 	private BodyPartControls bpc;
 	private int lifePoints = 350;
 	private BossState myState;
+	private Animator anim;
 
 	// Init
 	public void Awake() {
@@ -68,7 +69,6 @@ public class Head:MonoBehaviour {
 					
 					//remove life from the boss\
 					DealDamage ((int)EquipItem.BULLET);
-					Destroy (other.gameObject);
 					break;
 
 			case "Bomb":
@@ -80,7 +80,6 @@ public class Head:MonoBehaviour {
 			
 					//remove life from the boss\
 					DealDamage ((int)EquipItem.BOMB);
-					Destroy (other.gameObject);
 					break;
 	
 			default:

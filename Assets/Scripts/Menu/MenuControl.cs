@@ -78,12 +78,12 @@ string[] buttons = new string[2] {"Start", "Credits"};
 		GUISkin menuSkin = (GUISkin)Resources.Load("MenuGUI");
 		GUI.skin = menuSkin;
 		
-		const int buttonWidth = 160;
-		const int buttonHeight = 60;
+		const int buttonWidth = 200;
+		const int buttonHeight = 80;
 
 		// Determine the button's place on screen
 		Rect StartRect = new Rect((Screen.width / 2) - (buttonWidth / 2) + (Screen.width / 3), (Screen.height / 3) - (buttonHeight / 2), buttonWidth, buttonHeight);
-		Rect CreditsRect = new Rect((Screen.width / 2) - (buttonWidth / 2) + (Screen.width / 3), (Screen.height / 3) - (buttonHeight / 2) + 65, buttonWidth, buttonHeight);
+		Rect CreditsRect = new Rect((Screen.width / 2) - (buttonWidth / 2) + (Screen.width / 3), (Screen.height / 3) - (buttonHeight / 2) + 105, buttonWidth, buttonHeight);
 
 		GUI.SetNextControlName(buttons[0]);
 		GUI.Button(StartRect, buttons[0]);
