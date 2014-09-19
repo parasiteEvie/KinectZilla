@@ -40,6 +40,7 @@ public class PlayerScript : MonoBehaviour
 
 	private Vector3 moveDirection = Vector3.zero;
 
+	public GameObject invincibilityEffect;
 	// Use this for initialization
 	void Start () {
 	
@@ -52,10 +53,10 @@ public class PlayerScript : MonoBehaviour
 		//update timers 
 		timer += Time.deltaTime;
 		invincibleTimer -= Time.deltaTime;
-//		invincibleTimer1 -= Time.deltaTime;
-//		invincibleTimer2 -= Time.deltaTime;
-//		invincibleTimer3 -= Time.deltaTime;
-//		invincibleTimer4 -= Time.deltaTime;
+
+		if (invincibleTimer < 0f) {
+			invincibilityEffect.SetActive (false);
+		}
 
 		if(myPlayer == 0)return;
 
@@ -71,19 +72,13 @@ public class PlayerScript : MonoBehaviour
 		//update timer 
 		timer += Time.deltaTime;
 
+		moveDirection.x = Input.GetAxis ("HorizontalP" + myPlayer) * speed;
+		moveDirection.z = Input.GetAxis("VerticalP"+myPlayer) * speed;
+
+
 		if (controller.isGrounded) 
 		{
-			//if ( Application.platform == RuntimePlatform.WindowsEditor ||
-			  //  Application.platform == RuntimePlatform.WindowsPlayer ||
-			   // Application.platform == RuntimePlatform.WindowsWebPlayer) {
-			    //moveDirection = new Vector3(Input.GetAxis("HorizontalP"+myPlayer),0, Input.GetAxis("VerticalP"+myPlayer));
-			//}
-			//else{
-			    moveDirection = new Vector3(Input.GetAxis("HorizontalP"+myPlayer),0, Input.GetAxis("VerticalP"+myPlayer));
-			//}
-			 
-			//moveDirection = transform.TransformDirection(moveDirection);
-			moveDirection *= speed;
+			moveDirection.y = 0;
 			if ( Application.platform == RuntimePlatform.WindowsEditor ||
 			    Application.platform == RuntimePlatform.WindowsPlayer ||
 			    Application.platform == RuntimePlatform.WindowsWebPlayer) 
@@ -109,6 +104,9 @@ public class PlayerScript : MonoBehaviour
 			
 			}
 		}
+
+
+
 		//Vector3 newPosition = transform.position;
 		//newPosition.x += Input.GetAxis("HorizontalP"+myPlayer) * speed * Time.deltaTime;
 		//Debug.Log ("I am" +"HorizontalP"+myPlayer);
@@ -250,6 +248,7 @@ public class PlayerScript : MonoBehaviour
 		//TODO: Add logic that makes the player Invincible for 10 seconds. THIS FUNCTION DOES NOT YET EXIST
 		Debug.Log ("Invincible!");
 		invincibleTimer = 10f;
+		invincibilityEffect.SetActive (true);
 	}
 
 	public void IncrementBombCounter()

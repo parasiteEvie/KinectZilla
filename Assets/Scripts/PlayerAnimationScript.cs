@@ -21,8 +21,11 @@ public class PlayerAnimationScript : MonoBehaviour {
 
 	public bool playingDeath;
 
+	CharacterController characterController;
+
 	public void Awake() {
 		anim = GetComponent<Animator>();
+		characterController = GetComponent<CharacterController> ();
 	}
 
 	public void Start() {
@@ -62,7 +65,7 @@ public class PlayerAnimationScript : MonoBehaviour {
 			if((deltaPos.x < 0f && transform.localScale.x > 0f) || (deltaPos.x > 0f && transform.localScale.x < 0f)) {
 				transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 			}
-			if(transform.position.y > -10.5f) {
+			if(!characterController.isGrounded) {
 				anim.Play(animPrefix + "Jump");
 			} else {
 				anim.Play(animPrefix + "Run");
