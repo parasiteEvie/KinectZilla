@@ -21,7 +21,9 @@ public class ProjectileDestroyed : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		this.gameObject.transform.position = trackingobject.transform.position + deltaPosition;
+		if (trackingobject != null) {
+			this.gameObject.transform.position = trackingobject.transform.position + deltaPosition;
+		}
 	}
 
 	void OnTriggerEnter(Collider other)

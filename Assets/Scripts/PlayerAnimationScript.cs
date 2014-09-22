@@ -16,10 +16,15 @@ public class PlayerAnimationScript : MonoBehaviour {
 	private string animPrefix = "R";
 
 	private int myPlayer;
+	private float dustTimer = 0f;
 
 	private Animator anim;
 
 	public bool playingDeath;
+
+	public GameObject shadow;
+	public GameObject specialEffectprefab;
+	public GameObject se;
 
 	CharacterController characterController;
 
@@ -57,6 +62,14 @@ public class PlayerAnimationScript : MonoBehaviour {
 	}
 
 	public void Update() {
+		dustTimer -= Time.deltaTime;
+		RaycastHit hit;
+		if (Physics.Raycast (transform.position, Vector3.down, out hit)) {
+			float distanceToGround = hit.distance;
+			//set shadow position to hit.collider.ClosestPointOnBounds().y;
+			shadow.transform.position = new Vector3(shadow.transform.position.x, hit.collider.ClosestPointOnBounds(transform.position).y, shadow.transform.position.z);
+		}
+
 		if(playingDeath)return;
 
 		deltaPos = transform.position - prevPos;
@@ -67,8 +80,28 @@ public class PlayerAnimationScript : MonoBehaviour {
 			}
 			if(!characterController.isGrounded) {
 				anim.Play(animPrefix + "Jump");
+
 			} else {
-				anim.Play(animPrefix + "Run");
+				if(GetComponent<PlayerScript>().playerAcceleration == AccelerationState.ACCELERATING){
+					anim.Play(animPrefix + "Run");
+				}
+				else if(GetComponent<PlayerScript>().playerAcceleration == AccelerationState.DECCELERATING_HEAVY){
+					anim.Play(animPrefix + "Stop");
+					//TODO:  add little dust cloud particles
+					Debug.Log ("curr position"+transform.position.ToString());
+					if(se == null){
+						if(deltaPos.x < 0){
+						se = (GameObject)Instantiate(specialEffectprefab, transform.position+(new Vector3(-5.5f, -1.87f, 0)), Quaternion.identity);
+							se.transform.localScale = new Vector3(-se.transform.localScale.x,se.transform.localScale.y,se.transform.localScale.z); 
+						}else{
+							se = (GameObject)Instantiate(specialEffectprefab, transform.position+(new Vector3(5.5f, -1.87f, 0)), Quaternion.identity);
+						}
+					}
+					//TODO: add sound effect for braking
+				}
+				else if(GetComponent<PlayerScript>().playerAcceleration == AccelerationState.DECCELERATING){
+					anim.Play(animPrefix + "Stop");
+				}
 			}
 		} else {
 			anim.Play(animPrefix + "Idle");

@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: invincibility_anim
+  m_Name: GStop
   serializedVersion: 4
   m_AnimationType: 2
   m_Compressed: 0
@@ -17,14 +17,8 @@ AnimationClip:
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
-    - time: -0
-      value: {fileID: 21300000, guid: 5e65ba82c965d20438b2c55608b272a4, type: 3}
-    - time: .0833333358
-      value: {fileID: 21300000, guid: b7fa4b68e46fe14408f64b86b156801d, type: 3}
-    - time: .166666672
-      value: {fileID: 21300000, guid: f62091260bbfdd24a9439568d2213594, type: 3}
-    - time: .25
-      value: {fileID: 21300000, guid: f51aebfd1c348d34c8a9f3754af1af16, type: 3}
+    - time: 0
+      value: {fileID: 21300000, guid: a631822fd8e6aa74cae03fbde2ef10ec, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -43,18 +37,15 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 5e65ba82c965d20438b2c55608b272a4, type: 3}
-    - {fileID: 21300000, guid: b7fa4b68e46fe14408f64b86b156801d, type: 3}
-    - {fileID: 21300000, guid: f62091260bbfdd24a9439568d2213594, type: 3}
-    - {fileID: 21300000, guid: f51aebfd1c348d34c8a9f3754af1af16, type: 3}
+    - {fileID: 21300000, guid: a631822fd8e6aa74cae03fbde2ef10ec, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .266666681
+    m_StopTime: .0166666675
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
-    m_LoopTime: 1
+    m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0

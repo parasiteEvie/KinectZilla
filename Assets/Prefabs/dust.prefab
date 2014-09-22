@@ -8,15 +8,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
-  - 135: {fileID: 13500000}
-  - 54: {fileID: 5400000}
-  - 95: {fileID: 9500000}
-  - 114: {fileID: 11400002}
   - 212: {fileID: 21200000}
-  m_Layer: 11
-  m_Name: Bullet
-  m_TagString: Bullet
+  - 95: {fileID: 9500000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: dust
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,26 +25,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.3708878, y: -15.9046803, z: -1.0123e-07}
-  m_LocalScale: {x: .5, y: .5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: -3, y: 3, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!54 &5400000
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -57,7 +39,7 @@ Animator:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 343500c90136ae342bfc2fe7eee134c0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0018d92da398873419b2e88c0e2130a5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -71,37 +53,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6406d361e0039a5479d0ef39766a8e9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f562c1e145f7244b98f06409610ac56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  hascollided: 0
-  targetDirection: {x: 0, y: 0, z: 0}
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec78f52f79f59d342aa9ec45c132a074, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trackingobject: {fileID: 0}
-  deltaPosition: {x: 0, y: 0, z: 0}
---- !u!135 &13500000
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .5
-  m_Center: {x: 0, y: 0, z: 0}
+  dustTimer: .75
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -122,7 +77,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8a083f1de3c52d84ab62d2fb526a92ec, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

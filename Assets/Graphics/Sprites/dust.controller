@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: specials
+  m_Name: dust
   serializedVersion: 2
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -25,28 +25,13 @@ State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: invincibility_anim
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Motions:
-  - {fileID: 7400000, guid: de777bee7ccea8844bd85a9f3afed205, type: 2}
-  m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 48, y: 60, z: 0}
-  m_IKOnFeet: 0
-  m_Mirror: 0
-  m_Tag: 
---- !u!1102 &110264970
-State:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
   m_Name: dustcloud
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: 6880780b32ced184fa2372ca8f9c4388, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 48, y: 108, z: 0}
+  m_Position: {x: 48, y: 72, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -60,7 +45,6 @@ StateMachine:
   m_DefaultState: {fileID: 110200000}
   m_States:
   - {fileID: 110200000}
-  - {fileID: 110264970}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions: {}

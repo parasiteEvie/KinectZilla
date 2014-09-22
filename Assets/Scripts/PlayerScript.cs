@@ -7,14 +7,24 @@ public enum EquipItem
 	BOMB
 }
 
-[RequireComponent(typeof(AudioSource))]
+public enum AccelerationState{
+	DECCELERATING,
+	DECCELERATING_HEAVY,
+	NONE,
+	ACCELERATING
 
+}
+[RequireComponent(typeof(AudioSource))]
 public class PlayerScript : MonoBehaviour 
 {
-
-	public float speed = 1.0f;
+	public float acceleration = 0f;
 	public float jumpSpeed = 8.0f;
+	public float JUMP_PUSH_TIMER = .25f;
+	public float MAX_RUN_SPEED = 20;
+	public float FRICTION_COOEFFICIENT = 0.19f;
+	private float jumpTimer;
 	public float gravity = 20.0f;
+	public AccelerationState playerAcceleration = AccelerationState.NONE;
 
 	//gameobjects
 	public GameObject bullet;
@@ -38,7 +48,7 @@ public class PlayerScript : MonoBehaviour
 
 	public float deathCountdown = 0.0f;
 
-	private Vector3 moveDirection = Vector3.zero;
+	private Vector3 moveVelocity = Vector3.zero;
 
 	public GameObject invincibilityEffect;
 	// Use this for initialization
@@ -49,6 +59,8 @@ public class PlayerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		playerAcceleration = AccelerationState.NONE;
+		Vector3 currentVelocity = Vector3.zero;
 		weaponSelection ();
 		//update timers 
 		timer += Time.deltaTime;
@@ -69,41 +81,89 @@ public class PlayerScript : MonoBehaviour
 		}
 		CharacterController controller = GetComponent<CharacterController>();
 
+
 		//update timer 
 		timer += Time.deltaTime;
 
-		moveDirection.x = Input.GetAxis ("HorizontalP" + myPlayer) * speed;
-		moveDirection.z = Input.GetAxis("VerticalP"+myPlayer) * speed;
-
-
-		if (controller.isGrounded) 
-		{
-			moveDirection.y = 0;
-			if ( Application.platform == RuntimePlatform.WindowsEditor ||
-			    Application.platform == RuntimePlatform.WindowsPlayer ||
-			    Application.platform == RuntimePlatform.WindowsWebPlayer) 
-			{
-
-				if (Input.GetButton("JumpP"+myPlayer) || Input.GetAxis("JumpP"+myPlayer) > 0 || Input.GetAxis("JumpP"+myPlayer+"alt") > 0 || Input.GetAxis("JumpP"+myPlayer) < 0 || Input.GetAxis("JumpP"+myPlayer+"alt") < 0)
-				{
-					moveDirection.y = jumpSpeed;
-					audio.clip = jumpSound;
-					audio.Play();
+		if (Mathf.Abs (moveVelocity.x) < MAX_RUN_SPEED) {
+						moveVelocity.x = controller.velocity.x + (Input.GetAxis ("HorizontalP" + myPlayer) * acceleration * Time.deltaTime);
+			playerAcceleration = AccelerationState.ACCELERATING;
 				}
-				
-			else
-			{
-				if (Input.GetButton("JumpP"+myPlayer+"Mac"))
-				{
-					moveDirection.y = jumpSpeed;
-					audio.clip = jumpSound;
-					audio.Play();
-				}
-				
-			}
-			
-			}
+		if(Mathf.Abs (moveVelocity.z) < MAX_RUN_SPEED) {
+			moveVelocity.z = controller.velocity.z + (Input.GetAxis("VerticalP"+myPlayer) * acceleration * Time.deltaTime);
+			playerAcceleration = AccelerationState.ACCELERATING;
 		}
+		if (Input.GetAxis ("HorizontalP" + myPlayer) == 0 && moveVelocity.x != 0f) {
+			//friction coefficient remove
+			moveVelocity.x += (-moveVelocity.x)* FRICTION_COOEFFICIENT;
+			playerAcceleration = AccelerationState.DECCELERATING;
+			if(Mathf.Abs(moveVelocity.x) < 1.5f){moveVelocity.x = 0;}
+		}
+		else if (Input.GetAxis ("HorizontalP" + myPlayer) > 0 && moveVelocity.x < 0f) {
+			//friction coefficient remove
+			moveVelocity.x += (-moveVelocity.x)*.5f* FRICTION_COOEFFICIENT;
+			playerAcceleration = AccelerationState.DECCELERATING_HEAVY;
+		}
+		else if (Input.GetAxis ("HorizontalP" + myPlayer) < 0 && moveVelocity.x > 0f) {
+			//friction coefficient remove
+			moveVelocity.x += (-moveVelocity.x)*.5f* FRICTION_COOEFFICIENT;
+			playerAcceleration = AccelerationState.DECCELERATING_HEAVY;
+		}
+
+		if (Input.GetAxis ("VerticalP" + myPlayer) == 0 && moveVelocity.z != 0f) {
+			//friction coefficient remove
+			moveVelocity.z += (-moveVelocity.z)* FRICTION_COOEFFICIENT;
+		}
+		else if (Input.GetAxis ("VerticalP" + myPlayer) > 0 && moveVelocity.z < 0f) {
+			//friction coefficient remove
+			moveVelocity.z += (-moveVelocity.z)*3f* FRICTION_COOEFFICIENT;
+		}
+		else if (Input.GetAxis ("VerticalP" + myPlayer) < 0 && moveVelocity.z > 0f) {
+			//friction coefficient remove
+			moveVelocity.z += (-moveVelocity.z)*3f* FRICTION_COOEFFICIENT;
+		}
+
+		if (controller.isGrounded) {
+						moveVelocity.y = 0;
+						if (Application.platform == RuntimePlatform.WindowsEditor ||
+								Application.platform == RuntimePlatform.WindowsPlayer ||
+								Application.platform == RuntimePlatform.WindowsWebPlayer) {
+
+								if (Input.GetButton ("JumpP" + myPlayer) || Input.GetAxis ("JumpP" + myPlayer) > 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") > 0 || Input.GetAxis ("JumpP" + myPlayer) < 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") < 0) {
+										moveVelocity.y = jumpSpeed;
+										audio.clip = jumpSound;
+										audio.Play ();
+										jumpTimer = JUMP_PUSH_TIMER;
+								} else {
+										if (Input.GetButton ("JumpP" + myPlayer + "Mac")) {
+												moveVelocity.y = jumpSpeed;
+												audio.clip = jumpSound;
+												audio.Play ();
+												jumpTimer = JUMP_PUSH_TIMER;
+										}
+				
+								}
+			
+						}
+				} else {
+
+					jumpTimer -= Time.deltaTime;
+					// jump push
+					if (jumpTimer > 0){
+				if (Input.GetButton ("JumpP" + myPlayer) || Input.GetAxis ("JumpP" + myPlayer) > 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") > 0 || Input.GetAxis ("JumpP" + myPlayer) < 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") < 0) {
+					moveVelocity.y += jumpSpeed *2.0f* Time.deltaTime;
+					Debug.Log ("Pushing the jump");
+
+				} else {
+					if (Input.GetButton ("JumpP" + myPlayer + "Mac")) {
+						moveVelocity.y += jumpSpeed * Time.deltaTime;
+						Debug.Log ("Pushing the jump");
+					}
+					
+				}
+					}
+
+				}
 
 
 
@@ -112,8 +172,8 @@ public class PlayerScript : MonoBehaviour
 		//Debug.Log ("I am" +"HorizontalP"+myPlayer);
 		//transform.position = newPosition;
 
-		moveDirection.y -= gravity * Time.deltaTime;
-		controller.Move(moveDirection * Time.deltaTime);
+		moveVelocity.y -= gravity * Time.deltaTime;
+		controller.Move(moveVelocity * Time.deltaTime);
 		
 		//shoot
 		if(Time.timeScale != 0)  //Fixes pause issue. Without this IF statement the player is able to fire 1 bullet when the game is paused.
