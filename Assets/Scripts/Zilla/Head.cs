@@ -16,9 +16,14 @@ public class Head:MonoBehaviour {
 	private BossState myState;
 	private Animator anim;
 
+	public GameObject fireSpew;
+
+	public float fireSpewTimer;
+
 	// Init
 	public void Awake() {
 		bpc = GetComponent<BodyPartControls>();
+		anim = GetComponent<Animator>();
 	}
 
 	public void Start(){
@@ -34,6 +39,7 @@ public class Head:MonoBehaviour {
 			myState = BossState.DYING;
 			Application.LoadLevel("PlayersWin");
 		}
+		fireSpewTimer -= Time.deltaTime;
 	}
 
 	public void LateUpdate() {
@@ -53,6 +59,19 @@ public class Head:MonoBehaviour {
 		}
 		// Adjust
 		transform.position = pos;
+
+		if (transform.position.y < 4.25f) {
+			anim.Play ("BossSpewFire");
+
+			if(fireSpewTimer < 0f){
+				GameObject w = (GameObject) Instantiate(fireSpew, transform.position + (Vector3.down * 5.5f), Quaternion.identity);
+				w.GetComponent<FireSpewAI>().targetDirection = Vector3.down;
+				fireSpewTimer = .75f;
+			}
+		} 
+		else {
+			anim.Play ("BossIdle");
+		}
 	}
 
 	//void OnTriggerEnter(Collider other)
