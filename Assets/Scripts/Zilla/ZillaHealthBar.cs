@@ -10,7 +10,9 @@ public class ZillaHealthBar : MonoBehaviour {
 	
 	private GUIStyle backgroundStyle = null;
 	private GUIStyle foregroundStyle = null;
-	
+
+	public GUIStyle bossText;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -55,6 +57,8 @@ public class ZillaHealthBar : MonoBehaviour {
 
 		// Draw the foreground image
 		GUI.Box (new Rect (Screen.width/2-(Screen.width/3)/2,10, percentHealth,32), "", foregroundStyle);
+
+		GUI.Label (new Rect (20 + (Screen.width / 2 - (Screen.width / 3) / 2), 10, Screen.width / 3, 32), "BOSS", bossText);
 
 	}
 

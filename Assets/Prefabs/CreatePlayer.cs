@@ -10,10 +10,10 @@ public class CreatePlayer : MonoBehaviour {
 
 	public GameObject player;
 
-	private double spawntimer1;
-	private double spawntimer2;
-	private double spawntimer3;
-	private double spawntimer4;
+	public double spawntimer1;
+	public double spawntimer2;
+	public double spawntimer3;
+	public double spawntimer4;
 	private double TimeToWait;
 	private bool IsTiming = false;
 
@@ -21,12 +21,12 @@ public class CreatePlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		spawntimer1 = 3;
-		spawntimer2 = 3;
-		spawntimer3 = 3;
-		spawntimer4 = 3;
+		spawntimer1 = 1;
+		spawntimer2 = 1;
+		spawntimer3 = 1;
+		spawntimer4 = 1;
 		IsTiming = true;
-		TimeToWait = 3;
+		TimeToWait = 6;
 		if ( Application.platform == RuntimePlatform.WindowsEditor ||
 		    Application.platform == RuntimePlatform.WindowsPlayer ||
 		    Application.platform == RuntimePlatform.WindowsWebPlayer) {
@@ -44,58 +44,58 @@ public class CreatePlayer : MonoBehaviour {
 		if (IsTiming == true)
 		{
 			//Add the change in time between frames to the timer
-			spawntimer1 += Time.deltaTime;
-			spawntimer2 += Time.deltaTime;
-			spawntimer3 += Time.deltaTime;
-			spawntimer4 += Time.deltaTime;
+			spawntimer1 -= Time.deltaTime;
+			spawntimer2 -= Time.deltaTime;
+			spawntimer3 -= Time.deltaTime;
+			spawntimer4 -= Time.deltaTime;
 		}
 
 		//reset spawn timer when it gets too high
-		if (spawntimer1 > 20) 
+		if (spawntimer1 < 0) 
 			{
-				spawntimer1 = 0;
+				spawntimer1 = -10;
 			}
-		if (spawntimer2 > 20) 
+		if (spawntimer2 < 0) 
 			{
-				spawntimer2 = 0;
+				spawntimer2 = -10;
 			}
-		if (spawntimer3 > 20) 
+		if (spawntimer3 < 0) 
 			{
-				spawntimer3 = 0;
+				spawntimer3 = -10;
 			}
-		if (spawntimer4 > 20) 
+		if (spawntimer4 < 0) 
 			{
-				spawntimer4 = 0;
+				spawntimer4 = -10;
 			}
 		//end reset code
 
-		if(!player1IsActive && Input.GetButtonDown("JumpP1"+_isMac) && spawntimer1 > TimeToWait)
+		if(!player1IsActive && Input.GetButtonDown("JumpP1"+_isMac) && spawntimer1 < 0)
 		{ 
 			player1IsActive = true;
 			PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(-6f, -3f, 20), Quaternion.identity)).GetComponent<PlayerScript>();
 			p1.myPlayer = 1;
-			spawntimer1 = 0;
+			spawntimer1 = TimeToWait;
 		}
-		if(!player2IsActive && Input.GetButtonDown("JumpP2"+_isMac) && spawntimer2 > TimeToWait)
+		if(!player2IsActive && Input.GetButtonDown("JumpP2"+_isMac) && spawntimer2 < 0)
 		{
 			player2IsActive = true;
 			PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(-3f, -3f, 20), Quaternion.identity)).GetComponent<PlayerScript>();
 			p1.myPlayer = 2;
-			spawntimer2 = 0;
+			spawntimer2 = TimeToWait;
 		}
-		if(!player3IsActive && Input.GetButtonDown("JumpP3"+_isMac) && spawntimer3 > TimeToWait)
+		if(!player3IsActive && Input.GetButtonDown("JumpP3"+_isMac) && spawntimer3 < 0)
 		{
 			player3IsActive = true;
 			PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(-0f, -3f, 20), Quaternion.identity)).GetComponent<PlayerScript>();
 			p1.myPlayer = 3;
-			spawntimer3 = 0;
+			spawntimer3 = TimeToWait;
 		}
-		if(!player4IsActive && Input.GetButtonDown("JumpP4"+_isMac) && spawntimer4 > TimeToWait)
+		if(!player4IsActive && Input.GetButtonDown("JumpP4"+_isMac) && spawntimer4 < 0)
 		{
 			player4IsActive = true;
 			PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(3f, -3f, 20), Quaternion.identity)).GetComponent<PlayerScript>();
 			p1.myPlayer = 4;
-			spawntimer4 = 0;
+			spawntimer4 = TimeToWait;
 		}
 	
 	

@@ -260,18 +260,22 @@ public class PlayerScript : MonoBehaviour
 				
 			case 1:
 				pl.player1IsActive = false;
+				pl.spawntimer1 = 6.0;
 				break;
 				
 			case 2:
 				pl.player2IsActive = false;
+				pl.spawntimer2 = 6.0;
 				break;
 				
 			case 3:
 				pl.player3IsActive = false;
+				pl.spawntimer3 = 6.0;
 				break;
 				
 			case 4:
 				pl.player4IsActive = false;
+				pl.spawntimer4 = 6.0;
 				break;
 				
 			}
