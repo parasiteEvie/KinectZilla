@@ -9,6 +9,9 @@ TagManager:
   - Bomb
   - BombPack
   - arm
+  - Fire
+  - Ground
+  - Hand
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -23,7 +26,7 @@ TagManager:
   User Layer 10: Background
   User Layer 11: Bullet
   User Layer 12: Player
-  User Layer 13: 
+  User Layer 13: Fire
   User Layer 14: 
   User Layer 15: 
   User Layer 16: 
