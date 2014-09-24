@@ -310,7 +310,6 @@ public class PlayerScript : MonoBehaviour
 	public void MakeInvincible() 
 	{
 		//TODO: Add logic that makes the player Invincible for 10 seconds. THIS FUNCTION DOES NOT YET EXIST
-		Debug.Log ("Invincible!");
 		invincibleTimer = 10f;
 		invincibilityEffect.SetActive (true);
 	}
@@ -320,6 +319,7 @@ public class PlayerScript : MonoBehaviour
 		bombCount += 1;
 		Debug.Log ("Number of Bombs = "+bombCount);
 	}
+
 }
 
 

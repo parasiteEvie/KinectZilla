@@ -37,7 +37,6 @@ public class BodyPartControls:MonoBehaviour {
 						{
 							if (body.IsTracked) 
 							{
-					Debug.Log("tracking people");
 									Kinect.Joint joint = body.Joints [joinType];
 									pos.x = joint.Position.X * 50f;
 									pos.y = joint.Position.Y * 50f;

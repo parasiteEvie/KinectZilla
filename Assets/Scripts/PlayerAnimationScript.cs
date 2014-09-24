@@ -19,6 +19,9 @@ public class PlayerAnimationScript : MonoBehaviour {
 	private float dustTimer = 0f;
 
 	private Animator anim;
+	private AudioSource asource;
+
+	public AudioClip scootSE;
 
 	public bool playingDeath;
 
@@ -30,6 +33,7 @@ public class PlayerAnimationScript : MonoBehaviour {
 
 	public void Awake() {
 		anim = GetComponent<Animator>();
+		asource = GetComponent<AudioSource> ();
 		characterController = GetComponent<CharacterController> ();
 	}
 
@@ -88,7 +92,6 @@ public class PlayerAnimationScript : MonoBehaviour {
 				else if(GetComponent<PlayerScript>().playerAcceleration == AccelerationState.DECCELERATING_HEAVY){
 					anim.Play(animPrefix + "Stop");
 					//TODO:  add little dust cloud particles
-					Debug.Log ("curr position"+transform.position.ToString());
 					if(se == null){
 						if(deltaPos.x < 0){
 						se = (GameObject)Instantiate(specialEffectprefab, transform.position+(new Vector3(-5.5f, -1.87f, 0)), Quaternion.identity);
@@ -96,6 +99,8 @@ public class PlayerAnimationScript : MonoBehaviour {
 						}else{
 							se = (GameObject)Instantiate(specialEffectprefab, transform.position+(new Vector3(5.5f, -1.87f, 0)), Quaternion.identity);
 						}
+						asource.clip = scootSE;
+						asource.Play();
 					}
 					//TODO: add sound effect for braking
 				}

@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class PauseGame : MonoBehaviour {
+	public GUIStyle PauseStyle;
 
 	// Use this for initialization
 	void Start()
@@ -20,14 +21,24 @@ public class PauseGame : MonoBehaviour {
 				if (Time.timeScale == 0)
 				{
 					Time.timeScale = 1;
-					audio.pitch = 1f;  
+					audio.pitch = 1f;
+
 				} else {
 					Time.timeScale = 0;
 					audio.pitch = 0.75f;
+
 				}
 				
 			}    
 			yield return null;    
+		}
+	}
+
+	void OnGUI(){
+		if (Time.timeScale == 0) {
+			GUI.backgroundColor = Color.black;
+			GUI.Box(new Rect(0,0,Screen.width,Screen.height),"");
+			GUI.Label (new Rect (0, 0, Screen.width, Screen.height), "PAUSE", PauseStyle); 
 		}
 	}
 }

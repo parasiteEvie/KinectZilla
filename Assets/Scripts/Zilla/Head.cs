@@ -62,15 +62,18 @@ public class Head:MonoBehaviour {
 
 		if (transform.position.y < 4.25f) {
 			anim.Play ("BossSpewFire");
-
+			myState = BossState.RAGE;
 			if(fireSpewTimer < 0f){
 				GameObject w = (GameObject) Instantiate(fireSpew, transform.position + (Vector3.down * 5.5f), Quaternion.identity);
-				w.GetComponent<FireSpewAI>().targetDirection = Vector3.down;
-				fireSpewTimer = .75f;
+				Vector3 dirSpew = new Vector3(transform.position.x + ( Mathf.PingPong(Time.time*75f, 100f) - 30f), transform.position.y - 25f, transform.position.z-20f);
+				w.GetComponent<FireSpewAI>().targetDirection = dirSpew - (w.transform.position + new Vector3(0, 0, 10f));
+				w.GetComponent<FireSpewAI>().targetDirection.Normalize();
+				fireSpewTimer = .1f;
 			}
 		} 
 		else {
 			anim.Play ("BossIdle");
+			myState = BossState.NORMAL;
 		}
 	}
 
@@ -116,7 +119,8 @@ public class Head:MonoBehaviour {
 			if(e ==(int)EquipItem.BOMB){lifePoints -= 20;}
 			break;
 		case BossState.RAGE:
-			lifePoints -= 2;
+			if(e == (int)EquipItem.BULLET){lifePoints -= 3;}
+			if(e ==(int)EquipItem.BOMB){lifePoints -= 40;}
 			break;
 		default:
 			break;

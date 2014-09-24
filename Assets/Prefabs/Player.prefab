@@ -157,7 +157,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: .25, y: .25, z: .25}
@@ -266,6 +266,7 @@ MonoBehaviour:
   greenArmSpr: {fileID: 21300000, guid: 35111feac5752400ca52e275d42e7d20, type: 3}
   blueArmSpr: {fileID: 21300002, guid: 1dbadac70291b48399f4578c11d3a9b3, type: 3}
   yellowArmSpr: {fileID: 21300000, guid: 06b05c02d2bc84c73985b93ecc779bd9, type: 3}
+  scootSE: {fileID: 8300000, guid: ffa8827f633aab34f9ffaf07983ef9dd, type: 3}
   playingDeath: 0
   shadow: {fileID: 100006}
   specialEffectprefab: {fileID: 100000, guid: d5e69caa4c2b7584e95a759338e97962, type: 2}
