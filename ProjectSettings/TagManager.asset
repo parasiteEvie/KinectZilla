@@ -12,6 +12,8 @@ TagManager:
   - Fire
   - Ground
   - Hand
+  - LevelItem
+  - HealingWater
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

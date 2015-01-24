@@ -160,12 +160,14 @@ public class Hand:MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		if(collision.gameObject.tag == "Player")
-		{
+		if (collision.gameObject.tag == "Player") {
 			isBoss = true;
-			PlayerScript p = collision.gameObject.GetComponent<PlayerScript>();
-			p.KillPlayer(isBoss);
+			PlayerScript p = collision.gameObject.GetComponent<PlayerScript> ();
+			p.KillPlayer (isBoss);
 			
+		} else if (collision.gameObject.tag == "LevelItem") {
+			PedastalScript p = collision.gameObject.GetComponent<PedastalScript>();
+			p.SetDamage(.15f);
 		}
 	}
 }

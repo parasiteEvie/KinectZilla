@@ -11,7 +11,7 @@ public enum AccelerationState{
 	DECCELERATING,
 	DECCELERATING_HEAVY,
 	NONE,
-	ACCELERATING
+	ACCELERATING,
 
 }
 [RequireComponent(typeof(AudioSource))]
@@ -26,9 +26,13 @@ public class PlayerScript : MonoBehaviour
 	public float gravity = 20.0f;
 	public AccelerationState playerAcceleration = AccelerationState.NONE;
 
+	public PlayerAnimationScript playerAnim;
 	//gameobjects
+	public GameObject healingWater;
 	public GameObject bullet;
 	public GameObject bomb;
+
+	public bool healing;
 
 	//delay timers
 	public float BulletDelay = 0.25f;
@@ -53,77 +57,120 @@ public class PlayerScript : MonoBehaviour
 	public GameObject invincibilityEffect;
 	// Use this for initialization
 	void Start () {
-	
+		healing = false;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		playerAcceleration = AccelerationState.NONE;
-		Vector3 currentVelocity = Vector3.zero;
-		weaponSelection ();
-		//update timers 
-		timer += Time.deltaTime;
-		invincibleTimer -= Time.deltaTime;
+				playerAcceleration = AccelerationState.NONE;
 
-		if (invincibleTimer < 0f) {
-			invincibilityEffect.SetActive (false);
+		// Place your code to shoot
+		float x;
+		
+		if (Application.platform == RuntimePlatform.WindowsEditor ||
+		    Application.platform == RuntimePlatform.WindowsPlayer ||
+		    Application.platform == RuntimePlatform.WindowsWebPlayer) {
+			x = Input.GetAxis ("Horizontal2P" + myPlayer);
+		} else {
+			x = Input.GetAxis ("JumpP" + myPlayer + "alt");
+		}
+		float y;
+		
+		if (Application.platform == RuntimePlatform.WindowsEditor ||
+		    Application.platform == RuntimePlatform.WindowsPlayer ||
+		    Application.platform == RuntimePlatform.WindowsWebPlayer) {
+			y = Input.GetAxis ("Vertical2P" + myPlayer);
+		} else {
+			y = -Input.GetAxis ("Horizontal2P" + myPlayer);
 		}
 
-		if(myPlayer == 0)return;
+				Vector3 currentVelocity = Vector3.zero;
+				weaponSelection ();
+				//update timers 
+				timer += Time.deltaTime;
+				invincibleTimer -= Time.deltaTime;
 
-		if(deathCountdown > 0f){
-			deathCountdown -= Time.deltaTime;
-			if(deathCountdown <= 0f){
-				Destroy(this.gameObject);
+				if (invincibleTimer < 0f) {
+						invincibilityEffect.SetActive (false);
+				}
+
+				if (myPlayer == 0)
+						return;
+
+
+				if (deathCountdown > 0f) {
+						deathCountdown -= Time.deltaTime;
+						if (deathCountdown <= 0f) {
+								Destroy (this.gameObject);
+						}
+						return;
+				}
+
+		if (Input.GetButton("HealP" + myPlayer)) {		
+			//HEAL town
+			healing = true;
+			if (timer * 3f >= BulletDelay) {
+				BulletAI bai1 = ((GameObject)Instantiate (healingWater, transform.position, transform.rotation)).GetComponent<BulletAI> ();
+				if(playerAnim.transform.localScale.x < 0f){
+					bai1.targetDirection = transform.TransformDirection(new Vector3(-.96f, .34f, 0));
+				}
+				else{
+					bai1.targetDirection = transform.TransformDirection(new Vector3(.96f, .34f, 0));
+				}
+
+				audio.clip = bulletSound;
+				audio.Play ();
+				timer = 0;
+
 			}
 			return;
 		}
-		CharacterController controller = GetComponent<CharacterController>();
+		healing = false;
+
+				CharacterController controller = GetComponent<CharacterController> ();
 
 
-		//update timer 
-		timer += Time.deltaTime;
+				//update timer 
+				timer += Time.deltaTime;
 
-		if (Mathf.Abs (moveVelocity.x) < MAX_RUN_SPEED) {
+				if (Mathf.Abs (moveVelocity.x) < MAX_RUN_SPEED) {
 						moveVelocity.x = controller.velocity.x + (Input.GetAxis ("HorizontalP" + myPlayer) * acceleration * Time.deltaTime);
-			playerAcceleration = AccelerationState.ACCELERATING;
+						playerAcceleration = AccelerationState.ACCELERATING;
 				}
-		if(Mathf.Abs (moveVelocity.z) < MAX_RUN_SPEED) {
-			moveVelocity.z = controller.velocity.z + (Input.GetAxis("VerticalP"+myPlayer) * acceleration * Time.deltaTime);
-			playerAcceleration = AccelerationState.ACCELERATING;
-		}
-		if (Input.GetAxis ("HorizontalP" + myPlayer) == 0 && moveVelocity.x != 0f) {
-			//friction coefficient remove
-			moveVelocity.x += (-moveVelocity.x)* FRICTION_COOEFFICIENT;
-			playerAcceleration = AccelerationState.DECCELERATING;
-			if(Mathf.Abs(moveVelocity.x) < 1.5f){moveVelocity.x = 0;}
-		}
-		else if (Input.GetAxis ("HorizontalP" + myPlayer) > 0 && moveVelocity.x < 0f) {
-			//friction coefficient remove
-			moveVelocity.x += (-moveVelocity.x)*.5f* FRICTION_COOEFFICIENT;
-			playerAcceleration = AccelerationState.DECCELERATING_HEAVY;
-		}
-		else if (Input.GetAxis ("HorizontalP" + myPlayer) < 0 && moveVelocity.x > 0f) {
-			//friction coefficient remove
-			moveVelocity.x += (-moveVelocity.x)*.5f* FRICTION_COOEFFICIENT;
-			playerAcceleration = AccelerationState.DECCELERATING_HEAVY;
-		}
+				if (Mathf.Abs (moveVelocity.z) < MAX_RUN_SPEED) {
+						moveVelocity.z = controller.velocity.z + (Input.GetAxis ("VerticalP" + myPlayer) * acceleration * Time.deltaTime);
+						playerAcceleration = AccelerationState.ACCELERATING;
+				}
+				if (Input.GetAxis ("HorizontalP" + myPlayer) == 0 && moveVelocity.x != 0f) {
+						//friction coefficient remove
+						moveVelocity.x += (-moveVelocity.x) * FRICTION_COOEFFICIENT;
+						playerAcceleration = AccelerationState.DECCELERATING;
+						if (Mathf.Abs (moveVelocity.x) < 1.5f) {
+								moveVelocity.x = 0;
+						}
+				} else if (Input.GetAxis ("HorizontalP" + myPlayer) > 0 && moveVelocity.x < 0f) {
+						//friction coefficient remove
+						moveVelocity.x += (-moveVelocity.x) * .5f * FRICTION_COOEFFICIENT;
+						playerAcceleration = AccelerationState.DECCELERATING_HEAVY;
+				} else if (Input.GetAxis ("HorizontalP" + myPlayer) < 0 && moveVelocity.x > 0f) {
+						//friction coefficient remove
+						moveVelocity.x += (-moveVelocity.x) * .5f * FRICTION_COOEFFICIENT;
+						playerAcceleration = AccelerationState.DECCELERATING_HEAVY;
+				}
 
-		if (Input.GetAxis ("VerticalP" + myPlayer) == 0 && moveVelocity.z != 0f) {
-			//friction coefficient remove
-			moveVelocity.z += (-moveVelocity.z)* FRICTION_COOEFFICIENT;
-		}
-		else if (Input.GetAxis ("VerticalP" + myPlayer) > 0 && moveVelocity.z < 0f) {
-			//friction coefficient remove
-			moveVelocity.z += (-moveVelocity.z)*3f* FRICTION_COOEFFICIENT;
-		}
-		else if (Input.GetAxis ("VerticalP" + myPlayer) < 0 && moveVelocity.z > 0f) {
-			//friction coefficient remove
-			moveVelocity.z += (-moveVelocity.z)*3f* FRICTION_COOEFFICIENT;
-		}
+				if (Input.GetAxis ("VerticalP" + myPlayer) == 0 && moveVelocity.z != 0f) {
+						//friction coefficient remove
+						moveVelocity.z += (-moveVelocity.z) * FRICTION_COOEFFICIENT;
+				} else if (Input.GetAxis ("VerticalP" + myPlayer) > 0 && moveVelocity.z < 0f) {
+						//friction coefficient remove
+						moveVelocity.z += (-moveVelocity.z) * 3f * FRICTION_COOEFFICIENT;
+				} else if (Input.GetAxis ("VerticalP" + myPlayer) < 0 && moveVelocity.z > 0f) {
+						//friction coefficient remove
+						moveVelocity.z += (-moveVelocity.z) * 3f * FRICTION_COOEFFICIENT;
+				}
 
-		if (controller.isGrounded) {
+				if (controller.isGrounded) {
 						moveVelocity.y = 0;
 						if (Application.platform == RuntimePlatform.WindowsEditor ||
 								Application.platform == RuntimePlatform.WindowsPlayer ||
@@ -147,102 +194,75 @@ public class PlayerScript : MonoBehaviour
 						}
 				} else {
 
-					jumpTimer -= Time.deltaTime;
-					// jump push
-					if (jumpTimer > 0){
-				if (Input.GetButton ("JumpP" + myPlayer) || Input.GetAxis ("JumpP" + myPlayer) > 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") > 0 || Input.GetAxis ("JumpP" + myPlayer) < 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") < 0) {
-					moveVelocity.y += jumpSpeed *2.0f* Time.deltaTime;
-					Debug.Log ("Pushing the jump");
+						jumpTimer -= Time.deltaTime;
+						// jump push
+						if (jumpTimer > 0) {
+								if (Input.GetButton ("JumpP" + myPlayer) || Input.GetAxis ("JumpP" + myPlayer) > 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") > 0 || Input.GetAxis ("JumpP" + myPlayer) < 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") < 0) {
+										moveVelocity.y += jumpSpeed * 2.0f * Time.deltaTime;
+										Debug.Log ("Pushing the jump");
 
-				} else {
-					if (Input.GetButton ("JumpP" + myPlayer + "Mac")) {
-						moveVelocity.y += jumpSpeed * Time.deltaTime;
-						Debug.Log ("Pushing the jump");
-					}
+								} else {
+										if (Input.GetButton ("JumpP" + myPlayer + "Mac")) {
+												moveVelocity.y += jumpSpeed * Time.deltaTime;
+												Debug.Log ("Pushing the jump");
+										}
 					
-				}
-					}
+								}
+						}
 
 				}
 
 
 
-		//Vector3 newPosition = transform.position;
-		//newPosition.x += Input.GetAxis("HorizontalP"+myPlayer) * speed * Time.deltaTime;
-		//Debug.Log ("I am" +"HorizontalP"+myPlayer);
-		//transform.position = newPosition;
+				//Vector3 newPosition = transform.position;
+				//newPosition.x += Input.GetAxis("HorizontalP"+myPlayer) * speed * Time.deltaTime;
+				//Debug.Log ("I am" +"HorizontalP"+myPlayer);
+				//transform.position = newPosition;
 
-		moveVelocity.y -= gravity * Time.deltaTime;
-		controller.Move(moveVelocity * Time.deltaTime);
+				moveVelocity.y -= gravity * Time.deltaTime;
+				controller.Move (moveVelocity * Time.deltaTime);
 		
-		//shoot
-		if(Time.timeScale != 0)  //Fixes pause issue. Without this IF statement the player is able to fire 1 bullet when the game is paused.
-			{
-		// Place your code to shoot
-			float x;
-
-			if ( Application.platform == RuntimePlatform.WindowsEditor ||
-			    Application.platform == RuntimePlatform.WindowsPlayer ||
-			    Application.platform == RuntimePlatform.WindowsWebPlayer) 
-			{
-				x = Input.GetAxis ("Horizontal2P"+myPlayer);
-			}
-			else
-			{
-				x = Input.GetAxis ("JumpP"+myPlayer+"alt");
-			}
-		float y;
-
-			if ( Application.platform == RuntimePlatform.WindowsEditor ||
-			    Application.platform == RuntimePlatform.WindowsPlayer ||
-			    Application.platform == RuntimePlatform.WindowsWebPlayer) 
-			{
-				y = Input.GetAxis ("Vertical2P"+myPlayer);
-			}
-			else
-			{
-				y = -Input.GetAxis ("Horizontal2P"+myPlayer);
-			}
-		if (x != 0f || y != 0f) 
-			{
-			//Debug.Log(x + " " + y);
-			switch (currentWeapon)
-				{
-				case EquipItem.BULLET:
-					if (timer >= BulletDelay)
-					{
-						BulletAI bai1 = ((GameObject)Instantiate (bullet, transform.position, transform.rotation)).GetComponent<BulletAI>();
-						bai1.targetDirection = new Vector3(x, y, 0f).normalized;
-						audio.clip = bulletSound;
-						audio.Play();
-						timer = 0;
-					}
-					break;
-				case EquipItem.BOMB:
-					if(bombCount <= 0){break;}
-					if (timer >= BombDelay)
-					{
-						BombAI bai2 = ((GameObject)Instantiate (bomb, transform.position, transform.rotation)).GetComponent<BombAI>();
-						bai2.targetDirection = new Vector3(x, y, 0f).normalized;
-						audio.clip = bombSound;
-						audio.Play();
-						bombCount -= 1;
-						Debug.Log ("Number of bombs = "+bombCount);
-						timer = 0;
-					}
-					break;
-				default: 
-					break;
+				//shoot
+				if (Time.timeScale != 0) {  //Fixes pause issue. Without this IF statement the player is able to fire 1 bullet when the game is paused.
+						
+						if (x != 0f || y != 0f) {
+								//Debug.Log(x + " " + y);
+								switch (currentWeapon) {
+								case EquipItem.BULLET:
+										if (timer >= BulletDelay) {
+												BulletAI bai1 = ((GameObject)Instantiate (bullet, transform.position, transform.rotation)).GetComponent<BulletAI> ();
+												bai1.targetDirection = new Vector3 (x, y, 0f).normalized;
+												audio.clip = bulletSound;
+												audio.Play ();
+												timer = 0;
+										}
+										break;
+								case EquipItem.BOMB:
+										if (bombCount <= 0) {
+												break;
+										}
+										if (timer >= BombDelay) {
+												BombAI bai2 = ((GameObject)Instantiate (bomb, transform.position, transform.rotation)).GetComponent<BombAI> ();
+												bai2.targetDirection = new Vector3 (x, y, 0f).normalized;
+												audio.clip = bombSound;
+												audio.Play ();
+												bombCount -= 1;
+												Debug.Log ("Number of bombs = " + bombCount);
+												timer = 0;
+										}
+										break;
+								default: 
+										break;
+								}
+						}
 				}
-			}
-		}
 
-		//player death
-		if(transform.position.y < -30)
-		{
-			//FALSE is sent because the player is NOT being killed by the boss
-			KillPlayer(false);
-		}
+				//player death
+				if (transform.position.y < -30) {
+						//FALSE is sent because the player is NOT being killed by the boss
+						KillPlayer (false);
+				}
+
 	}
 
 	public void KillPlayer(bool isBoss)
@@ -282,8 +302,7 @@ public class PlayerScript : MonoBehaviour
 
 			deathCountdown = 3.0f;
 
-			PlayerAnimationScript p = this.gameObject.GetComponent<PlayerAnimationScript>();
-			p.PlayDeath();
+			playerAnim.PlayDeath();
 		}
 	}
 

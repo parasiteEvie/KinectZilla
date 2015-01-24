@@ -12,7 +12,7 @@ public class PlayerAnimationScript : MonoBehaviour {
 
 	private Vector3 prevPos;
 	private Vector3 deltaPos;
-
+	
 	private string animPrefix = "R";
 
 	private int myPlayer;
@@ -33,12 +33,13 @@ public class PlayerAnimationScript : MonoBehaviour {
 
 	public void Awake() {
 		anim = GetComponent<Animator>();
-		asource = GetComponent<AudioSource> ();
-		characterController = GetComponent<CharacterController> ();
+		asource = GetComponentInParent<AudioSource> ();
+
 	}
 
 	public void Start() {
-		myPlayer = GetComponent<PlayerScript>().myPlayer;
+		myPlayer = this.GetComponentInParent<PlayerScript>().myPlayer;
+		characterController = this.GetComponentInParent<CharacterController> ();
 
 		switch(myPlayer) {
 		case 1:
@@ -78,41 +79,44 @@ public class PlayerAnimationScript : MonoBehaviour {
 
 		deltaPos = transform.position - prevPos;
 
-		if(deltaPos.magnitude > 0f) {
-			if((deltaPos.x < 0f && transform.localScale.x > 0f) || (deltaPos.x > 0f && transform.localScale.x < 0f)) {
-				transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-			}
-			if(!characterController.isGrounded) {
-				anim.Play(animPrefix + "Jump");
-
-			} else {
-				if(GetComponent<PlayerScript>().playerAcceleration == AccelerationState.ACCELERATING){
-					anim.Play(animPrefix + "Run");
-				}
-				else if(GetComponent<PlayerScript>().playerAcceleration == AccelerationState.DECCELERATING_HEAVY){
-					anim.Play(animPrefix + "Stop");
-					//TODO:  add little dust cloud particles
-					if(se == null){
-						if(deltaPos.x < 0){
-						se = (GameObject)Instantiate(specialEffectprefab, transform.position+(new Vector3(-5.5f, -1.87f, 0)), Quaternion.identity);
-							se.transform.localScale = new Vector3(-se.transform.localScale.x,se.transform.localScale.y,se.transform.localScale.z); 
-						}else{
-							se = (GameObject)Instantiate(specialEffectprefab, transform.position+(new Vector3(5.5f, -1.87f, 0)), Quaternion.identity);
+		if (deltaPos.magnitude > 0f) {
+						if ((deltaPos.x < 0f && transform.localScale.x > 0f) || (deltaPos.x > 0f && transform.localScale.x < 0f)) {
+								transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 						}
-						asource.clip = scootSE;
-						asource.Play();
-					}
-					//TODO: add sound effect for braking
-				}
-				else if(GetComponent<PlayerScript>().playerAcceleration == AccelerationState.DECCELERATING){
-					anim.Play(animPrefix + "Stop");
-				}
-			}
-		} else {
+						if (!characterController.isGrounded) {
+								anim.Play (animPrefix + "Jump");
+
+						} else {
+								if (this.GetComponentInParent<PlayerScript> ().playerAcceleration == AccelerationState.ACCELERATING) {
+										anim.Play (animPrefix + "Run");
+						} else if (this.GetComponentInParent<PlayerScript> ().playerAcceleration == AccelerationState.DECCELERATING_HEAVY) {
+										anim.Play (animPrefix + "Stop");
+										//TODO:  add little dust cloud particles
+										if (se == null) {
+												if (deltaPos.x < 0) {
+														se = (GameObject)Instantiate (specialEffectprefab, transform.position + (new Vector3 (-5.5f, -1.87f, 0)), Quaternion.identity);
+														se.transform.localScale = new Vector3 (-se.transform.localScale.x, se.transform.localScale.y, se.transform.localScale.z); 
+												} else {
+														se = (GameObject)Instantiate (specialEffectprefab, transform.position + (new Vector3 (5.5f, -1.87f, 0)), Quaternion.identity);
+												}
+												asource.clip = scootSE;
+												asource.Play ();
+										}
+										//TODO: add sound effect for braking
+								} else if (this.GetComponentInParent<PlayerScript>().playerAcceleration == AccelerationState.DECCELERATING) {
+										anim.Play (animPrefix + "Stop");
+								}
+						}
+		} else if (this.GetComponentInParent<PlayerScript>().healing) {
+			anim.Play(animPrefix + "Kneel");
+			return;
+		}
+		else {
 			anim.Play(animPrefix + "Idle");
 		}
 
 		prevPos = transform.position;
+
 
 		// Gun pointing
 		float x;
@@ -140,6 +144,7 @@ public class PlayerAnimationScript : MonoBehaviour {
 		var lookPos = new Vector3(y, 0f, -x).normalized;
 		if(transform.localScale.x < 0f) {
 			//gunArm.transform.rotation = Quaternion.LookRotation(lookPos);
+			Debug.Log("x is: "+x+"and y is" +y);
 			if(x == 0 && y == 0)
 			{
 				gunArm.transform.rotation = Quaternion.AngleAxis(15, Vector3.forward);

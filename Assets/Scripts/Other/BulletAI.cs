@@ -7,6 +7,9 @@ public class BulletAI : MonoBehaviour {
 	public bool hascollided;
 	private Animator anim;
 
+	public float lifeDistance = 0f;
+
+	private Vector3 startPosition;
 
 	public Vector3 targetDirection;
 
@@ -14,6 +17,10 @@ public class BulletAI : MonoBehaviour {
 	{
 		anim = GetComponent<Animator>();
 		anim.Play ("bulletAnim");
+	}
+
+	public void Start(){
+		startPosition = this.transform.position;
 	}
 
 
@@ -30,6 +37,11 @@ public class BulletAI : MonoBehaviour {
 			newPosition = newPosition + targetDirection * speed * Time.deltaTime;
 			transform.position = newPosition;
 
+		float distance = Vector3.Distance (this.transform.position, startPosition);
+
+		if (distance > lifeDistance && lifeDistance != 0f) {
+			Destroy(gameObject);
+		}
 	}
 	
 	void OnBecameInvisible() 

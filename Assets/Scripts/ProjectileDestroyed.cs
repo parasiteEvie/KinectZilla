@@ -60,6 +60,16 @@ public class ProjectileDestroyed : MonoBehaviour {
 				Invoke("killYourself", 0.6f);
 			}
 		}
+		else if (this.gameObject.tag == "HealingWater"){
+			this.gameObject.GetComponent<BulletAI> ().hascollided = true;
+
+			if(other.gameObject.tag == "LevelItem" || (other.transform.parent != null && other.transform.parent.tag == "LevelItem")){
+				other.gameObject.GetComponentInParent<PedastalScript>().HealDamage(.45f);
+			}
+
+			//this gameObject can go away
+			Invoke("killYourself", 0.3f);
+		}
 		else {
 
 			BulletAI bai = this.gameObject.GetComponent<BulletAI> ();

@@ -106,7 +106,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 102b8491230d14824b58576461c7ae63, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 36, y: 204, z: 0}
+  m_Position: {x: 36, y: 312, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -200,6 +200,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110261630
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: BKneel
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: de98ad2234ed23342af3fde9b3e5bf62, type: 2}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 36, y: 192, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110266854
 State:
   m_ObjectHideFlags: 3
@@ -227,6 +242,21 @@ State:
   - {fileID: 7400000, guid: 3398186af1d923d4c9c112f156a32084, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: -180, y: 144, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
+--- !u!1102 &110269186
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: RKneel
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: 9b832a26162b1a14481366a909cffe2e, type: 2}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: -180, y: 192, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -376,6 +406,8 @@ StateMachine:
   - {fileID: 110287453}
   - {fileID: 110280340}
   - {fileID: 110287040}
+  - {fileID: 110269186}
+  - {fileID: 110261630}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions: {}
