@@ -4,10 +4,14 @@ using System.Collections;
 public class PauseGame : MonoBehaviour {
 	public GUIStyle PauseStyle;
 
+	public AudioClip otherMusic;
+	public AudioClip pauseMusic;
+
 	// Use this for initialization
 	void Start()
 	{
-		StartCoroutine(PauseCoroutine());    
+		StartCoroutine(PauseCoroutine());  
+		otherMusic = audio.clip;
 	}
 	
 	IEnumerator PauseCoroutine() {
@@ -21,11 +25,13 @@ public class PauseGame : MonoBehaviour {
 				if (Time.timeScale == 0)
 				{
 					Time.timeScale = 1;
-					audio.pitch = 1f;
+					audio.clip = otherMusic;
+					audio.Play();
 
 				} else {
 					Time.timeScale = 0;
-					audio.pitch = 0.75f;
+					audio.clip = pauseMusic;
+					audio.Play();
 
 				}
 				

@@ -3,12 +3,19 @@ using System.Collections;
 
 public class CreatePlayer : MonoBehaviour {
 
-	public bool player1IsActive = false;
-	public bool player2IsActive = false;
-	public bool player3IsActive = false;
-	public bool player4IsActive = false;
+	public enum SummonStatus
+		{
+			INACTIVE,
+			SUMMONED,
+			ACTIVE,
+		}
+	public SummonStatus player1IsActive = SummonStatus.INACTIVE;
+	public SummonStatus player2IsActive = SummonStatus.INACTIVE;
+	public SummonStatus player3IsActive = SummonStatus.INACTIVE;
+	public SummonStatus player4IsActive = SummonStatus.INACTIVE;
 
 	public GameObject player;
+	public GameObject FireTruck;
 
 	public double spawntimer1;
 	public double spawntimer2;
@@ -26,7 +33,7 @@ public class CreatePlayer : MonoBehaviour {
 		spawntimer3 = 1;
 		spawntimer4 = 1;
 		IsTiming = true;
-		TimeToWait = 6;
+		TimeToWait = 1.5;
 		if ( Application.platform == RuntimePlatform.WindowsEditor ||
 		    Application.platform == RuntimePlatform.WindowsPlayer ||
 		    Application.platform == RuntimePlatform.WindowsWebPlayer) {
@@ -37,18 +44,54 @@ public class CreatePlayer : MonoBehaviour {
 			_isMac = "Mac";
 		}
 	}
-	
+	public void SummonFireTruck(){
+		FireTruck.GetComponent<Animator>().SetBool("summoned", true);
+	}
 	// Update is called once per frame
 	void Update () 
 	{
 		if (IsTiming == true)
 		{
 			//Add the change in time between frames to the timer
-			spawntimer1 -= Time.deltaTime;
-			spawntimer2 -= Time.deltaTime;
-			spawntimer3 -= Time.deltaTime;
-			spawntimer4 -= Time.deltaTime;
+
+			if(FireTruck.GetComponent<SpawnPlayersFlag>().spawnPlayers == true){
+
+				if (spawntimer1 < 0 && player1IsActive == SummonStatus.SUMMONED) 
+				{
+					player1IsActive = SummonStatus.ACTIVE;
+					PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(8f, -3f, 15), Quaternion.identity)).GetComponent<PlayerScript>();
+					p1.myPlayer = 1;
+					spawntimer1 = TimeToWait;
+				}
+				if (spawntimer2 < 0 && player2IsActive == SummonStatus.SUMMONED) 
+				{
+					player2IsActive = SummonStatus.ACTIVE;
+					PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(8f, -3f, 15), Quaternion.identity)).GetComponent<PlayerScript>();
+					p1.myPlayer = 2;
+					spawntimer2 = TimeToWait;
+				}
+				if (spawntimer3 < 0 && player3IsActive == SummonStatus.SUMMONED) 
+				{
+					player3IsActive = SummonStatus.ACTIVE;
+					PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(8f, -3f, 15), Quaternion.identity)).GetComponent<PlayerScript>();
+					p1.myPlayer = 3;
+					spawntimer3 = TimeToWait;
+				}
+				if (spawntimer4 < 0 && player4IsActive == SummonStatus.SUMMONED) 
+				{
+					player4IsActive = SummonStatus.ACTIVE;
+					PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(8f, -3f, 15), Quaternion.identity)).GetComponent<PlayerScript>();
+					p1.myPlayer = 4;
+					spawntimer4 = TimeToWait;
+				}
+
+			}
 		}
+
+		spawntimer1 -= Time.deltaTime;
+		spawntimer2 -= Time.deltaTime;
+		spawntimer3 -= Time.deltaTime;
+		spawntimer4 -= Time.deltaTime;
 
 		//reset spawn timer when it gets too high
 		if (spawntimer1 < 0) 
@@ -69,33 +112,25 @@ public class CreatePlayer : MonoBehaviour {
 			}
 		//end reset code
 
-		if(!player1IsActive && Input.GetButtonDown("JumpP1"+_isMac) && spawntimer1 < 0)
+		if(player1IsActive == SummonStatus.INACTIVE && Input.GetButtonDown("JumpP1"+_isMac) && spawntimer1 < 0)
 		{ 
-			player1IsActive = true;
-			PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(-6f, -3f, 20), Quaternion.identity)).GetComponent<PlayerScript>();
-			p1.myPlayer = 1;
-			spawntimer1 = TimeToWait;
+			player1IsActive = SummonStatus.SUMMONED;
+			FireTruck.GetComponent<Animator>().SetBool("summoned", true);
 		}
-		if(!player2IsActive && Input.GetButtonDown("JumpP2"+_isMac) && spawntimer2 < 0)
+		if(player2IsActive == SummonStatus.INACTIVE && Input.GetButtonDown("JumpP2"+_isMac) && spawntimer2 < 0)
 		{
-			player2IsActive = true;
-			PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(-3f, -3f, 20), Quaternion.identity)).GetComponent<PlayerScript>();
-			p1.myPlayer = 2;
-			spawntimer2 = TimeToWait;
+			player2IsActive = SummonStatus.SUMMONED;
+			FireTruck.GetComponent<Animator>().SetBool("summoned", true);
 		}
-		if(!player3IsActive && Input.GetButtonDown("JumpP3"+_isMac) && spawntimer3 < 0)
+		if(player3IsActive == SummonStatus.INACTIVE && Input.GetButtonDown("JumpP3"+_isMac) && spawntimer3 < 0)
 		{
-			player3IsActive = true;
-			PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(-0f, -3f, 20), Quaternion.identity)).GetComponent<PlayerScript>();
-			p1.myPlayer = 3;
-			spawntimer3 = TimeToWait;
+			player3IsActive = SummonStatus.SUMMONED;
+			FireTruck.GetComponent<Animator>().SetBool("summoned", true);
 		}
-		if(!player4IsActive && Input.GetButtonDown("JumpP4"+_isMac) && spawntimer4 < 0)
+		if(player4IsActive == SummonStatus.INACTIVE && Input.GetButtonDown("JumpP4"+_isMac) && spawntimer4 < 0)
 		{
-			player4IsActive = true;
-			PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(3f, -3f, 20), Quaternion.identity)).GetComponent<PlayerScript>();
-			p1.myPlayer = 4;
-			spawntimer4 = TimeToWait;
+			player4IsActive = SummonStatus.SUMMONED;
+			FireTruck.GetComponent<Animator>().SetBool("summoned", true);
 		}
 	
 	

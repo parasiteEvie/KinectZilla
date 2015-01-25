@@ -279,23 +279,27 @@ public class PlayerScript : MonoBehaviour
 			switch(myPlayer){
 				
 			case 1:
-				pl.player1IsActive = false;
-				pl.spawntimer1 = 6.0;
+				pl.player1IsActive = CreatePlayer.SummonStatus.SUMMONED;
+				pl.SummonFireTruck();
+				pl.spawntimer1 = 3.0;
 				break;
 				
 			case 2:
-				pl.player2IsActive = false;
-				pl.spawntimer2 = 6.0;
+				pl.player2IsActive  = CreatePlayer.SummonStatus.SUMMONED;
+				pl.SummonFireTruck();
+				pl.spawntimer2 = 3.0;
 				break;
 				
 			case 3:
-				pl.player3IsActive = false;
-				pl.spawntimer3 = 6.0;
+				pl.player3IsActive  = CreatePlayer.SummonStatus.SUMMONED;
+				pl.SummonFireTruck();
+				pl.spawntimer3 = 3.0;
 				break;
 				
 			case 4:
-				pl.player4IsActive = false;
-				pl.spawntimer4 = 6.0;
+				pl.player4IsActive  = CreatePlayer.SummonStatus.SUMMONED;
+				pl.SummonFireTruck();
+				pl.spawntimer4 = 3.0;
 				break;
 				
 			}

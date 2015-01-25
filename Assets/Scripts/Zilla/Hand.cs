@@ -167,7 +167,7 @@ public class Hand:MonoBehaviour {
 			
 		} else if (collision.gameObject.tag == "LevelItem") {
 			PedastalScript p = collision.gameObject.GetComponent<PedastalScript>();
-			p.SetDamage(.15f);
+			p.SetDamage(.1f);
 		}
 	}
 }

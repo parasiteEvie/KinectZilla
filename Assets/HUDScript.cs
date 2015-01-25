@@ -34,7 +34,7 @@ public class HUDScript : MonoBehaviour {
 		players = GameObject.FindGameObjectsWithTag ("Player");
 
 		CreatePlayer pl = Camera.main.GetComponent<CreatePlayer>();
-		if (pl.player1IsActive) {
+		if (pl.player1IsActive == CreatePlayer.SummonStatus.ACTIVE) {
 			p1StartImg.SetActive (false);
 
 			for (int i = 0; i < players.Length; i++){
@@ -54,7 +54,7 @@ public class HUDScript : MonoBehaviour {
 				break;
 			}
 		} 
-		else if (!pl.player1IsActive && pl.spawntimer1 > 0) {
+		else if (pl.player1IsActive != CreatePlayer.SummonStatus.ACTIVE && pl.spawntimer1 > 0) {
 			p1Invincible.SetActive(false);
 			p1Bombs.SetActive(false);
 			p1StartImg.SetActive (false);
@@ -69,7 +69,7 @@ public class HUDScript : MonoBehaviour {
 			p1Countdown.SetActive(false);
 		}
 
-		if (pl.player2IsActive) {
+		if (pl.player2IsActive == CreatePlayer.SummonStatus.ACTIVE) {
 			p2StartImg.SetActive (false);
 			for (int i = 0; i < players.Length; i++){
 				PlayerScript p = players[i].GetComponent<PlayerScript>();
@@ -88,7 +88,7 @@ public class HUDScript : MonoBehaviour {
 				break;
 			}
 		}
-		else if (!pl.player2IsActive && pl.spawntimer2 > 0) {
+		else if (pl.player2IsActive != CreatePlayer.SummonStatus.ACTIVE && pl.spawntimer2 > 0) {
 			p2StartImg.SetActive (false);
 			p2Invincible.SetActive(false);
 			p2Bombs.SetActive(false);
@@ -102,7 +102,7 @@ public class HUDScript : MonoBehaviour {
 			p2Countdown.SetActive(false);
 		}
 
-		if (pl.player3IsActive) {
+		if (pl.player3IsActive == CreatePlayer.SummonStatus.ACTIVE) {
 			p3StartImg.SetActive (false);
 
 			for (int i = 0; i < players.Length; i++){
@@ -122,7 +122,7 @@ public class HUDScript : MonoBehaviour {
 				break;
 			}
 		}
-		else if (!pl.player3IsActive && pl.spawntimer3 > 0) {
+		else if (pl.player3IsActive != CreatePlayer.SummonStatus.ACTIVE && pl.spawntimer3 > 0) {
 			p3StartImg.SetActive (false);
 			p3Invincible.SetActive(false);
 			p3Bombs.SetActive(false);
@@ -136,7 +136,7 @@ public class HUDScript : MonoBehaviour {
 			p3Countdown.SetActive(false);
 		}
 
-		if (pl.player4IsActive) {
+		if (pl.player4IsActive == CreatePlayer.SummonStatus.ACTIVE) {
 			p4StartImg.SetActive (false);
 
 			for (int i = 0; i < players.Length; i++){
@@ -156,7 +156,7 @@ public class HUDScript : MonoBehaviour {
 				break;
 			}
 		}
-		else if (!pl.player4IsActive && pl.spawntimer4 > 0) {
+		else if (pl.player4IsActive != CreatePlayer.SummonStatus.ACTIVE && pl.spawntimer4 > 0) {
 			p4StartImg.SetActive (false);
 			p4Invincible.SetActive(false);
 			p4Bombs.SetActive(false);
