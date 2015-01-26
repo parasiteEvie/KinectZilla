@@ -16,7 +16,6 @@ public class BulletAI : MonoBehaviour {
 	public void Awake() 
 	{
 		anim = GetComponent<Animator>();
-		anim.Play ("bulletAnim");
 	}
 
 	public void Start(){
@@ -41,6 +40,15 @@ public class BulletAI : MonoBehaviour {
 
 		if (distance > lifeDistance && lifeDistance != 0f) {
 			Destroy(gameObject);
+		}
+
+		if(targetDirection.x == 0 && targetDirection.y == 0)
+		{
+			transform.rotation = Quaternion.AngleAxis(0f, Vector3.forward);
+		}
+		else
+		{
+			transform.rotation =  Quaternion.AngleAxis((Mathf.Atan2(targetDirection.y, targetDirection.x) *Mathf.Rad2Deg), Vector3.forward);
 		}
 	}
 	

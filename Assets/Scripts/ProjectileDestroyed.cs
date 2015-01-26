@@ -81,7 +81,7 @@ public class ProjectileDestroyed : MonoBehaviour {
 			bai.hascollided = true;
 			transform.localScale += new Vector3 (2.5f, 2.5f, 0);
 
-			anim.Play ("SmallExplosionAnim");
+			anim.SetTrigger("Contact");
 			if(bai.targetDirection.x == 0 && bai.targetDirection.y == 0)
 			{
 				transform.rotation = Quaternion.AngleAxis(15, Vector3.forward);
