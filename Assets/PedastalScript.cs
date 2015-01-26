@@ -41,6 +41,7 @@ public class PedastalScript : MonoBehaviour {
 			destroyed = true;
 			GameObject gm = GameObject.Find("GAME MANAGER");
 			gm.GetComponent<GameManagerScript>().AdvanceLevel();
+			GetComponentInChildren<Animator> ().SetBool("Destroyed", true);
 		}
 
 		Debug.Log ("doing damage over here");

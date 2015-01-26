@@ -10,10 +10,20 @@ public class GameManagerScript : MonoBehaviour {
 
 	public int currentLevel = 0;
 
+	public GameObject BossHead;
+	public GameObject BossLeftHand;
+	public GameObject BossRightHand;
+
+	public GameObject HellFire;
 	// Use this for initialization
 	public float dampTime = 0.15f;
 	private Vector3 velocity = Vector3.zero;
-	
+
+	void Awake(){
+		//GetComponent<SpriteRenderer> ().enabled = false;
+
+	}
+
 	// Update is called once per frame
 	public bool checkForCompletion () 
 	{
@@ -42,8 +52,29 @@ public class GameManagerScript : MonoBehaviour {
 			return;
 		}
 		currentLevel++;
-		if(currentLevel < 3)
-			StartCoroutine (CameraMoveTo ());
+
+		BossHead.GetComponent<Head> ().Roar ();
+		if (currentLevel < 3) {
+			GetComponent<Animator> ().SetTrigger ("AdvanceLevel");
+
+			GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+			
+			foreach (GameObject body in players) {
+				PlayerAnimationScript pas = body.GetComponentInChildren<PlayerAnimationScript>();
+				FlailingScript fs = body.GetComponentInChildren<FlailingScript>();
+				
+				pas.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+				fs.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+				
+				fs.gameObject.GetComponent<Animator>().SetInteger("FlailColor", body.GetComponent<PlayerScript>().myPlayer);
+				fs.gameObject.GetComponent<Animator>().SetTrigger("TimeToFlail");
+			}
+		}
+			
+	}
+
+	public void StartMovingCamera(){
+		StartCoroutine (CameraMoveTo ());
 	}
 
 	public IEnumerator CameraMoveTo(){
@@ -52,9 +83,48 @@ public class GameManagerScript : MonoBehaviour {
 			camera.transform.position = Vector3.SmoothDamp(camera.transform.position, startPositions[currentLevel].transform.position, ref velocity, dampTime);
 			yield return null;
 		}
+	
 	}
 
-	public IEnumerator PlayersMoveTo(){
-		yield return null;
+	public void ShowAnimation(){
+		GetComponent<SpriteRenderer> ().enabled = true;
+	}
+
+	public void HideAnimation(){
+		GetComponent<SpriteRenderer> ().enabled = false;
+	}
+	
+	public void MoveToBackground(){
+		GetComponent<SpriteRenderer> ().sortingOrder = -10;
+	}
+
+	public void MoveToForeground(){
+		GetComponent<SpriteRenderer> ().sortingOrder = 100;
+	}
+	public void DisableKinecter(){
+		BossHead.SetActive (false);
+		BossLeftHand.SetActive (false);
+		BossRightHand.SetActive (false);
+		HellFire.SetActive (true);
+	}
+	public void EnableKinecter(){
+		BossHead.SetActive (true);
+		BossLeftHand.SetActive (true);
+		BossRightHand.SetActive (true);
+		HellFire.SetActive (false);
+
+		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+		foreach (GameObject body in players) {
+			PlayerAnimationScript pas = body.GetComponentInChildren<PlayerAnimationScript>();
+			FlailingScript fs = body.GetComponentInChildren<FlailingScript>();
+			
+			pas.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+			fs.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+			Vector3 v =  startPositions[currentLevel].controllerPlayerStarts[body.GetComponent<PlayerScript>().myPlayer - 1];
+			body.GetComponent<PlayerScript>().warpPosition = new Vector3(v.x, v.y, v.z);
+
+			Debug.Log("player number is: "+startPositions[currentLevel].controllerPlayerStarts[body.GetComponent<PlayerScript>().myPlayer - 1].ToString());
+		}
 	}
 }

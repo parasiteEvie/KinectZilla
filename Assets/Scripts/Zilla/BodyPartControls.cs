@@ -38,7 +38,7 @@ public class BodyPartControls:MonoBehaviour {
 							if (body.IsTracked) 
 							{
 									Kinect.Joint joint = body.Joints [joinType];
-									pos.x = joint.Position.X * 50f;
+									pos.x = (joint.Position.X * 50f) + Camera.main.transform.position.x;
 									pos.y = joint.Position.Y * 50f;
 									pos.z = transform.position.z;
 

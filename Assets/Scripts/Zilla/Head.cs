@@ -16,6 +16,10 @@ public class Head:MonoBehaviour {
 	private BossState myState;
 	private Animator anim;
 
+	public AudioClip roar;
+	public AudioClip spew;
+	public BossQuips bossquip;
+
 	public GameObject fireSpew;
 
 	public float fireSpewTimer;
@@ -45,23 +49,23 @@ public class Head:MonoBehaviour {
 	public void LateUpdate() {
 		pos = transform.position;
 		// Check bounds
-		if(pos.x > 26f) {
-			pos.x = 26f;
+		if(pos.x > Camera.main.transform.position.x + 26f) {
+			pos.x = Camera.main.transform.position.x + 26f;
 		}
-		if(pos.x < -26f) {
-			pos.x = -26f;
+		if(pos.x < Camera.main.transform.position.x - 26f) {
+			pos.x = Camera.main.transform.position.x - 26f;
 		}
-		if(pos.y < -10f) {
-			pos.y = -10f;
+		if(pos.y < Camera.main.transform.position.y - 10f) {
+			pos.y = Camera.main.transform.position.y - 10f;
 		}
-		if(pos.y > 18f) {
-			pos.y = 18f;
+		if(pos.y > Camera.main.transform.position.y + 18f) {
+			pos.y = Camera.main.transform.position.y + 18f;
 		}
 		// Adjust
 		transform.position = pos;
 
 		if (transform.position.y < 4.25f) {
-			anim.Play ("BossSpewFire");
+			anim.SetBool("StartSpewCue", true);
 			myState = BossState.RAGE;
 			if(fireSpewTimer < 0f){
 				GameObject w = (GameObject) Instantiate(fireSpew, transform.position + (Vector3.down * 5.5f), Quaternion.identity);
@@ -72,7 +76,7 @@ public class Head:MonoBehaviour {
 			}
 		} 
 		else {
-			anim.Play ("BossIdle");
+			anim.SetBool("StartSpewCue", false);
 			myState = BossState.NORMAL;
 		}
 	}
@@ -127,5 +131,14 @@ public class Head:MonoBehaviour {
 		}
 	
 		Debug.Log("current boss life: "+lifePoints);
+	}
+	public void Spew(){
+		audio.clip = spew;
+		audio.Play ();
+	}
+	public void Roar(){
+		audio.clip = roar;
+		audio.Play ();
+		bossquip.StartQuip ();
 	}
 }

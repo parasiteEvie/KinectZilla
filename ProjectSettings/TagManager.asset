@@ -14,6 +14,9 @@ TagManager:
   - Hand
   - LevelItem
   - HealingWater
+  - Dweller
+  - FlailBody
+  - RegBody
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -29,9 +32,9 @@ TagManager:
   User Layer 11: Bullet
   User Layer 12: Player
   User Layer 13: Fire
-  User Layer 14: 
-  User Layer 15: 
-  User Layer 16: 
+  User Layer 14: FireTruck
+  User Layer 15: Shadow
+  User Layer 16: Ground
   User Layer 17: 
   User Layer 18: 
   User Layer 19: 

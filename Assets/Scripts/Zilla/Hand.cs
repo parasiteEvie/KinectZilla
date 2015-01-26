@@ -109,17 +109,17 @@ public class Hand:MonoBehaviour {
 				pos += deltaPos * Time.deltaTime * 5f;
 			}
 			// Check bounds
-			if (pos.x > 23f) {
-				pos.x = 23f;
+			if (pos.x > Camera.main.transform.position.x + 23f) {
+				pos.x = Camera.main.transform.position.x + 23f;
 			}
-			if (pos.x < -23f) {
-				pos.x = -23f;
+			if (pos.x < Camera.main.transform.position.x -23f) {
+				pos.x = Camera.main.transform.position.x -23f;
 			}
-			if (pos.y < -10f) {
-				pos.y = -10f;
+			if (pos.y < Camera.main.transform.position.y-10f) {
+				pos.y = Camera.main.transform.position.y-10f;
 			}
-			if (pos.y > 18f) {
-				pos.y = 18f;
+			if (pos.y > Camera.main.transform.position.y + 18f) {
+				pos.y = Camera.main.transform.position.y + 18f;
 			}
 			// Adjust
 			transform.position = pos;
@@ -168,6 +168,9 @@ public class Hand:MonoBehaviour {
 		} else if (collision.gameObject.tag == "LevelItem") {
 			PedastalScript p = collision.gameObject.GetComponent<PedastalScript>();
 			p.SetDamage(.1f);
+		} else if (collision.transform.parent != null && collision.transform.parent.gameObject.tag == "Dweller") {
+			collision.transform.parent.GetComponent<CityDweller>().SetTrampled();
+			collision.gameObject.GetComponentInChildren<Animator>().SetTrigger("Trampled");
 		}
 	}
 }

@@ -34,7 +34,8 @@ public class ProjectileDestroyed : MonoBehaviour {
 		trackingobject = other.gameObject;
 		deltaPosition = this.gameObject.transform.position - other.gameObject.transform.position;
 		if(this.gameObject.tag == "Fire"){
-			if(other.gameObject.tag != "Ground" && other.gameObject.tag != "Player"){ 
+			if(other.gameObject.tag != "Ground" && other.gameObject.tag != "Player" 
+			   && other.gameObject.tag != "LevelItem"){ 
 				trackingobject = null;
 				return; 
 			}
@@ -44,8 +45,12 @@ public class ProjectileDestroyed : MonoBehaviour {
 			if(other.gameObject.tag == "Player"){
 				PlayerScript ps = other.gameObject.GetComponent<PlayerScript>();
 				ps.KillPlayer(true);
-				Debug.Log("this should kill the player");
 
+			}
+			if(other.gameObject.tag == "LevelItem"){
+				other.gameObject.GetComponent<PedastalScript>().SetDamage(.005f);
+				Debug.Log("hellfire raining down on city");
+				
 			}
 			//this gameObject can go away
 			Invoke("killYourself", 1.0f);

@@ -38,6 +38,7 @@ public class PlayerAnimationScript : MonoBehaviour {
 	}
 
 	public void Start() {
+		GetComponent<SpriteRenderer> ().castShadows = true;
 		myPlayer = this.GetComponentInParent<PlayerScript>().myPlayer;
 		characterController = this.GetComponentInParent<CharacterController> ();
 

@@ -13,6 +13,11 @@ public class CityDwellerGenerationScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (GetComponent<PedastalScript> ().damage == 0) {
+			return;
+		}
+
 		if (deployDwellerTimer < 0) {
 			deployDwellerTimer = Random.Range (1f - GetComponent<PedastalScript>().damage, 4.1f) /(1 + ( GetComponent<PedastalScript>().damage * 3f));
 

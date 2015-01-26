@@ -53,13 +53,22 @@ public class PlayerScript : MonoBehaviour
 	public float deathCountdown = 0.0f;
 
 	private Vector3 moveVelocity = Vector3.zero;
+	public Vector3 warpPosition = Vector3.zero;
 
 	public GameObject invincibilityEffect;
 	// Use this for initialization
 	void Start () {
 		healing = false;
 	}
-	
+
+	public void LateUpdate(){
+		if (warpPosition == Vector3.zero){
+			return;
+		}
+		Debug.Log ("I DID A THING");
+		transform.position = warpPosition;
+		warpPosition = Vector3.zero;
+	}
 	// Update is called once per frame
 	void Update () 
 	{
@@ -263,6 +272,19 @@ public class PlayerScript : MonoBehaviour
 						KillPlayer (false);
 				}
 
+	}
+
+	void OnTriggerEnter(Collider collision) {
+		CharacterController controller = GetComponent<CharacterController> ();
+		if (collision.transform.parent != null && collision.transform.parent.gameObject.tag == "Dweller" &&
+		    !controller.isGrounded) {
+			collision.transform.parent.GetComponent<CityDweller>().SetTrampled();
+			collision.gameObject.GetComponentInChildren<Animator>().SetTrigger("Trampled");
+			moveVelocity.y = jumpSpeed * 2.8f;
+			audio.clip = jumpSound;
+			audio.Play ();
+			jumpTimer = JUMP_PUSH_TIMER;
+		}
 	}
 
 	public void KillPlayer(bool isBoss)
