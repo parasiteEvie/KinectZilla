@@ -7,11 +7,21 @@ public class PauseGame : MonoBehaviour {
 	public AudioClip otherMusic;
 	public AudioClip pauseMusic;
 
+	public string mac;
+
 	// Use this for initialization
 	void Start()
 	{
 		StartCoroutine(PauseCoroutine());  
 		otherMusic = audio.clip;
+
+		mac = "Mac";
+		if (Application.platform == RuntimePlatform.WindowsEditor ||
+		    Application.platform == RuntimePlatform.WindowsPlayer ||
+		    Application.platform == RuntimePlatform.WindowsWebPlayer) {
+			mac = "";
+			
+		}
 	}
 	
 	IEnumerator PauseCoroutine() {
@@ -20,7 +30,7 @@ public class PauseGame : MonoBehaviour {
 
 		while (true)
 		{
-			if (Input.GetButtonDown("PauseP1") || Input.GetButtonDown("PauseP2") || Input.GetButtonDown("PauseP3") || Input.GetButtonDown("PauseP4"))
+			if (Input.GetButtonDown("PauseP1"+mac) || Input.GetButtonDown("PauseP2"+mac) || Input.GetButtonDown("PauseP3"+mac) || Input.GetButtonDown("PauseP4"+mac))
 			{
 				if (Time.timeScale == 0)
 				{

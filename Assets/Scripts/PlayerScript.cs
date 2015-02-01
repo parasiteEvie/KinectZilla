@@ -56,9 +56,17 @@ public class PlayerScript : MonoBehaviour
 	public Vector3 warpPosition = Vector3.zero;
 
 	public GameObject invincibilityEffect;
+	public string mac;
 	// Use this for initialization
 	void Start () {
 		healing = false;
+		mac = "Mac";
+		if (Application.platform == RuntimePlatform.WindowsEditor ||
+		    Application.platform == RuntimePlatform.WindowsPlayer ||
+		    Application.platform == RuntimePlatform.WindowsWebPlayer) {
+			mac = "";
+
+		}
 	}
 
 	public void LateUpdate(){
@@ -76,23 +84,11 @@ public class PlayerScript : MonoBehaviour
 
 		// Place your code to shoot
 		float x;
-		
-		if (Application.platform == RuntimePlatform.WindowsEditor ||
-		    Application.platform == RuntimePlatform.WindowsPlayer ||
-		    Application.platform == RuntimePlatform.WindowsWebPlayer) {
-			x = Input.GetAxis ("Horizontal2P" + myPlayer);
-		} else {
-			x = Input.GetAxis ("JumpP" + myPlayer + "alt");
-		}
+		x = Input.GetAxis ("Horizontal2P" + myPlayer + mac);
+
 		float y;
-		
-		if (Application.platform == RuntimePlatform.WindowsEditor ||
-		    Application.platform == RuntimePlatform.WindowsPlayer ||
-		    Application.platform == RuntimePlatform.WindowsWebPlayer) {
-			y = Input.GetAxis ("Vertical2P" + myPlayer);
-		} else {
-			y = -Input.GetAxis ("Horizontal2P" + myPlayer);
-		}
+		y = Input.GetAxis ("Vertical2P" + myPlayer+mac);
+
 
 				Vector3 currentVelocity = Vector3.zero;
 				weaponSelection ();
@@ -116,7 +112,7 @@ public class PlayerScript : MonoBehaviour
 						return;
 				}
 
-		if (Input.GetButton("HealP" + myPlayer)) {		
+		if (Input.GetButton("HealP" + myPlayer + mac)) {		
 			//HEAL town
 			healing = true;
 			if (timer * 3f >= BulletDelay) {
@@ -144,31 +140,31 @@ public class PlayerScript : MonoBehaviour
 				timer += Time.deltaTime;
 
 				if (Mathf.Abs (moveVelocity.x) < MAX_RUN_SPEED) {
-						moveVelocity.x = controller.velocity.x + (Input.GetAxis ("HorizontalP" + myPlayer) * acceleration * Time.deltaTime);
+						moveVelocity.x = controller.velocity.x + (Input.GetAxis ("HorizontalP" + myPlayer + mac) * acceleration * Time.deltaTime);
 						playerAcceleration = AccelerationState.ACCELERATING;
 				}
 				if (Mathf.Abs (moveVelocity.z) < MAX_RUN_SPEED) {
-						moveVelocity.z = controller.velocity.z + (Input.GetAxis ("VerticalP" + myPlayer) * acceleration * Time.deltaTime);
+						moveVelocity.z = controller.velocity.z + (Input.GetAxis ("VerticalP" + myPlayer + mac) * acceleration * Time.deltaTime);
 						playerAcceleration = AccelerationState.ACCELERATING;
 				}
-				if (Input.GetAxis ("HorizontalP" + myPlayer) == 0 && moveVelocity.x != 0f) {
+				if (Input.GetAxis ("HorizontalP" + myPlayer + mac) == 0 && moveVelocity.x != 0f) {
 						//friction coefficient remove
 						moveVelocity.x += (-moveVelocity.x) * FRICTION_COOEFFICIENT;
 						playerAcceleration = AccelerationState.DECCELERATING;
 						if (Mathf.Abs (moveVelocity.x) < 1.5f) {
 								moveVelocity.x = 0;
 						}
-				} else if (Input.GetAxis ("HorizontalP" + myPlayer) > 0 && moveVelocity.x < 0f) {
+				} else if (Input.GetAxis ("HorizontalP" + myPlayer + mac) > 0 && moveVelocity.x < 0f) {
 						//friction coefficient remove
 						moveVelocity.x += (-moveVelocity.x) * .5f * FRICTION_COOEFFICIENT;
 						playerAcceleration = AccelerationState.DECCELERATING_HEAVY;
-				} else if (Input.GetAxis ("HorizontalP" + myPlayer) < 0 && moveVelocity.x > 0f) {
+				} else if (Input.GetAxis ("HorizontalP" + myPlayer + mac) < 0 && moveVelocity.x > 0f) {
 						//friction coefficient remove
 						moveVelocity.x += (-moveVelocity.x) * .5f * FRICTION_COOEFFICIENT;
 						playerAcceleration = AccelerationState.DECCELERATING_HEAVY;
 				}
 
-				if (Input.GetAxis ("VerticalP" + myPlayer) == 0 && moveVelocity.z != 0f) {
+				if (Input.GetAxis ("VerticalP" + myPlayer + mac) == 0 && moveVelocity.z != 0f) {
 						//friction coefficient remove
 						moveVelocity.z += (-moveVelocity.z) * FRICTION_COOEFFICIENT;
 				} else if (Input.GetAxis ("VerticalP" + myPlayer) > 0 && moveVelocity.z < 0f) {
@@ -181,42 +177,25 @@ public class PlayerScript : MonoBehaviour
 
 				if (controller.isGrounded) {
 						moveVelocity.y = 0;
-						if (Application.platform == RuntimePlatform.WindowsEditor ||
-								Application.platform == RuntimePlatform.WindowsPlayer ||
-								Application.platform == RuntimePlatform.WindowsWebPlayer) {
 
-								if (Input.GetButton ("JumpP" + myPlayer) || Input.GetAxis ("JumpP" + myPlayer) > 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") > 0 || Input.GetAxis ("JumpP" + myPlayer) < 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") < 0) {
-										moveVelocity.y = jumpSpeed;
-										audio.clip = jumpSound;
-										audio.Play ();
-										jumpTimer = JUMP_PUSH_TIMER;
-								} else {
-										if (Input.GetButton ("JumpP" + myPlayer + "Mac")) {
-												moveVelocity.y = jumpSpeed;
-												audio.clip = jumpSound;
-												audio.Play ();
-												jumpTimer = JUMP_PUSH_TIMER;
-										}
-				
-								}
+						if (Input.GetButton ("JumpP" + myPlayer + mac) || Input.GetAxis ("JumpP" + myPlayer + "alt" + mac) > 0 ) {
+								moveVelocity.y = jumpSpeed;
+								audio.clip = jumpSound;
+								audio.Play ();
+								jumpTimer = JUMP_PUSH_TIMER;
+						} 
 			
-						}
+
 				} else {
 
 						jumpTimer -= Time.deltaTime;
 						// jump push
 						if (jumpTimer > 0) {
-								if (Input.GetButton ("JumpP" + myPlayer) || Input.GetAxis ("JumpP" + myPlayer) > 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") > 0 || Input.GetAxis ("JumpP" + myPlayer) < 0 || Input.GetAxis ("JumpP" + myPlayer + "alt") < 0) {
+								if (Input.GetButton ("JumpP" + myPlayer +mac) || Input.GetAxis ("JumpP" + myPlayer + "alt" + mac) > 0) {
 										moveVelocity.y += jumpSpeed * 2.0f * Time.deltaTime;
 										Debug.Log ("Pushing the jump");
 
-								} else {
-										if (Input.GetButton ("JumpP" + myPlayer + "Mac")) {
-												moveVelocity.y += jumpSpeed * Time.deltaTime;
-												Debug.Log ("Pushing the jump");
-										}
-					
-								}
+								} 
 						}
 
 				}
@@ -341,11 +320,10 @@ public class PlayerScript : MonoBehaviour
 
 	public void weaponSelection()
 	{
-		if (Input.GetButtonDown("BumperP"+myPlayer))
+		if (Input.GetButtonDown("BumperP"+myPlayer + mac))
 		{
 			int cw = (int)currentWeapon;
 			currentWeapon = (EquipItem)(int)((cw + 1)%2);
-			Debug.Log ("Equiped Weapon = "+currentWeapon);
 		}
 
 

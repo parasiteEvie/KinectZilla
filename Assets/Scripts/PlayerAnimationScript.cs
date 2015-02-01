@@ -31,6 +31,8 @@ public class PlayerAnimationScript : MonoBehaviour {
 
 	CharacterController characterController;
 
+	public string mac;
+
 	public void Awake() {
 		anim = GetComponent<Animator>();
 		asource = GetComponentInParent<AudioSource> ();
@@ -59,6 +61,13 @@ public class PlayerAnimationScript : MonoBehaviour {
 			animPrefix = "Y";
 			gunArm.GetComponent<SpriteRenderer>().sprite = yellowArmSpr;
 			break;
+		}
+
+		mac = "Mac";
+		if ( Application.platform == RuntimePlatform.WindowsEditor ||
+		    Application.platform == RuntimePlatform.WindowsPlayer ||
+		    Application.platform == RuntimePlatform.WindowsWebPlayer) {
+			mac = "";
 		}
 	} 
 
@@ -121,41 +130,22 @@ public class PlayerAnimationScript : MonoBehaviour {
 
 		// Gun pointing
 		float x;
-		
-		if ( Application.platform == RuntimePlatform.WindowsEditor ||
-		    Application.platform == RuntimePlatform.WindowsPlayer ||
-		    Application.platform == RuntimePlatform.WindowsWebPlayer) {
-			
-			x = Input.GetAxis ("Horizontal2P"+myPlayer);
-		}
-		else{
-			x = Input.GetAxis ("JumpP"+myPlayer+"alt");
-		}
+		x = Input.GetAxis ("Horizontal2P"+myPlayer+mac);
+
 		float y;
-		
-		if ( Application.platform == RuntimePlatform.WindowsEditor ||
-		    Application.platform == RuntimePlatform.WindowsPlayer ||
-		    Application.platform == RuntimePlatform.WindowsWebPlayer) {
-			y = Input.GetAxis ("Vertical2P"+myPlayer);
-		}
-		else{
-			y = -Input.GetAxis ("Horizontal2P"+myPlayer);
-		}
+
+		y = Input.GetAxis ("Vertical2P"+myPlayer+mac);
 
 		var lookPos = new Vector3(y, 0f, -x).normalized;
+		gunArm.transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(y, x) *Mathf.Rad2Deg - 30f), Vector3.forward);
+
 		if(transform.localScale.x < 0f) {
 			//gunArm.transform.rotation = Quaternion.LookRotation(lookPos);
-			Debug.Log("x is: "+x+"and y is" +y);
 			if(x == 0 && y == 0)
 			{
-				gunArm.transform.rotation = Quaternion.AngleAxis(15, Vector3.forward);
+				gunArm.transform.rotation = Quaternion.AngleAxis(-215, Vector3.forward);
 			}
-			else
-			{
-				gunArm.transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(y, -x) *Mathf.Rad2Deg - 30f), Vector3.forward);
-			}
-		} else {
-			gunArm.transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(y, x) *Mathf.Rad2Deg - 30f), Vector3.forward);
-		}
+
+		} 
 	}
 }
