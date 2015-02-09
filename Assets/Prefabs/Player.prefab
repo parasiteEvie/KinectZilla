@@ -345,6 +345,7 @@ MonoBehaviour:
   shadow: {fileID: 100006}
   specialEffectprefab: {fileID: 100000, guid: d5e69caa4c2b7584e95a759338e97962, type: 2}
   se: {fileID: 0}
+  mac: 
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -379,7 +380,9 @@ MonoBehaviour:
   bombSound: {fileID: 8300000, guid: be14c7ff5c7764d4e8e3e1d2835f0f7d, type: 3}
   deathSound: {fileID: 8300000, guid: 495b11f2547dd40079fb097c56abb400, type: 3}
   deathCountdown: 0
+  warpPosition: {x: 0, y: 0, z: 0}
   invincibilityEffect: {fileID: 100008}
+  mac: 
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -391,6 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf62f7ad6b1d104b9bda0ec914e1581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunArm: {fileID: 100000}
 --- !u!143 &14300000
 CharacterController:
   m_ObjectHideFlags: 1

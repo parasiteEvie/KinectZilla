@@ -24,10 +24,16 @@ public class CreatePlayer : MonoBehaviour {
 	private double TimeToWait;
 	private bool IsTiming = false;
 
+	public Vector3[] spawnLocations;
+
+	private GameObject gameManager;
+	private int currentLevel;
+
 	private string _isMac;
 	// Use this for initialization
 	void Start () 
 	{
+		gameManager = GameObject.Find("GAME MANAGER");
 		spawntimer1 = 1;
 		spawntimer2 = 1;
 		spawntimer3 = 1;
@@ -55,32 +61,32 @@ public class CreatePlayer : MonoBehaviour {
 			//Add the change in time between frames to the timer
 
 			if(FireTruck.GetComponent<SpawnPlayersFlag>().spawnPlayers == true){
-
+				currentLevel = gameManager.GetComponent<GameManagerScript>().currentLevel;
 				if (spawntimer1 < 0 && player1IsActive == SummonStatus.SUMMONED) 
 				{
 					player1IsActive = SummonStatus.ACTIVE;
-					PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(8f, -3f, 15), Quaternion.identity)).GetComponent<PlayerScript>();
+					PlayerScript p1 = ((GameObject)Instantiate(player, spawnLocations[currentLevel] , Quaternion.identity)).GetComponent<PlayerScript>();
 					p1.myPlayer = 1;
 					spawntimer1 = TimeToWait;
 				}
 				if (spawntimer2 < 0 && player2IsActive == SummonStatus.SUMMONED) 
 				{
 					player2IsActive = SummonStatus.ACTIVE;
-					PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(8f, -3f, 15), Quaternion.identity)).GetComponent<PlayerScript>();
+					PlayerScript p1 = ((GameObject)Instantiate(player, spawnLocations[currentLevel], Quaternion.identity)).GetComponent<PlayerScript>();
 					p1.myPlayer = 2;
 					spawntimer2 = TimeToWait;
 				}
 				if (spawntimer3 < 0 && player3IsActive == SummonStatus.SUMMONED) 
 				{
 					player3IsActive = SummonStatus.ACTIVE;
-					PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(8f, -3f, 15), Quaternion.identity)).GetComponent<PlayerScript>();
+					PlayerScript p1 = ((GameObject)Instantiate(player, spawnLocations[currentLevel], Quaternion.identity)).GetComponent<PlayerScript>();
 					p1.myPlayer = 3;
 					spawntimer3 = TimeToWait;
 				}
 				if (spawntimer4 < 0 && player4IsActive == SummonStatus.SUMMONED) 
 				{
 					player4IsActive = SummonStatus.ACTIVE;
-					PlayerScript p1 = ((GameObject)Instantiate(player, new Vector3(8f, -3f, 15), Quaternion.identity)).GetComponent<PlayerScript>();
+					PlayerScript p1 = ((GameObject)Instantiate(player, spawnLocations[currentLevel], Quaternion.identity)).GetComponent<PlayerScript>();
 					p1.myPlayer = 4;
 					spawntimer4 = TimeToWait;
 				}

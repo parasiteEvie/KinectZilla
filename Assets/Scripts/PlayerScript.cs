@@ -67,19 +67,24 @@ public class PlayerScript : MonoBehaviour
 			mac = "";
 
 		}
+
+		invincibleTimer = 2.0f;
 	}
 
 	public void LateUpdate(){
 		if (warpPosition == Vector3.zero){
 			return;
 		}
-		Debug.Log ("I DID A THING");
 		transform.position = warpPosition;
 		warpPosition = Vector3.zero;
 	}
 	// Update is called once per frame
 	void Update () 
 	{
+		SpriteRenderer[] spr = GetComponentsInChildren<SpriteRenderer>();
+		foreach(SpriteRenderer sr in spr){
+			sr.sortingOrder = (int)-transform.position.z;
+		}
 				playerAcceleration = AccelerationState.NONE;
 
 		// Place your code to shoot
@@ -193,7 +198,6 @@ public class PlayerScript : MonoBehaviour
 						if (jumpTimer > 0) {
 								if (Input.GetButton ("JumpP" + myPlayer +mac) || Input.GetAxis ("JumpP" + myPlayer + "alt" + mac) > 0) {
 										moveVelocity.y += jumpSpeed * 2.0f * Time.deltaTime;
-										Debug.Log ("Pushing the jump");
 
 								} 
 						}

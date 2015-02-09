@@ -34,6 +34,12 @@ public class Head:MonoBehaviour {
 		myState = BossState.NORMAL;
 	}
 
+	public void UpdatePosition(){
+		transform.position = new Vector3(Camera.main.transform.position.x, 
+		                                 transform.position.y , 
+		                                 transform.position.z);
+	}
+
 	public void Update()
 	{
 		BroadcastMessage ("AdjustCurrentHealth", (lifePoints));

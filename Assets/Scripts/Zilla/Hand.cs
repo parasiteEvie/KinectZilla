@@ -50,6 +50,12 @@ public class Hand:MonoBehaviour {
 				anim.Play("fistanim");
 				HandAttack();
 			}
+			if(Input.GetKey(KeyCode.LeftArrow)){
+				followTarget.transform.position += new Vector3(-1,0,0);
+			}
+			if(Input.GetKey(KeyCode.RightArrow)){
+				followTarget.transform.position += new Vector3(1,0,0);
+			}
 			// Attack
 			if(pos.y < ATTACK_Y_POS && ! attacking && recovered) {
 				if(bpc.bodyPartClosed) {
@@ -72,6 +78,11 @@ public class Hand:MonoBehaviour {
 				anim.Play("handanim");
 			}
 		}
+	}
+
+	public void UpdatePosition(){
+		followTarget.position = startPos + new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, transform.position.z);
+		Debug.Log("position: "+followTarget.position);
 	}
 
 	// Attack!
@@ -109,11 +120,11 @@ public class Hand:MonoBehaviour {
 				pos += deltaPos * Time.deltaTime * 5f;
 			}
 			// Check bounds
-			if (pos.x > Camera.main.transform.position.x + 23f) {
-				pos.x = Camera.main.transform.position.x + 23f;
+			if (pos.x > Camera.main.transform.position.x + 28f) {
+				pos.x = Camera.main.transform.position.x + 28f;
 			}
-			if (pos.x < Camera.main.transform.position.x -23f) {
-				pos.x = Camera.main.transform.position.x -23f;
+			if (pos.x < Camera.main.transform.position.x -28f) {
+				pos.x = Camera.main.transform.position.x -28f;
 			}
 			if (pos.y < Camera.main.transform.position.y-10f) {
 				pos.y = Camera.main.transform.position.y-10f;

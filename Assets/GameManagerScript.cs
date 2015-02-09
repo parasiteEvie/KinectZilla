@@ -19,6 +19,8 @@ public class GameManagerScript : MonoBehaviour {
 	public float dampTime = 0.15f;
 	private Vector3 velocity = Vector3.zero;
 
+	public GameObject fireTruck;
+
 	void Awake(){
 		//GetComponent<SpriteRenderer> ().enabled = false;
 
@@ -69,6 +71,9 @@ public class GameManagerScript : MonoBehaviour {
 				fs.gameObject.GetComponent<Animator>().SetInteger("FlailColor", body.GetComponent<PlayerScript>().myPlayer);
 				fs.gameObject.GetComponent<Animator>().SetTrigger("TimeToFlail");
 			}
+
+			fireTruck.GetComponent<Animator> ().SetTrigger ("AdvanceLevel");
+
 		}
 			
 	}
@@ -79,10 +84,14 @@ public class GameManagerScript : MonoBehaviour {
 
 	public IEnumerator CameraMoveTo(){
 		GameObject camera = Camera.main.gameObject;
-		while (camera.transform.position != startPositions[currentLevel].transform.position) {
+		while (Vector3.Distance(camera.transform.position, startPositions[currentLevel].transform.position) > 0.1f) {
 			camera.transform.position = Vector3.SmoothDamp(camera.transform.position, startPositions[currentLevel].transform.position, ref velocity, dampTime);
 			yield return null;
 		}
+		camera.transform.position = startPositions[currentLevel].transform.position;
+		BossLeftHand.GetComponent<Hand>().UpdatePosition();
+		BossRightHand.GetComponent<Hand>().UpdatePosition();
+		BossHead.GetComponent<Head>().UpdatePosition();
 	
 	}
 

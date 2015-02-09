@@ -5,11 +5,12 @@ public class PedastalScript : MonoBehaviour {
 
 	public float damage;
 	public bool destroyed;
-
+	
 	// Use this for initialization
 	void Start () {
 		destroyed = false;
 		damage = 0f;
+		GetComponentInChildren<SpriteRenderer>().sortingOrder = (int)-transform.position.z;
 	}
 
 	//public void OnCollisionStay(
@@ -53,5 +54,11 @@ public class PedastalScript : MonoBehaviour {
 		damage = Mathf.Max (damage, 0f);
 		Debug.Log ("healing damage" + t);
 		GetComponentInChildren<Animator> ().SetFloat ("Damage", damage);
+	}
+
+	public void RebuildCity(float t){
+		damage -= t;
+		damage = Mathf.Max (damage, 0f);
+
 	}
 }

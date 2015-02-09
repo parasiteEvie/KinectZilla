@@ -8,7 +8,7 @@ public class CityDweller : MonoBehaviour {
 	public float screamTimer;
 
 	public Vector3 direction;
-	public float speed = 2.4f;
+	public float speed = .06f;
 	public int queueOrder = 3000;
 
 	private Vector3 startPoint;
@@ -41,7 +41,7 @@ public class CityDweller : MonoBehaviour {
 		screamTimer -= Time.deltaTime;
 
 		//Move in a direction
-		transform.position += (direction * speed * Time.deltaTime);
+		GetComponent<CharacterController>().Move(direction * speed);
 		GetComponentInChildren<SpriteRenderer> ().sortingOrder = -Mathf.CeilToInt (transform.position.z);
 
 		if (Vector3.Distance (startPoint, this.transform.position) > 100f) {
@@ -53,4 +53,5 @@ public class CityDweller : MonoBehaviour {
 	public void SetTrampled(){
 		trampled = true;
 	}
+
 }

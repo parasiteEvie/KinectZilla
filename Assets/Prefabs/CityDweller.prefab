@@ -14,8 +14,7 @@ GameObject:
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
   - 65: {fileID: 6500000}
-  - 143: {fileID: 14300000}
-  m_Layer: 5
+  m_Layer: 17
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +31,8 @@ GameObject:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400000}
   - 82: {fileID: 8200000}
-  m_Layer: 5
+  - 143: {fileID: 14307642}
+  m_Layer: 17
   m_Name: CityDweller
   m_TagString: Dweller
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 46e71fc06a4b8494c9b2f42c2c126ed2, type: 3}
   screamTimer: 0
   direction: {x: 0, y: 0, z: 0}
-  speed: 3.5999999
+  speed: .0599999987
   queueOrder: 3000
 --- !u!114 &11400002
 MonoBehaviour:
@@ -185,17 +185,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f1d922dcb950948802e70890830265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!143 &14300000
+--- !u!143 &14307642
 CharacterController:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
+  m_GameObject: {fileID: 100002}
   serializedVersion: 2
-  m_Height: 1.27999997
-  m_Radius: .159999996
+  m_Height: 3.07999992
+  m_Radius: .5
   m_SlopeLimit: 45
-  m_StepOffset: .300000012
+  m_StepOffset: 9
   m_SkinWidth: .0799999982
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
