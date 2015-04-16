@@ -398,7 +398,7 @@ MonoBehaviour:
   gunArm: {fileID: 100000}
   redArmSpr: {fileID: 21300000, guid: 57792f29e331b470fa85b46d64ed1670, type: 3}
   greenArmSpr: {fileID: 21300000, guid: 35111feac5752400ca52e275d42e7d20, type: 3}
-  blueArmSpr: {fileID: 21300002, guid: 1dbadac70291b48399f4578c11d3a9b3, type: 3}
+  blueArmSpr: {fileID: 21300000, guid: 1dbadac70291b48399f4578c11d3a9b3, type: 3}
   yellowArmSpr: {fileID: 21300000, guid: 06b05c02d2bc84c73985b93ecc779bd9, type: 3}
   scootSE: {fileID: 8300000, guid: ffa8827f633aab34f9ffaf07983ef9dd, type: 3}
   playingDeath: 0
