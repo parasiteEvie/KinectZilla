@@ -31,6 +31,19 @@ public class ProjectileDestroyed : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
+		BulletAI bai = this.gameObject.GetComponent<BulletAI> ();
+		if(bai != null){
+			bai.hascollided = true;
+		}
+
+		HealingWaterAI hwai = this.gameObject.GetComponent<HealingWaterAI>();
+		if(hwai != null){
+			if(other.gameObject.tag == "City"){
+				Vector3 collisionPoint = other.ClosestPointOnBounds(this.transform.position);
+				Vector3 delta = this.transform.position - collisionPoint;
+				//this.GetComponent<SpriteRenderer>().
+			}
+		}
 		trackingobject = other.gameObject;
 		deltaPosition = this.gameObject.transform.position - other.gameObject.transform.position;
 		if(this.gameObject.tag == "Fire"){
@@ -77,7 +90,6 @@ public class ProjectileDestroyed : MonoBehaviour {
 		}
 		else {
 
-			BulletAI bai = this.gameObject.GetComponent<BulletAI> ();
 			bai.hascollided = true;
 			transform.localScale += new Vector3 (2.5f, 2.5f, 0);
 

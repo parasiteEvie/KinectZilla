@@ -92,6 +92,7 @@ public class HUDScript : MonoBehaviour {
 			p2StartImg.SetActive (false);
 			p2Invincible.SetActive(false);
 			p2Bombs.SetActive(false);
+
 			//show count down timer
 			p2Countdown.SetActive(true);
 			p2Countdown.GetComponent<Text>().text = Mathf.FloorToInt((float)pl.spawntimer2).ToString();
@@ -126,6 +127,7 @@ public class HUDScript : MonoBehaviour {
 			p3StartImg.SetActive (false);
 			p3Invincible.SetActive(false);
 			p3Bombs.SetActive(false);
+
 			//show count down timer
 			p3Countdown.SetActive(true);
 			p3Countdown.GetComponent<Text>().text = Mathf.FloorToInt((float)pl.spawntimer3).ToString();
@@ -160,6 +162,7 @@ public class HUDScript : MonoBehaviour {
 			p4StartImg.SetActive (false);
 			p4Invincible.SetActive(false);
 			p4Bombs.SetActive(false);
+
 			//show count down timer
 			p4Countdown.SetActive(true);
 			p4Countdown.GetComponent<Text>().text = Mathf.FloorToInt((float)pl.spawntimer4).ToString();

@@ -95,21 +95,6 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1102 &110226608
-State:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: BRunToNextScreen
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Motions:
-  - {fileID: 7400000, guid: c9156b649270da2439e09bb10d604ddc, type: 2}
-  m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 36, y: 240, z: 0}
-  m_IKOnFeet: 0
-  m_Mirror: 0
-  m_Tag: 
 --- !u!1102 &110229575
 State:
   m_ObjectHideFlags: 3
@@ -167,6 +152,21 @@ State:
   - {fileID: 7400000, guid: 49cdc98a1bafc4118b7a01edcd50af54, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: 36, y: 96, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
+--- !u!1102 &110246892
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: GKneel
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: d75c65926f797447baa9d05f9ddf4520, type: 2}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 252, y: 192, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -272,6 +272,21 @@ State:
   - {fileID: 7400000, guid: 9b832a26162b1a14481366a909cffe2e, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: -180, y: 192, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
+--- !u!1102 &110275566
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: YKneel
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: 248d310f9ca75419d9ba8b222b24c999, type: 2}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 480, y: 192, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -423,7 +438,8 @@ StateMachine:
   - {fileID: 110287040}
   - {fileID: 110269186}
   - {fileID: 110261630}
-  - {fileID: 110226608}
+  - {fileID: 110246892}
+  - {fileID: 110275566}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions: {}

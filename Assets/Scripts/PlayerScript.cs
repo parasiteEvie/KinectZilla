@@ -121,12 +121,14 @@ public class PlayerScript : MonoBehaviour
 			//HEAL town
 			healing = true;
 			if (timer * 3f >= BulletDelay) {
-				BulletAI bai1 = ((GameObject)Instantiate (healingWater, transform.position, transform.rotation)).GetComponent<BulletAI> ();
+				healingWater.SetActive(true);
 				if(playerAnim.transform.localScale.x < 0f){
-					bai1.targetDirection = transform.TransformDirection(new Vector3(-.96f, .34f, 0));
+					healingWater.transform.localPosition = new Vector3(-Mathf.Abs(healingWater.transform.localPosition.x), healingWater.transform.localPosition.y,
+					                                                   healingWater.transform.localPosition.z);
 				}
 				else{
-					bai1.targetDirection = transform.TransformDirection(new Vector3(.96f, .34f, 0));
+					healingWater.transform.localPosition = new Vector3(Mathf.Abs(healingWater.transform.localPosition.x), healingWater.transform.localPosition.y,
+					                                                   healingWater.transform.localPosition.z);
 				}
 
 				audio.clip = bulletSound;
@@ -134,7 +136,13 @@ public class PlayerScript : MonoBehaviour
 				timer = 0;
 
 			}
+			playerAnim.gunArm.SetActive(false);
 			return;
+		}
+		else{
+			healingWater.SetActive(false);
+			playerAnim.gunArm.SetActive(true);
+
 		}
 		healing = false;
 
@@ -270,6 +278,14 @@ public class PlayerScript : MonoBehaviour
 		}
 	}
 
+	void OnTriggerStay(Collider collision){
+		if (Input.GetButtonDown("HealP" + myPlayer + mac)) {
+			if(collision.gameObject.name == "City" && collision.gameObject.GetComponent<PedastalScript>().destroyed){
+				collision.gameObject.GetComponent<PedastalScript>().RebuildCity();
+				return;
+			}
+		}
+	}
 	public void KillPlayer(bool isBoss)
 	{
 //		var invincibleString = "invincibleTimer"+myPlayer;

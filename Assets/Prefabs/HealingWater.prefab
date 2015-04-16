@@ -9,11 +9,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400002}
-  - 135: {fileID: 13500000}
   - 54: {fileID: 5400000}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
   - 212: {fileID: 21200000}
+  - 65: {fileID: 6517984}
   m_Layer: 11
   m_Name: HealingWater
   m_TagString: HealingWater
@@ -48,6 +48,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!65 &6517984
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: .370000005, z: .200000003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -57,7 +69,7 @@ Animator:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 343500c90136ae342bfc2fe7eee134c0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 862fdbde0218a4402be1a1b55d9e4a4c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -85,25 +97,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6406d361e0039a5479d0ef39766a8e9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cf03e4b28bab404284851f9d94135f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  hascollided: 0
-  lifeDistance: 9
-  targetDirection: {x: 0, y: 0, z: 0}
---- !u!135 &13500000
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -124,7 +120,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8a083f1de3c52d84ab62d2fb526a92ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 073b873a3d68c4ab0ad31aee538662d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

@@ -26,7 +26,10 @@ public class BulletAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (hascollided) {return;}
+		this.transform.localScale = Vector3.one * 1.75f;
+		if (hascollided) {
+			return;
+		}
 			if (targetDirection == Vector3.zero)
 			{
 				speed = speed/5f;

@@ -54,6 +54,7 @@ public class GameManagerScript : MonoBehaviour {
 			return;
 		}
 		currentLevel++;
+		Debug.Log ("somehow this happened twice? currentlevel: "+currentLevel);
 
 		BossHead.GetComponent<Head> ().Roar ();
 		if (currentLevel < 3) {
@@ -84,6 +85,7 @@ public class GameManagerScript : MonoBehaviour {
 
 	public IEnumerator CameraMoveTo(){
 		GameObject camera = Camera.main.gameObject;
+		Debug.Log ("camera moving currentlevel: "+currentLevel);
 		while (Vector3.Distance(camera.transform.position, startPositions[currentLevel].transform.position) > 0.1f) {
 			camera.transform.position = Vector3.SmoothDamp(camera.transform.position, startPositions[currentLevel].transform.position, ref velocity, dampTime);
 			yield return null;

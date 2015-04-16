@@ -45,7 +45,6 @@ public class Head:MonoBehaviour {
 		BroadcastMessage ("AdjustCurrentHealth", (lifePoints));
 		if(lifePoints <= 0)
 		{
-			Debug.Log("GAME OVER! THE BOSS IS DEAD!");
 			myState = BossState.DYING;
 			Application.LoadLevel("PlayersWin");
 		}
@@ -115,7 +114,6 @@ public class Head:MonoBehaviour {
 					break;
 	
 			default:
-					Debug.Log ("Bad String");
 					break;
 		}
 }

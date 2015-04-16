@@ -175,13 +175,16 @@ public class Hand:MonoBehaviour {
 			isBoss = true;
 			PlayerScript p = collision.gameObject.GetComponent<PlayerScript> ();
 			p.KillPlayer (isBoss);
-			
-		} else if (collision.gameObject.tag == "LevelItem") {
-			PedastalScript p = collision.gameObject.GetComponent<PedastalScript>();
-			p.SetDamage(.1f);
 		} else if (collision.transform.parent != null && collision.transform.parent.gameObject.tag == "Dweller") {
 			collision.transform.parent.GetComponent<CityDweller>().SetTrampled();
 			collision.gameObject.GetComponentInChildren<Animator>().SetTrigger("Trampled");
 		}
+	}
+
+	void OnTriggerEnter(Collider collider){
+	if (collider.gameObject.tag == "LevelItem") {
+		PedastalScript p = collider.gameObject.GetComponent<PedastalScript>();
+		p.SetDamage(.1f);
+	}
 	}
 }

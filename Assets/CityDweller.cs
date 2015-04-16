@@ -52,6 +52,8 @@ public class CityDweller : MonoBehaviour {
 
 	public void SetTrampled(){
 		trampled = true;
+		this.GetComponentInChildren<BoxCollider>().enabled = false;
+		this.GetComponentInChildren<CharacterController>().enabled = false;
 	}
 
 }
