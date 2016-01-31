@@ -21,6 +21,11 @@ public class GameManagerScript : MonoBehaviour {
 
 	public GameObject fireTruck;
 
+	public AudioSource level1Music;
+	public AudioSource level2Music;
+	public AudioSource level3Music;
+	public AudioSource dangerMusic;
+
 	void Awake(){
 		//GetComponent<SpriteRenderer> ().enabled = false;
 
@@ -40,10 +45,17 @@ public class GameManagerScript : MonoBehaviour {
 		}
 
 		bool allDone = true;
+		int finalCount = 0;
 		foreach (PedastalScript city in stage) {
 			if(!city.destroyed){
 				allDone = false;
 			}
+			else{
+				finalCount++;
+			}
+		}
+		if (currentLevel == 2 && finalCount == 2) {
+			dangerMusic.volume = 1f;
 		}
 		return allDone;
 		
@@ -94,7 +106,11 @@ public class GameManagerScript : MonoBehaviour {
 		BossLeftHand.GetComponent<Hand>().UpdatePosition();
 		BossRightHand.GetComponent<Hand>().UpdatePosition();
 		BossHead.GetComponent<Head>().UpdatePosition();
-	
+		if (currentLevel == 1) {
+			level2Music.volume = 1f;
+		} else if (currentLevel == 2) {
+			level3Music.volume = 1f;
+		}
 	}
 
 	public void ShowAnimation(){

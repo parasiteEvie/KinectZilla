@@ -24,6 +24,8 @@ public class Head:MonoBehaviour {
 
 	public float fireSpewTimer;
 
+	GameManagerScript game;
+
 	// Init
 	public void Awake() {
 		bpc = GetComponent<BodyPartControls>();
@@ -32,6 +34,7 @@ public class Head:MonoBehaviour {
 
 	public void Start(){
 		myState = BossState.NORMAL;
+		game = GameObject.Find ("GAME MANAGER").GetComponent<GameManagerScript>();
 	}
 
 	public void UpdatePosition(){
@@ -43,6 +46,9 @@ public class Head:MonoBehaviour {
 	public void Update()
 	{
 		BroadcastMessage ("AdjustCurrentHealth", (lifePoints));
+		if (lifePoints <= 50) {
+			game.dangerMusic.volume = 1;	
+		} 
 		if(lifePoints <= 0)
 		{
 			myState = BossState.DYING;

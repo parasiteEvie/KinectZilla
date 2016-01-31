@@ -49,6 +49,7 @@ public class PlayerScript : MonoBehaviour
 	public AudioClip bulletSound;
 	public AudioClip bombSound;
 	public AudioClip deathSound;
+	public AudioClip splashSound;
 
 	public float deathCountdown = 0.0f;
 
@@ -123,15 +124,19 @@ public class PlayerScript : MonoBehaviour
 			if (timer * 3f >= BulletDelay) {
 				healingWater.SetActive(true);
 				if(playerAnim.transform.localScale.x < 0f){
-					healingWater.transform.localPosition = new Vector3(-Mathf.Abs(healingWater.transform.localPosition.x), healingWater.transform.localPosition.y,
-					                                                   healingWater.transform.localPosition.z);
+				//	healingWater.transform.localPosition = new Vector3(-Mathf.Abs(healingWater.transform.localPosition.x), healingWater.transform.localPosition.y,
+				//	                                                  healingWater.transform.localPosition.z);
+					healingWater.transform.localScale = new Vector3(-Mathf.Abs(healingWater.transform.localScale.x), 
+					                                        healingWater.transform.localScale.y, healingWater.transform.localScale.z);
 				}
 				else{
-					healingWater.transform.localPosition = new Vector3(Mathf.Abs(healingWater.transform.localPosition.x), healingWater.transform.localPosition.y,
-					                                                   healingWater.transform.localPosition.z);
+				//	healingWater.transform.localPosition = new Vector3(Mathf.Abs(healingWater.transform.localPosition.x), healingWater.transform.localPosition.y,
+				//	                                                   healingWater.transform.localPosition.z);
+					healingWater.transform.localScale = new Vector3(Mathf.Abs(healingWater.transform.localScale.x), 
+					                                        healingWater.transform.localScale.y, healingWater.transform.localScale.z);
 				}
 
-				audio.clip = bulletSound;
+				audio.clip = splashSound;
 				audio.Play ();
 				timer = 0;
 
@@ -140,6 +145,9 @@ public class PlayerScript : MonoBehaviour
 			return;
 		}
 		else{
+			if(audio.clip == splashSound){
+				audio.Stop();
+			}
 			healingWater.SetActive(false);
 			playerAnim.gunArm.SetActive(true);
 

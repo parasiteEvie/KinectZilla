@@ -5,6 +5,8 @@ Shader "Sprites/DiffuseWithShadows"
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
 		_Color ("Tint", Color) = (1,1,1,1)
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
+		[PerRendererData] _UVLength ("UVLength", Float) = 125
+		[PerRendererData] _UVTotal ("UVTotal", Float) = 255
 		_Cutoff ("Shadow alpha cutoff", Range(0,1)) = 0.5
 	}
 
@@ -31,7 +33,9 @@ Shader "Sprites/DiffuseWithShadows"
 
 		sampler2D _MainTex;
 		fixed4 _Color;
-
+		float _UVLength;
+		float _UVTotal;
+		
 		struct Input
 		{
 			float2 uv_MainTex;
@@ -54,6 +58,10 @@ Shader "Sprites/DiffuseWithShadows"
 			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * IN.color;
 			o.Albedo = c.rgb * c.a;
 			o.Alpha = c.a;
+			float test = _UVLength / _UVTotal;
+			if(IN.uv_MainTex.x  > test){
+				discard;
+			}
 		}
 		ENDCG
 	}
